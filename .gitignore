@@ -1,0 +1,67 @@
+# =============== #
+# Unity generated #
+# =============== #
+[Tt]emp/
+[Oo]bj/
+[Bb]uild
+[Bb]uild.*
+/[Ll]ibrary/
+sysinfo.txt
+*.stackdump
+/Assets/AssetStoreTools*
+*.apk
+*.unitypackage
+ 
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+[Ee]xported[Oo]bj/
+.vs/
+/*.userprefs
+/*.csproj
+/*.pidb
+*.pidb.meta
+/*.suo
+/*.sln*
+/*.user
+/*.unityproj
+/*.booproj
+.consulo/
+/*.tmp
+/*.svd
+ 
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store*
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+[Tt]humbs.db
+[Dd]esktop.ini
+
+# ==================== #
+# Procedural Materials #
+# ==================== #
+
+
+# ============== #
+# FMOD generated #
+# ============== #
+Assets/FMODStudioCache.asset
+Assets/FMODStudioCache.asset.*
+Assets/StreamingAssets/*.bank
+Assets/StreamingAssets/*.bank.meta
+Assets/Resources/FMODStudioSettings.asset
+*.log
+
+# Personal
+*.cd
+.viminfo
+Assets/Oculus/VR/Plugins/1.45.0/Win64/OVRPlugin.dll
+Assets/Plugins/FMOD/Cache/Editor/FMODStudioCache.asset
+*.popb
+*.popb.*
+Recordings/
