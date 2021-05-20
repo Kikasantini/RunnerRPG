@@ -1,0 +1,828 @@
+fileFormatVersion: 2
+guid: 5ff96aa69ff497c46a3ae2720c0037fc
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2477352014541117142
+    second: Mage_Evade_0
+  - first:
+      213: -4203008324265775032
+    second: Mage_Evade_1
+  - first:
+      213: 6139911926298620596
+    second: Mage_Evade_2
+  - first:
+      213: 8138854047337080990
+    second: Mage_Evade_3
+  - first:
+      213: 3435771085833023831
+    second: Mage_Evade_4
+  - first:
+      213: 2207655444973988771
+    second: Mage_Evade_5
+  - first:
+      213: -6460616850919488475
+    second: Mage_Evade_6
+  - first:
+      213: -7465781505548772529
+    second: Mage_Evade_7
+  - first:
+      213: 6968932972650943320
+    second: Mage_Evade_8
+  - first:
+      213: 919811949401883377
+    second: Mage_Evade_9
+  - first:
+      213: 8473986575725156104
+    second: Mage_Evade_10
+  - first:
+      213: 5455564117016803379
+    second: Mage_Evade_11
+  - first:
+      213: 1593169986038384143
+    second: Mage_Evade_12
+  - first:
+      213: 8967549138811398269
+    second: Mage_Evade_13
+  - first:
+      213: -4335754384609570363
+    second: Mage_Evade_14
+  - first:
+      213: -621829444019104408
+    second: Mage_Evade_15
+  - first:
+      213: 3287288876112728344
+    second: Mage_Evade_16
+  - first:
+      213: 1863434228837503200
+    second: Mage_Evade_17
+  - first:
+      213: 1838394698087605786
+    second: Mage_Evade_18
+  - first:
+      213: -6549653080147865203
+    second: Mage_Evade_19
+  - first:
+      213: 1378192666946694681
+    second: Mage_Evade_20
+  - first:
+      213: -6738558666035638280
+    second: Mage_Evade_21
+  - first:
+      213: -5436731828559738516
+    second: Mage_Evade_22
+  - first:
+      213: 2664163804533846782
+    second: Mage_Evade_23
+  - first:
+      213: -3750992926821293433
+    second: Mage_Evade_24
+  - first:
+      213: 1530170559138969300
+    second: Mage_Evade_25
+  - first:
+      213: -468014855426546666
+    second: Mage_Evade_26
+  - first:
+      213: 3029540351840157665
+    second: Mage_Evade_27
+  - first:
+      213: 3576587514735905607
+    second: Mage_Evade_28
+  - first:
+      213: 8893843609439211954
+    second: Mage_Evade_29
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Mage_Evade_0
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 1530
+        width: 293
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d6525a1882516220800000000000000
+      internalID: 2477352014541117142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_1
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 1531
+        width: 299
+        height: 275
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 840f024923aeba5c0800000000000000
+      internalID: -4203008324265775032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_2
+      rect:
+        serializedVersion: 2
+        x: 998
+        y: 1531
+        width: 305
+        height: 284
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b2b637cd59553550800000000000000
+      internalID: 6139911926298620596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_3
+      rect:
+        serializedVersion: 2
+        x: 1485
+        y: 1533
+        width: 308
+        height: 294
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e98e64272a403f070800000000000000
+      internalID: 8138854047337080990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_4
+      rect:
+        serializedVersion: 2
+        x: 1983
+        y: 1578
+        width: 304
+        height: 266
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 751b2ac599f4eaf20800000000000000
+      internalID: 3435771085833023831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_5
+      rect:
+        serializedVersion: 2
+        x: 2098
+        y: 1534
+        width: 171
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3aba1283eea23ae10800000000000000
+      internalID: 2207655444973988771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_6
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 1107
+        width: 293
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5248a0334374756a0800000000000000
+      internalID: -6460616850919488475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_7
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 1112
+        width: 278
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4b951fa647346890800000000000000
+      internalID: -7465781505548772529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_8
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 1070
+        width: 63
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 853dd5a9d9f96b060800000000000000
+      internalID: 6968932972650943320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_9
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 1114
+        width: 267
+        height: 274
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f242483814d3cc00800000000000000
+      internalID: 919811949401883377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_10
+      rect:
+        serializedVersion: 2
+        x: 1101
+        y: 1072
+        width: 68
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 807d68db4e5a99570800000000000000
+      internalID: 8473986575725156104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_11
+      rect:
+        serializedVersion: 2
+        x: 1559
+        y: 1110
+        width: 280
+        height: 274
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 338772cd8ae06bb40800000000000000
+      internalID: 5455564117016803379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_12
+      rect:
+        serializedVersion: 2
+        x: 1574
+        y: 1074
+        width: 71
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f06c1ac49a31c1610800000000000000
+      internalID: 1593169986038384143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_13
+      rect:
+        serializedVersion: 2
+        x: 2041
+        y: 1099
+        width: 300
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d78a6bcfd62237c70800000000000000
+      internalID: 8967549138811398269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_14
+      rect:
+        serializedVersion: 2
+        x: 2053
+        y: 1076
+        width: 69
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c11108eb5e44d3c0800000000000000
+      internalID: -4335754384609570363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_15
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 1067
+        width: 57
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 865dc5e4a61de57f0800000000000000
+      internalID: -621829444019104408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_16
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 1054
+        width: 125
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 811dac6e0dbce9d20800000000000000
+      internalID: 3287288876112728344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_17
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 1054
+        width: 121
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e0d928ee8f3cd910800000000000000
+      internalID: 1863434228837503200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_18
+      rect:
+        serializedVersion: 2
+        x: 1205
+        y: 1055
+        width: 120
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a162978dc3a438910800000000000000
+      internalID: 1838394698087605786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_19
+      rect:
+        serializedVersion: 2
+        x: 1689
+        y: 1054
+        width: 123
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d815eb3a935fa15a0800000000000000
+      internalID: -6549653080147865203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_20
+      rect:
+        serializedVersion: 2
+        x: 2179
+        y: 1053
+        width: 129
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91ee769bde2502310800000000000000
+      internalID: 1378192666946694681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_21
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 596
+        width: 70
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ffc0dc7894db72a0800000000000000
+      internalID: -6738558666035638280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_22
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 573
+        width: 307
+        height: 294
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6903abf439dc84b0800000000000000
+      internalID: -5436731828559738516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_23
+      rect:
+        serializedVersion: 2
+        x: 613
+        y: 571
+        width: 320
+        height: 278
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef271b86dd209f420800000000000000
+      internalID: 2664163804533846782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_24
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 567
+        width: 324
+        height: 275
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78260d18ecbc1fbc0800000000000000
+      internalID: -3750992926821293433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_25
+      rect:
+        serializedVersion: 2
+        x: 1573
+        y: 559
+        width: 325
+        height: 283
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d63d3f24024c3510800000000000000
+      internalID: 1530170559138969300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_26
+      rect:
+        serializedVersion: 2
+        x: 2053
+        y: 552
+        width: 323
+        height: 290
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 614e1b8f7f64189f0800000000000000
+      internalID: -468014855426546666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_27
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 67
+        width: 333
+        height: 295
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1eff42816e61b0a20800000000000000
+      internalID: 3029540351840157665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_28
+      rect:
+        serializedVersion: 2
+        x: 613
+        y: 65
+        width: 337
+        height: 297
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74b4ee3256792a130800000000000000
+      internalID: 3576587514735905607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Evade_29
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 91
+        width: 321
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b1908424a74d6b70800000000000000
+      internalID: 8893843609439211954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: fab9a9e0057d07d4797d7e50ca977a1d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -18,9 +18,9 @@ public class CharacterUI : MonoBehaviour
         attack.text = characterSO.attack.ToString();
         magDefense.text = characterSO.magDefense.ToString();
         phyDefense.text = characterSO.phyDefense.ToString();
-        //skill_1.text = characterSO.skill_1.ToString();
-        //skill_2.text = characterSO.skill_2.ToString();
-        //skill_3.text = characterSO.skill_3.ToString();
+        skill_1.text = characterSO.skill1.ToString();
+        skill_2.text = characterSO.skill2.ToString();
+        skill_3.text = characterSO.skill3.ToString();
 
         for(int i = 0; i < stars.Length; i++)
         {

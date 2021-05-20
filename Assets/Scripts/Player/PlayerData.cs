@@ -8,11 +8,5 @@ public class PlayerData : MonoBehaviour
 
     public List<CharacterSO> characters = new List<CharacterSO>();
 
-    // Start is called before the first frame update
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

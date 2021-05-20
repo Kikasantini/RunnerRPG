@@ -10,10 +10,6 @@ public class Inventory : MonoBehaviour
 
     public Text goldText, woodText, ironText;
  
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
