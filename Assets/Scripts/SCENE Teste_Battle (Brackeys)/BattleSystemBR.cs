@@ -15,7 +15,7 @@ public class BattleSystemBR : MonoBehaviour
     public Transform playerBattleStation;
     public Transform enemyBattleStation;
 
-    Unit playerUnit;
+    UnitPlayer playerUnit;
     Unit enemyUnit;
 
     public Text dialogueText;
@@ -34,7 +34,20 @@ public class BattleSystemBR : MonoBehaviour
     void SetupBattle() // transformou isso em coroutine = 18:25 https://www.youtube.com/watch?v=_1pz_ohupPs
     {
         GameObject playerGO = Instantiate(playerPrefab, playerBattleStation);
-        playerUnit = playerGO.GetComponent<Unit>();
+        playerUnit = playerGO.GetComponent<UnitPlayer>();
+
+        CharacterSO selectedCharacter = null;
+
+        foreach (CharacterSO c in character)
+        {
+            if (c.selected)
+            {
+                selectedCharacter = c;
+                break;
+            }
+        }
+
+        playerUnit.SetCharacter(selectedCharacter);
 
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<Unit>();
