@@ -128,6 +128,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Inimigo
   unitLevel: 10
-  damage: 5
+  damage: 50
   maxHP: 40
   currentHP: 40

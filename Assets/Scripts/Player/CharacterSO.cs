@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "New Character", menuName = "Character")]
 public class CharacterSO : ScriptableObject
 {
     public string characterName;
+    public Sprite charImage;
+
     public bool selected = false;
     public int stars;
-    public int skills; // transformar em uma classe de skills
 
     public int health;
     public int attack;
@@ -23,7 +25,7 @@ public class CharacterSO : ScriptableObject
     public int iron;
     public int gold;
 
-    
+    public SkillSO[] skill;
     public void ActivateChar()
     {
         selected = true;

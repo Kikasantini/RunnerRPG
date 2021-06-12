@@ -136,10 +136,10 @@ TextureImporter:
       name: Mage_Idle_0
       rect:
         serializedVersion: 2
-        x: 47
-        y: 1051
-        width: 297
-        height: 271
+        x: 0
+        y: 960
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,10 +157,10 @@ TextureImporter:
       name: Mage_Idle_1
       rect:
         serializedVersion: 2
-        x: 528
-        y: 1051
-        width: 296
-        height: 271
+        x: 480
+        y: 960
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,10 +178,10 @@ TextureImporter:
       name: Mage_Idle_2
       rect:
         serializedVersion: 2
-        x: 1007
-        y: 1051
-        width: 299
-        height: 270
+        x: 960
+        y: 960
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,10 +199,10 @@ TextureImporter:
       name: Mage_Idle_3
       rect:
         serializedVersion: 2
-        x: 1488
-        y: 1051
-        width: 300
-        height: 269
+        x: 1440
+        y: 960
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -220,10 +220,10 @@ TextureImporter:
       name: Mage_Idle_4
       rect:
         serializedVersion: 2
-        x: 1967
-        y: 1051
-        width: 302
-        height: 267
+        x: 1920
+        y: 960
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -241,10 +241,10 @@ TextureImporter:
       name: Mage_Idle_5
       rect:
         serializedVersion: 2
-        x: 47
-        y: 571
-        width: 305
-        height: 265
+        x: 0
+        y: 480
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -262,10 +262,10 @@ TextureImporter:
       name: Mage_Idle_6
       rect:
         serializedVersion: 2
-        x: 527
-        y: 571
-        width: 307
-        height: 264
+        x: 480
+        y: 480
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -283,10 +283,10 @@ TextureImporter:
       name: Mage_Idle_7
       rect:
         serializedVersion: 2
-        x: 1007
-        y: 571
-        width: 307
-        height: 263
+        x: 960
+        y: 480
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -304,10 +304,10 @@ TextureImporter:
       name: Mage_Idle_8
       rect:
         serializedVersion: 2
-        x: 1487
-        y: 571
-        width: 307
-        height: 264
+        x: 1440
+        y: 480
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -325,10 +325,10 @@ TextureImporter:
       name: Mage_Idle_9
       rect:
         serializedVersion: 2
-        x: 1967
-        y: 571
-        width: 305
-        height: 265
+        x: 1920
+        y: 480
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -346,10 +346,10 @@ TextureImporter:
       name: Mage_Idle_10
       rect:
         serializedVersion: 2
-        x: 47
-        y: 91
-        width: 302
-        height: 267
+        x: 0
+        y: 0
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -367,10 +367,10 @@ TextureImporter:
       name: Mage_Idle_11
       rect:
         serializedVersion: 2
-        x: 527
-        y: 91
-        width: 299
-        height: 268
+        x: 480
+        y: 0
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -388,10 +388,10 @@ TextureImporter:
       name: Mage_Idle_12
       rect:
         serializedVersion: 2
-        x: 1007
-        y: 91
-        width: 298
-        height: 270
+        x: 960
+        y: 0
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -409,10 +409,10 @@ TextureImporter:
       name: Mage_Idle_13
       rect:
         serializedVersion: 2
-        x: 1488
-        y: 91
-        width: 296
-        height: 272
+        x: 1440
+        y: 0
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

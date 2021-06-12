@@ -6,6 +6,8 @@ public enum BattleStateBR { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
 public class BattleSystemBR : MonoBehaviour
 {
+    private CharacterSO selectedCharacter = null; // tirei do SetupBattle()
+
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
 
@@ -24,19 +26,37 @@ public class BattleSystemBR : MonoBehaviour
     public BattleHUD enemyHUD;
 
     public BattleStateBR state;
-    
+
+    public Button button1;
+    public Button button2;
+    public Button button3;
+    public Image[] buttonSelected;
+    //public Image buttonSelected2;
+    //public Image buttonSelected3;
+
+    private bool[] skillButtons;
+    public AnimatorOverrideController[] heroesAnimators;
+    //private bool firstBattle;
+
+    private int selectedSkills = 0;
+
     void Start()
     {
+        //firstBattle = true;
         state = BattleStateBR.START;
+        skillButtons = new bool[3];
         SetupBattle();
+        
     }
 
     void SetupBattle() // transformou isso em coroutine = 18:25 https://www.youtube.com/watch?v=_1pz_ohupPs
     {
+        selectedSkills = 0;
         GameObject playerGO = Instantiate(playerPrefab, playerBattleStation);
         playerUnit = playerGO.GetComponent<UnitPlayer>();
 
-        CharacterSO selectedCharacter = null;
+        //CharacterSO selectedCharacter = null;
+        int heroIndex = 0;
 
         foreach (CharacterSO c in character)
         {
@@ -45,14 +65,16 @@ public class BattleSystemBR : MonoBehaviour
                 selectedCharacter = c;
                 break;
             }
+            heroIndex++;
         }
 
+        playerUnit.SetAnimator(heroesAnimators[heroIndex]);
         playerUnit.SetCharacter(selectedCharacter);
 
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<Unit>();
 
-        playerHUD.SetHUD(playerUnit);
+        playerHUD.SetHeroHUD(playerUnit);
         enemyHUD.SetHUD(enemyUnit);
 
         state = BattleStateBR.PLAYERTURN;
@@ -62,6 +84,17 @@ public class BattleSystemBR : MonoBehaviour
     void PlayerTurn()
     {
         dialogueText.text = "Choose your next move..";
+
+        selectedSkills = 0;
+
+        skillButtons[0] = false;
+        skillButtons[1] = false;
+        skillButtons[2] = false;
+
+        buttonSelected[0].enabled = false;
+        buttonSelected[1].enabled = false;
+        buttonSelected[2].enabled = false;
+
     }
 
     public void OnAttackButton()
@@ -69,11 +102,57 @@ public class BattleSystemBR : MonoBehaviour
         if (state != BattleStateBR.PLAYERTURN)
             return;
 
+        // ver quais skills estão selecionadas
+        if (skillButtons[0])
+        {
+            // skill 1 selecionada
+            Debug.Log("skill 1 selecionada");
+        }
+        if (skillButtons[1])
+        {
+            // skill 2 selecionada
+            Debug.Log("skill 2 selecionada");
+        }
+        if (skillButtons[2])
+        {
+            // skill 3 selecionada
+            Debug.Log("skill 3 selecionada");
+        }
+
+
+
+
         PlayerAttack();
+    }
+
+    public void OnClickSkillButton(int index)
+    {
+        if(selectedSkills < playerUnit.unitLevel && buttonSelected[index].enabled == false && selectedCharacter.skill[index].quantity > 0) // conferir se tem skill > 0
+        {
+            skillButtons[index] = !skillButtons[index];
+            buttonSelected[index].enabled = !buttonSelected[index].enabled;
+            selectedSkills++;
+
+            // tem que atualizar a quantidade de skills do char
+            selectedCharacter.skill[index].quantity--;
+            playerHUD.SetHeroHUD(playerUnit);
+        }
+        else if(buttonSelected[index].enabled == true)
+        {
+            selectedSkills--;
+            skillButtons[index] = !skillButtons[index];
+            buttonSelected[index].enabled = !buttonSelected[index].enabled;
+            
+            selectedCharacter.skill[index].quantity++;
+            playerHUD.SetHeroHUD(playerUnit);
+        }
+        Debug.Log(selectedSkills + " skill(s) selecionada(s)");
     }
 
     public void PlayerAttack()
     {
+        playerUnit.Attack();
+
         // Damage the enemy
         bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
 
@@ -95,7 +174,7 @@ public class BattleSystemBR : MonoBehaviour
         {
             // Enemy turn
             state = BattleStateBR.ENEMYTURN;
-            EnemyTurn();
+            Invoke(nameof(EnemyTurn), 2f);
         }
 
         // Change state based on what happened
@@ -110,9 +189,10 @@ public class BattleSystemBR : MonoBehaviour
         }
         else if(state == BattleStateBR.LOST)
         {
-            StartCoroutine(DeathAnimation(playerUnit));
+            //StartCoroutine(DeathAnimation(playerUnit));
             dialogueText.text = "You were defeated";
         }
+
     }
 
     void EnemyTurn()
@@ -124,11 +204,10 @@ public class BattleSystemBR : MonoBehaviour
 
         // Teste com função de HP Bar genérica:
         //playerHUD.SetHpBar(playerUnit.currentHP, playerUnit.maxHP);
-
-
         if (isDead)
         {
             state = BattleStateBR.LOST;
+            playerUnit.Die();
             EndBattle();
         }
         else
@@ -146,5 +225,13 @@ public class BattleSystemBR : MonoBehaviour
             unit.transform.Rotate(0f, 0f, 9f);
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    private void RestartBattle()
+    {
+        //firstBattle = false;
+        state = BattleStateBR.START;
+        Invoke(nameof(SetupBattle), 5f);
+        playerUnit.Idle();
     }
 }

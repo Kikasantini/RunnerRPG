@@ -13,16 +13,20 @@ MonoBehaviour:
   m_Name: Warrior
   m_EditorClassIdentifier: 
   characterName: 
+  charImage: {fileID: 21300000, guid: 1cb5103581dbff24586eb3747afe695f, type: 3}
   selected: 0
   stars: 2
-  skills: 0
   health: 120
   attack: 0
   magDefense: 0
   phyDefense: 0
-  skill1: 1
+  skill1: 0
   skill2: 0
-  skill3: 1
+  skill3: 0
   wood: 500
   iron: 500
   gold: 500
+  skill:
+  - {fileID: 11400000, guid: 30879b08a6bfd1945b5a0fcdb9c78447, type: 2}
+  - {fileID: 11400000, guid: c41e328c9ea7d9b468c8900e0fcc9285, type: 2}
+  - {fileID: 11400000, guid: 357fb52e0bc67e14c98d5056b9349978, type: 2}

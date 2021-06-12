@@ -130,10 +130,10 @@ TextureImporter:
       name: Mage-Damage_0
       rect:
         serializedVersion: 2
-        x: 64
-        y: 1051
-        width: 269
-        height: 276
+        x: 0
+        y: 960
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,10 +151,10 @@ TextureImporter:
       name: Mage-Damage_1
       rect:
         serializedVersion: 2
-        x: 542
-        y: 1051
-        width: 281
-        height: 272
+        x: 480
+        y: 960
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,10 +172,10 @@ TextureImporter:
       name: Mage-Damage_2
       rect:
         serializedVersion: 2
-        x: 1018
-        y: 1051
-        width: 295
-        height: 271
+        x: 960
+        y: 960
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,10 +193,10 @@ TextureImporter:
       name: Mage-Damage_3
       rect:
         serializedVersion: 2
-        x: 1495
-        y: 1051
-        width: 327
-        height: 265
+        x: 1440
+        y: 960
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,10 +214,10 @@ TextureImporter:
       name: Mage-Damage_4
       rect:
         serializedVersion: 2
-        x: 1974
-        y: 1051
-        width: 355
-        height: 267
+        x: 1920
+        y: 960
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,10 +235,10 @@ TextureImporter:
       name: Mage-Damage_5
       rect:
         serializedVersion: 2
-        x: 58
-        y: 571
-        width: 374
-        height: 266
+        x: 0
+        y: 480
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -256,10 +256,10 @@ TextureImporter:
       name: Mage-Damage_6
       rect:
         serializedVersion: 2
-        x: 548
-        y: 571
-        width: 379
-        height: 256
+        x: 480
+        y: 480
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -277,10 +277,10 @@ TextureImporter:
       name: Mage-Damage_7
       rect:
         serializedVersion: 2
-        x: 1037
-        y: 571
-        width: 378
-        height: 245
+        x: 960
+        y: 480
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -298,10 +298,10 @@ TextureImporter:
       name: Mage-Damage_8
       rect:
         serializedVersion: 2
-        x: 1515
-        y: 571
-        width: 380
-        height: 245
+        x: 1440
+        y: 480
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -319,10 +319,10 @@ TextureImporter:
       name: Mage-Damage_9
       rect:
         serializedVersion: 2
-        x: 1996
-        y: 571
-        width: 379
-        height: 245
+        x: 1920
+        y: 480
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -340,10 +340,10 @@ TextureImporter:
       name: Mage-Damage_10
       rect:
         serializedVersion: 2
-        x: 77
-        y: 91
-        width: 378
-        height: 245
+        x: 0
+        y: 0
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -361,10 +361,10 @@ TextureImporter:
       name: Mage-Damage_11
       rect:
         serializedVersion: 2
-        x: 556
-        y: 91
-        width: 379
-        height: 245
+        x: 480
+        y: 0
+        width: 480
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

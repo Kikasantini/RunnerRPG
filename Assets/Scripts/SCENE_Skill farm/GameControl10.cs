@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using DG.Tweening;
 
 public class GameControl10 : MonoBehaviour
 {
@@ -21,26 +22,19 @@ public class GameControl10 : MonoBehaviour
     private int[] quantidades = new int[10]; // quanto de cada item deu no spin
 
     public IntVariable coins;
-    public CharacterSO[] characters;
+    public SkillSO[] skill; // Lista das 9 skills
 
-    public GameObject imgSkill1;
-    public GameObject imgSkill2;
-    public GameObject imgSkill3;
-    public GameObject imgSkill4;
-    public GameObject imgSkill5;
-    public GameObject imgSkill6;
-    public GameObject imgSkill7;
-    public GameObject imgSkill8;
-    public GameObject imgSkill9;
+    public Image skillSprite; // Imagem da skill que ganhou
+    public Text skillName;  // Nome da skill que ganhou
+
     public GameObject imgCoin;
     public GameObject giftLid;
 
-    //Vector2 posOriginal = new Vector2();
+    public Text coinAnim;
 
     private void Start()
     {
-        //posOriginal.x = giftLid.transform.position.x;
-        //posOriginal.y = giftLid.transform.position.y;
+        skillSprite.enabled = false;
     }
 
     void Update()
@@ -61,24 +55,17 @@ public class GameControl10 : MonoBehaviour
 
         if (rows[0].rowStopped && rows[1].rowStopped && rows[2].rowStopped && coins.Value >= 10)
         {
-
-            //giftLid.transform.position = posOriginal;
-
+            skillName.enabled = false;
             prizeText.enabled = false;
-            imgSkill1.SetActive(false);
-            imgSkill2.SetActive(false);
-            imgSkill3.SetActive(false);
-            imgSkill4.SetActive(false);
-            imgSkill5.SetActive(false);
-            imgSkill6.SetActive(false);
-            imgSkill7.SetActive(false);
-            imgSkill8.SetActive(false);
-            imgSkill9.SetActive(false);
+
+            skillSprite.enabled = false;
             imgCoin.SetActive(false);
 
             podePremiar = true;
             HandlePulled();
+            CoinAnimation(-10);
             coins.Value -= 10;
+
         }
     }
 
@@ -86,88 +73,84 @@ public class GameControl10 : MonoBehaviour
     {
         StartCoroutine(OpenGift());
         prizeText.enabled = true;
+        skillName.enabled = true;
+        skillSprite.enabled = true;
 
         if (numberOfRewards == 3)
-            numberOfRewards = 11;  
+            numberOfRewards = 10;  
 
         switch (rewardType)
         {
-            case 0:
+            case 0: // 10 ou 50 coins
+                skillSprite.enabled = false;
+                skillName.enabled = false;
                 coins.Value += numberOfRewards * 5;
-                //prizeText.text = numberOfRewards * 5 + " coins";
+                CoinAnimation(numberOfRewards * 5);
                 prizeText.text = (numberOfRewards * 5).ToString();
                 imgCoin.SetActive(true);
                 break;
-            case 1:
-                characters[0].skill1 += numberOfRewards - 1;
-                //prizeText.text = (numberOfRewards - 1) + " Skill 1 (Mage)";
-                prizeText.text = (numberOfRewards - 1).ToString();
-                imgSkill1.SetActive(true);
+            case 1: // Skill 1 (Mage)
+                prizeText.text = numberOfRewards.ToString();
+                skillName.text = skill[0].skillName;
+                skill[0].quantity += numberOfRewards;
+                skillSprite.sprite = skill[0].image;
                 break;
-            case 2:
-                characters[1].skill1 += numberOfRewards - 1;
-                //prizeText.text = (numberOfRewards - 1) + " Skill 1 (Warrior)";
-                prizeText.text = (numberOfRewards - 1).ToString();
-                imgSkill4.SetActive(true);
+            case 2: // Skill 1 (Warrior)
+                prizeText.text = numberOfRewards.ToString();
+                skillName.text = skill[1].skillName;
+                skill[1].quantity += numberOfRewards;
+                skillSprite.sprite = skill[1].image;
                 break;
-            case 3:
-                characters[2].skill1 += numberOfRewards - 1;
-                //prizeText.text = (numberOfRewards - 1) + " Skill 1 (Priest)";
-                prizeText.text = (numberOfRewards - 1).ToString();
-                imgSkill7.SetActive(true);
+            case 3: // Skill 1 (Priest)
+                prizeText.text = numberOfRewards.ToString();
+                skillName.text = skill[2].skillName;
+                skill[2].quantity += numberOfRewards;
+                skillSprite.sprite = skill[2].image;
                 break;
-            case 4:
-                characters[0].skill2 += numberOfRewards - 1;
-                //prizeText.text = (numberOfRewards - 1) + " Skill 2 (Mage)";
-                prizeText.text = (numberOfRewards - 1).ToString();
-                imgSkill2.SetActive(true);
+            case 4: // Skill 2 (Mage)
+                prizeText.text = numberOfRewards.ToString();
+                skillName.text = skill[3].skillName;
+                skill[3].quantity += numberOfRewards;
+                skillSprite.sprite = skill[3].image;
                 break;
-            case 5:
-                characters[1].skill2 += numberOfRewards - 1;
-                //prizeText.text = (numberOfRewards - 1) + " Skill 2 (Warrior)";
-                prizeText.text = (numberOfRewards - 1).ToString();
-                imgSkill5.SetActive(true);
+            case 5: // Skill 2 (Warrior)
+                prizeText.text = numberOfRewards.ToString();
+                skillName.text = skill[4].skillName;
+                skill[4].quantity += numberOfRewards;
+                skillSprite.sprite = skill[4].image;
                 break;
-            case 6:
-                characters[2].skill2 += numberOfRewards - 1;
-                //prizeText.text = (numberOfRewards - 1) + " Skill 2 (Priest)";
-                prizeText.text = (numberOfRewards - 1).ToString();
-                imgSkill8.SetActive(true);
+            case 6: // Skill 2 (Priest)
+                prizeText.text = numberOfRewards.ToString();
+                skillName.text = skill[5].skillName;
+                skill[5].quantity += numberOfRewards;
+                skillSprite.sprite = skill[5].image;
                 break;
-            case 7:
-                characters[0].skill3 += numberOfRewards - 1;
-                //prizeText.text = (numberOfRewards - 1) + " Skill 3 (Mage)";
-                prizeText.text = (numberOfRewards - 1).ToString();
-                imgSkill3.SetActive(true);
+            case 7: // Skill 3 (Mage)
+                prizeText.text = numberOfRewards.ToString();
+                skillName.text = skill[6].skillName;
+                skill[6].quantity += numberOfRewards;
+                skillSprite.sprite = skill[6].image;
                 break;
-            case 8:
-                characters[1].skill3 += numberOfRewards - 1;
-                //prizeText.text = (numberOfRewards - 1) + " Skill 3 (Warrior)";
-                prizeText.text = (numberOfRewards - 1).ToString();
-                imgSkill6.SetActive(true);
+            case 8: // Skill 3 (Warrior)
+                prizeText.text = numberOfRewards.ToString();
+                skillName.text = skill[7].skillName;
+                skill[7].quantity += numberOfRewards;
+                skillSprite.sprite = skill[7].image;
                 break;
-            case 9:
-                characters[2].skill3 += numberOfRewards - 1;
-                //prizeText.text = (numberOfRewards - 1) + " Skill 3 (Priest)";
-                prizeText.text = (numberOfRewards - 1).ToString();
-                imgSkill9.SetActive(true);
+            case 9: // Skill 3 (Priest)
+                prizeText.text = numberOfRewards.ToString();
+                skillName.text = skill[8].skillName;
+                skill[8].quantity += numberOfRewards;
+                skillSprite.sprite = skill[8].image;
                 break;
         }
     }
 
     private void CheckResults()
     {
-        quantidades[0] = 0;
-        quantidades[1] = 0;
-        quantidades[2] = 0;
-        quantidades[3] = 0;
-        quantidades[4] = 0;
-        quantidades[5] = 0;
-        quantidades[6] = 0;
-        quantidades[7] = 0;
-        quantidades[8] = 0;
-        quantidades[9] = 0;   
-    
+        for (int i = 0; i < 10; i++)
+            quantidades[i] = 0;
+
         for(int i = 0; i < 3; i++) // aumenta a quantidade do item que parou (nas 3 rows)
             quantidades[(int)rows[i].stoppedSlot]++;
       
@@ -184,8 +167,9 @@ public class GameControl10 : MonoBehaviour
         {
             StartCoroutine(OpenGift());
             prizeText.enabled = true;
-            prizeText.text = "5";
+            prizeText.text = "5 coins";
             imgCoin.SetActive(true);
+            CoinAnimation(5);
             coins.Value += 5;
             achouPremio = false;
         }
@@ -216,5 +200,38 @@ public class GameControl10 : MonoBehaviour
         }
     }
 
+    void CoinAnimation(int value)
+    {
+        
 
+        if(value < 0) // gastando moeda
+        {
+            Vector2 posInicial = new Vector2();
+            posInicial.x = coinAnim.transform.position.x;
+            posInicial.y = 3.7f;
+            coinAnim.transform.position = posInicial;
+            coinAnim.DOFade(1, 0);
+            // cor vermelha
+            // animação pra baixo
+            coinAnim.text = value.ToString();
+            coinAnim.color = Color.red;
+            coinAnim.DOFade(0, 2);
+            coinAnim.transform.DOMoveY(3.5f, 1, false); // (float to, float duration, bool snapping)
+        }
+        else // ganhando moeda
+        {
+            Vector2 posInicial = new Vector2();
+            posInicial.x = coinAnim.transform.position.x;
+            posInicial.y = 3.5f;
+            coinAnim.transform.position = posInicial;
+            coinAnim.DOFade(1, 0);
+            // cor verde
+            // animação pra cima
+            coinAnim.text = "+" + value;
+            coinAnim.color = Color.blue;
+            coinAnim.DOFade(0, 2);
+            coinAnim.transform.DOMoveY(3.7f, 1, false); // (float to, float duration, bool snapping)
+        }
+
+    }
 }

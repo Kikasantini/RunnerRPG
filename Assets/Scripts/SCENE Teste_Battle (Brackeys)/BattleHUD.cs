@@ -10,6 +10,10 @@ public class BattleHUD : MonoBehaviour
     public Text nameText;
     public Text levelText;
 
+    public Image[] stars;
+
+    public Image[] skills;
+    public Text[] skillAmount;
     
     // Slider player:
     public Image slider;
@@ -37,8 +41,34 @@ public class BattleHUD : MonoBehaviour
     {
         nameText.text = unit.unitName;
         levelText.text = "Lvl " + unit.unitLevel;
-        // mostrar estrelas se for o jogador
     }
+
+    public void SetHeroHUD(UnitPlayer unit)
+    {
+        // Teste estrelas:
+        for (int i = 0; i < stars.Length; i++)
+        {
+            if (i < unit.unitLevel)
+            {
+                stars[i].color = Color.white;
+                Debug.Log("if" + unit.unitLevel);
+            }
+            else
+            {
+                stars[i].color = Color.gray;
+                Debug.Log("else");
+            }
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            skills[i].sprite = unit.character.skill[i].image;
+            skillAmount[i].text = unit.character.skill[i].quantity.ToString();
+        }
+        
+
+        SetHUD(unit);
+    }
+
 
     public void SetPlayerBar(int hp, int max)
     {
