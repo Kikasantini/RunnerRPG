@@ -13,20 +13,11 @@ public class SkillSO : ScriptableObject
     public Sprite image;
     public int quantity;
 
+    [SerializeField]
+    public List<SkillEffect> effects;
+
+    public Target dmgTarget;
     public int damage;
-    public int dotDamage;
-    public int dotTime; // em turnos
-    public int heal;
-
-    public bool isAOE;
-    public bool isDOT;
-    public bool isHeal;
-    public bool isDamage;
-    public bool isShield;
-    public bool isStun;
-
-
-
-
+    public bool isMagic;
 
 }

@@ -97,6 +97,38 @@ public class BattleSystemBR : MonoBehaviour
 
     }
 
+    public void CastSkill (SkillSO skill)
+    {
+        int dmg = skill.damage;
+
+        if (skill.isMagic)
+        {
+            //dmg -= enemyUnit;
+        }
+        else
+        {
+
+        }
+
+        enemyUnit.TakeDamage(dmg);
+
+        foreach (SkillEffect effect in skill.effects)
+        {
+            switch (effect.target)
+            {
+                case Target.self:
+                    playerUnit.ApplyEffect(effect, dmg);
+                    playerHUD.SetPlayerBar(playerUnit.currentHP, playerUnit.maxHP);
+                    break;
+
+                case Target.boss:
+                    enemyUnit.ApplyEffect(effect, dmg);
+                    break;
+            }
+        }
+        
+    }
+
     public void OnAttackButton()
     {
         if (state != BattleStateBR.PLAYERTURN)
@@ -107,20 +139,20 @@ public class BattleSystemBR : MonoBehaviour
         {
             // skill 1 selecionada
             Debug.Log("skill 1 selecionada");
+            CastSkill(selectedCharacter.skill[0]);
         }
         if (skillButtons[1])
         {
             // skill 2 selecionada
             Debug.Log("skill 2 selecionada");
+            CastSkill(selectedCharacter.skill[1]);
         }
         if (skillButtons[2])
         {
             // skill 3 selecionada
             Debug.Log("skill 3 selecionada");
+            CastSkill(selectedCharacter.skill[2]);
         }
-
-
-
 
         PlayerAttack();
     }

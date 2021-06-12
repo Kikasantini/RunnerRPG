@@ -17,9 +17,9 @@ public class CharacterSO : ScriptableObject
     public int magDefense;
     public int phyDefense;
 
-    public int skill1;
-    public int skill2;
-    public int skill3;
+    //public int skill1;
+    //public int skill2;
+    //public int skill3;
 
     public int wood;
     public int iron;
