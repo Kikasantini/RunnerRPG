@@ -17,12 +17,9 @@ MonoBehaviour:
   selected: 0
   stars: 2
   health: 120
-  attack: 0
+  attack: 3
   magDefense: 0
   phyDefense: 0
-  skill1: 0
-  skill2: 0
-  skill3: 0
   wood: 500
   iron: 500
   gold: 500

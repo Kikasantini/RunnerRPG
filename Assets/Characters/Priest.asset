@@ -14,15 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: 
   charImage: {fileID: 21300000, guid: d6a5c3853cde4e44893f75075010cb29, type: 3}
-  selected: 0
+  selected: 1
   stars: 3
   health: 500
-  attack: 11
+  attack: 2
   magDefense: 22
   phyDefense: 33
-  skill1: 1
-  skill2: 0
-  skill3: 0
   wood: 500
   iron: 500
   gold: 500

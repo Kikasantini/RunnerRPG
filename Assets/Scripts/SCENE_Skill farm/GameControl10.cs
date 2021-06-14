@@ -25,16 +25,25 @@ public class GameControl10 : MonoBehaviour
     public SkillSO[] skill; // Lista das 9 skills
 
     public Image skillSprite; // Imagem da skill que ganhou
-    public Text skillName;  // Nome da skill que ganhou
 
-    public GameObject imgCoin;
+    //public GameObject imgCoin;
+    public GameObject coinPrize;
+    
+    public Text coinAnim;
+    public GameObject thePrize;
+    public GameObject yourPRIZEText;
     public GameObject giftLid;
 
-    public Text coinAnim;
+    private Vector2 posicaoInicial = new Vector2(0, 0);
+    private Vector2 posicaoFinal = new Vector2(0, 0);
+    //private Vector2 posInicialCoin = new Vector2(0, 0);
 
     private void Start()
     {
         skillSprite.enabled = false;
+        posicaoInicial = thePrize.transform.position;
+        //posInicialCoin = thePrize.transform.position;
+
     }
 
     void Update()
@@ -52,19 +61,24 @@ public class GameControl10 : MonoBehaviour
 
     public void ClickSpinButton()
     {
-
         if (rows[0].rowStopped && rows[1].rowStopped && rows[2].rowStopped && coins.Value >= 10)
         {
-            skillName.enabled = false;
             prizeText.enabled = false;
 
             skillSprite.enabled = false;
-            imgCoin.SetActive(false);
+            coinPrize.SetActive(false);
 
             podePremiar = true;
             HandlePulled();
             CoinAnimation(-10);
             coins.Value -= 10;
+
+            yourPRIZEText.SetActive(true);
+
+            // Prêmio revelado volta ao tamanho e posição iniciais
+            thePrize.transform.DOScale(1, 0);
+            thePrize.transform.position = posicaoInicial;
+            coinPrize.transform.position = posicaoInicial;
 
         }
     }
@@ -72,8 +86,6 @@ public class GameControl10 : MonoBehaviour
     private void RewardPlayer (int numberOfRewards, int rewardType)
     {
         StartCoroutine(OpenGift());
-        prizeText.enabled = true;
-        skillName.enabled = true;
         skillSprite.enabled = true;
 
         if (numberOfRewards == 3)
@@ -83,67 +95,105 @@ public class GameControl10 : MonoBehaviour
         {
             case 0: // 10 ou 50 coins
                 skillSprite.enabled = false;
-                skillName.enabled = false;
                 coins.Value += numberOfRewards * 5;
                 CoinAnimation(numberOfRewards * 5);
-                prizeText.text = (numberOfRewards * 5).ToString();
-                imgCoin.SetActive(true);
+                prizeText.enabled = true;
+                prizeText.text = (numberOfRewards * 5) + " coins";
+                coinPrize.SetActive(true);
                 break;
             case 1: // Skill 1 (Mage)
-                prizeText.text = numberOfRewards.ToString();
-                skillName.text = skill[0].skillName;
                 skill[0].quantity += numberOfRewards;
-                skillSprite.sprite = skill[0].image;
+                ShowPrize(skill[0].skillName, numberOfRewards, skill[0].image);
                 break;
             case 2: // Skill 1 (Warrior)
-                prizeText.text = numberOfRewards.ToString();
-                skillName.text = skill[1].skillName;
                 skill[1].quantity += numberOfRewards;
-                skillSprite.sprite = skill[1].image;
+                ShowPrize(skill[1].skillName, numberOfRewards, skill[1].image);
                 break;
             case 3: // Skill 1 (Priest)
-                prizeText.text = numberOfRewards.ToString();
-                skillName.text = skill[2].skillName;
                 skill[2].quantity += numberOfRewards;
-                skillSprite.sprite = skill[2].image;
+                ShowPrize(skill[2].skillName, numberOfRewards, skill[2].image);
                 break;
             case 4: // Skill 2 (Mage)
-                prizeText.text = numberOfRewards.ToString();
-                skillName.text = skill[3].skillName;
                 skill[3].quantity += numberOfRewards;
-                skillSprite.sprite = skill[3].image;
+                ShowPrize(skill[3].skillName, numberOfRewards, skill[3].image);
                 break;
             case 5: // Skill 2 (Warrior)
-                prizeText.text = numberOfRewards.ToString();
-                skillName.text = skill[4].skillName;
                 skill[4].quantity += numberOfRewards;
-                skillSprite.sprite = skill[4].image;
+                ShowPrize(skill[4].skillName, numberOfRewards, skill[4].image);
                 break;
             case 6: // Skill 2 (Priest)
-                prizeText.text = numberOfRewards.ToString();
-                skillName.text = skill[5].skillName;
                 skill[5].quantity += numberOfRewards;
-                skillSprite.sprite = skill[5].image;
+                ShowPrize(skill[5].skillName, numberOfRewards, skill[5].image);
                 break;
             case 7: // Skill 3 (Mage)
-                prizeText.text = numberOfRewards.ToString();
-                skillName.text = skill[6].skillName;
                 skill[6].quantity += numberOfRewards;
-                skillSprite.sprite = skill[6].image;
+                ShowPrize(skill[6].skillName, numberOfRewards, skill[6].image);
                 break;
             case 8: // Skill 3 (Warrior)
-                prizeText.text = numberOfRewards.ToString();
-                skillName.text = skill[7].skillName;
                 skill[7].quantity += numberOfRewards;
-                skillSprite.sprite = skill[7].image;
+                ShowPrize(skill[7].skillName, numberOfRewards, skill[7].image);
                 break;
             case 9: // Skill 3 (Priest)
-                prizeText.text = numberOfRewards.ToString();
-                skillName.text = skill[8].skillName;
                 skill[8].quantity += numberOfRewards;
-                skillSprite.sprite = skill[8].image;
+                ShowPrize(skill[8].skillName, numberOfRewards, skill[8].image);
                 break;
         }
+    }
+
+
+    private void ShowPrize(String name, int number, Sprite sprite)
+    {
+        yourPRIZEText.SetActive(false);
+        skillSprite.sprite = sprite;
+
+        StartCoroutine(AnimatePrize(thePrize));
+        prizeText.enabled = true;
+        prizeText.text = number + " " + name;
+        prizeText.DOFade(0, 0);
+        prizeText.DOFade(1, 0.5f);
+
+
+    }
+
+    IEnumerator AnimatePrize(GameObject thePrize)
+    {
+        posicaoFinal = thePrize.transform.position;
+        //thePrize.transform.DOScale(2f, 0.5f);
+
+        for (int i = 0; i < 20; i++)
+        {
+            posicaoFinal.y += (float)(i * 0.01);
+            thePrize.transform.position = posicaoFinal;
+            //thePrize.transform.Rotate()
+            //thePrize.transform.DOScale((float)((1*(1+i)/10)), .1f);
+            yield return new WaitForSeconds(0.01f);
+        }
+        yield return new WaitForSeconds(1f);
+    }
+
+    IEnumerator CoinPrize(int quantity)
+    {
+        coinPrize.SetActive(true);
+        CoinAnimation(5);
+        yourPRIZEText.SetActive(false);
+
+
+
+        posicaoFinal = coinPrize.transform.position;
+
+        for (int i = 0; i < 20; i++)
+        {
+            posicaoFinal.y += (float)(i * 0.01);
+            coinPrize.transform.position = posicaoFinal;
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        prizeText.enabled = true;
+        prizeText.text = quantity + " coins";
+
+        yield return new WaitForSeconds(1f);
+
+
     }
 
     private void CheckResults()
@@ -166,10 +216,7 @@ public class GameControl10 : MonoBehaviour
         if (achouPremio == false)
         {
             StartCoroutine(OpenGift());
-            prizeText.enabled = true;
-            prizeText.text = "5 coins";
-            imgCoin.SetActive(true);
-            CoinAnimation(5);
+            StartCoroutine(CoinPrize(5));
             coins.Value += 5;
             achouPremio = false;
         }
