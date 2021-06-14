@@ -23,27 +23,22 @@ public class GameControl10 : MonoBehaviour
 
     public IntVariable coins;
     public SkillSO[] skill; // Lista das 9 skills
-
     public Image skillSprite; // Imagem da skill que ganhou
 
-    //public GameObject imgCoin;
-    public GameObject coinPrize;
+    public Text coinAnim; // Dinheiro gastando e ganhando (animação)
     
-    public Text coinAnim;
-    public GameObject thePrize;
     public GameObject yourPRIZEText;
     public GameObject giftLid;
+    public GameObject skillPrize;
+    public GameObject coinPrize;
 
     private Vector2 posicaoInicial = new Vector2(0, 0);
     private Vector2 posicaoFinal = new Vector2(0, 0);
-    //private Vector2 posInicialCoin = new Vector2(0, 0);
 
     private void Start()
     {
         skillSprite.enabled = false;
-        posicaoInicial = thePrize.transform.position;
-        //posInicialCoin = thePrize.transform.position;
-
+        posicaoInicial = skillPrize.transform.position;
     }
 
     void Update()
@@ -76,8 +71,8 @@ public class GameControl10 : MonoBehaviour
             yourPRIZEText.SetActive(true);
 
             // Prêmio revelado volta ao tamanho e posição iniciais
-            thePrize.transform.DOScale(1, 0);
-            thePrize.transform.position = posicaoInicial;
+            skillPrize.transform.DOScale(1, 0);
+            skillPrize.transform.position = posicaoInicial;
             coinPrize.transform.position = posicaoInicial;
 
         }
@@ -86,7 +81,6 @@ public class GameControl10 : MonoBehaviour
     private void RewardPlayer (int numberOfRewards, int rewardType)
     {
         StartCoroutine(OpenGift());
-        skillSprite.enabled = true;
 
         if (numberOfRewards == 3)
             numberOfRewards = 10;  
@@ -94,12 +88,9 @@ public class GameControl10 : MonoBehaviour
         switch (rewardType)
         {
             case 0: // 10 ou 50 coins
-                skillSprite.enabled = false;
+                Debug.Log("Entrou em 10 ou 50 coins. Reward é " + numberOfRewards * 5);
                 coins.Value += numberOfRewards * 5;
-                CoinAnimation(numberOfRewards * 5);
-                prizeText.enabled = true;
-                prizeText.text = (numberOfRewards * 5) + " coins";
-                coinPrize.SetActive(true);
+                StartCoroutine(CoinPrize(numberOfRewards * 5));
                 break;
             case 1: // Skill 1 (Mage)
                 skill[0].quantity += numberOfRewards;
@@ -143,29 +134,26 @@ public class GameControl10 : MonoBehaviour
 
     private void ShowPrize(String name, int number, Sprite sprite)
     {
+        skillSprite.enabled = true;
         yourPRIZEText.SetActive(false);
         skillSprite.sprite = sprite;
 
-        StartCoroutine(AnimatePrize(thePrize));
-        prizeText.enabled = true;
-        prizeText.text = number + " " + name;
+        StartCoroutine(AnimatePrize(skillPrize));
+
         prizeText.DOFade(0, 0);
-        prizeText.DOFade(1, 0.5f);
-
-
+        prizeText.text = number + " " + name;
+        prizeText.enabled = true;
+        prizeText.DOFade(1, 2);  
     }
 
-    IEnumerator AnimatePrize(GameObject thePrize)
+    IEnumerator AnimatePrize(GameObject skillPrize)
     {
-        posicaoFinal = thePrize.transform.position;
-        //thePrize.transform.DOScale(2f, 0.5f);
+        posicaoFinal = skillPrize.transform.position;
 
         for (int i = 0; i < 20; i++)
         {
             posicaoFinal.y += (float)(i * 0.01);
-            thePrize.transform.position = posicaoFinal;
-            //thePrize.transform.Rotate()
-            //thePrize.transform.DOScale((float)((1*(1+i)/10)), .1f);
+            skillPrize.transform.position = posicaoFinal;
             yield return new WaitForSeconds(0.01f);
         }
         yield return new WaitForSeconds(1f);
@@ -173,11 +161,10 @@ public class GameControl10 : MonoBehaviour
 
     IEnumerator CoinPrize(int quantity)
     {
+        Debug.Log("Entrou em Coin Prize. Reward é " + quantity);
         coinPrize.SetActive(true);
-        CoinAnimation(5);
         yourPRIZEText.SetActive(false);
-
-
+        CoinAnimation(quantity);
 
         posicaoFinal = coinPrize.transform.position;
 
@@ -188,12 +175,10 @@ public class GameControl10 : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
-        prizeText.enabled = true;
+        prizeText.DOFade(0, 0);
         prizeText.text = quantity + " coins";
-
-        yield return new WaitForSeconds(1f);
-
-
+        prizeText.enabled = true;
+        prizeText.DOFade(1, 2);
     }
 
     private void CheckResults()
@@ -249,36 +234,30 @@ public class GameControl10 : MonoBehaviour
 
     void CoinAnimation(int value)
     {
-        
-
-        if(value < 0) // gastando moeda
+        Debug.Log("Entrou em Coin Animation");
+        if(value < 0) // gastando moeda // cor vermelha // animação pra baixo
         {
             Vector2 posInicial = new Vector2();
             posInicial.x = coinAnim.transform.position.x;
             posInicial.y = 3.7f;
             coinAnim.transform.position = posInicial;
             coinAnim.DOFade(1, 0);
-            // cor vermelha
-            // animação pra baixo
             coinAnim.text = value.ToString();
             coinAnim.color = Color.red;
             coinAnim.DOFade(0, 2);
             coinAnim.transform.DOMoveY(3.5f, 1, false); // (float to, float duration, bool snapping)
         }
-        else // ganhando moeda
+        else // ganhando moeda // cor verde // animação pra cima
         {
             Vector2 posInicial = new Vector2();
             posInicial.x = coinAnim.transform.position.x;
             posInicial.y = 3.5f;
             coinAnim.transform.position = posInicial;
             coinAnim.DOFade(1, 0);
-            // cor verde
-            // animação pra cima
             coinAnim.text = "+" + value;
             coinAnim.color = Color.blue;
             coinAnim.DOFade(0, 2);
             coinAnim.transform.DOMoveY(3.7f, 1, false); // (float to, float duration, bool snapping)
         }
-
     }
 }
