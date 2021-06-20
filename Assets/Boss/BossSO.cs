@@ -16,7 +16,7 @@ public class BossSO : ScriptableObject
     public float phyDef;
     public bool isMagic;
 
-
+    
     // hp final = hp + (level * 5)
     // dano final = baseDamage + (level * 5)
     // magDef final = magDef + (level * (3 ou 1)) depende se o boss é mágico ou físico
