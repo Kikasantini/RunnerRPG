@@ -12,6 +12,9 @@ public class Unit : MonoBehaviour
     public int maxHP;
     public int currentHP;
 
+    public int phyDef;
+    public int magDef;
+
     SkillEffect dotEffect;
 
     bool blockNextDamage;

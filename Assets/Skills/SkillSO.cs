@@ -10,6 +10,7 @@ public enum Type { MAG, PHY } // Skill mágica ou física
 public class SkillSO : ScriptableObject
 {
     public string skillName;
+    public string description;
     public Sprite image;
     public int quantity;
 

@@ -46,7 +46,6 @@ public class BattleSystemBR : MonoBehaviour
         state = BattleStateBR.START;
         skillButtons = new bool[3];
         SetupBattle();
-        
     }
 
     void SetupBattle() // transformou isso em coroutine = 18:25 https://www.youtube.com/watch?v=_1pz_ohupPs
@@ -77,6 +76,9 @@ public class BattleSystemBR : MonoBehaviour
         playerHUD.SetHeroHUD(playerUnit);
         enemyHUD.SetHUD(enemyUnit);
 
+        playerHUD.SetPlayerBar(playerUnit.currentHP, playerUnit.maxHP);
+        enemyHUD.SetEnemyBar(enemyUnit.currentHP, enemyUnit.maxHP);
+
         state = BattleStateBR.PLAYERTURN;
         PlayerTurn();
     }
@@ -103,11 +105,17 @@ public class BattleSystemBR : MonoBehaviour
 
         if (skill.isMagic)
         {
-            //dmg -= enemyUnit;
+            Debug.Log("é Magic. Enemy magDef = " + enemyUnit.magDef + ". Enemy phyDef = " + enemyUnit.phyDef);
+            Debug.Log("Dano antes = " + dmg);
+            dmg *= (1 - enemyUnit.magDef / 100);
+            Debug.Log("Dano depois = " + dmg);
         }
         else
         {
-
+            Debug.Log("é Physic. Enemy magDef = " + enemyUnit.magDef + ". Enemy phyDef = " + enemyUnit.phyDef);
+            Debug.Log("Dano antes = " + dmg);
+            dmg *= (1 - enemyUnit.phyDef / 100);
+            Debug.Log("Dano depois = " + dmg);
         }
 
         enemyUnit.TakeDamage(dmg);
@@ -138,19 +146,16 @@ public class BattleSystemBR : MonoBehaviour
         if (skillButtons[0])
         {
             // skill 1 selecionada
-            Debug.Log("skill 1 selecionada");
             CastSkill(selectedCharacter.skill[0]);
         }
         if (skillButtons[1])
         {
             // skill 2 selecionada
-            Debug.Log("skill 2 selecionada");
             CastSkill(selectedCharacter.skill[1]);
         }
         if (skillButtons[2])
         {
             // skill 3 selecionada
-            Debug.Log("skill 3 selecionada");
             CastSkill(selectedCharacter.skill[2]);
         }
 
@@ -178,7 +183,6 @@ public class BattleSystemBR : MonoBehaviour
             selectedCharacter.skill[index].quantity++;
             playerHUD.SetHeroHUD(playerUnit);
         }
-        Debug.Log(selectedSkills + " skill(s) selecionada(s)");
     }
 
     public void PlayerAttack()
@@ -229,7 +233,6 @@ public class BattleSystemBR : MonoBehaviour
 
     void EnemyTurn()
     {
-        Debug.Log("entrou em Enemy Turn()");
         bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
 
         playerHUD.SetPlayerBar(playerUnit.currentHP, playerUnit.maxHP);

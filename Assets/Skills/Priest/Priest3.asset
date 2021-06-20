@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Priest3
   m_EditorClassIdentifier: 
   skillName: Healing Conduit
+  description: aaaaaaaa
   image: {fileID: 21300000, guid: fe55f28144929bf4c9823fc104966d78, type: 3}
-  quantity: 7
+  quantity: 11
   effects:
   - intensity: 1
     target: 0

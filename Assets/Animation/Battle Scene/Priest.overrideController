@@ -8,4 +8,12 @@ AnimatorOverrideController:
   m_PrefabAsset: {fileID: 0}
   m_Name: Priest
   m_Controller: {fileID: 9100000, guid: 153417a06ca91ae4ab1ec5d7c77652ad, type: 2}
-  m_Clips: []
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: affc20478fd7ab645b779e5ea8eb36e6, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 35ec372e367dc5f4caba47edd91ba078, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 4ecdcfec849cf6f4fa5a171f01be0552, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 377b5868b8db89f448b988a78e8cf46a, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 2ae8373f96e93c64faa89c8c02e6d5e7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 452bd4c0e104a27438f3f9188ede341b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: c025d14ca0c34844ab644158e750aed7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e132cb1310d575c4390755138addc7cd, type: 2}

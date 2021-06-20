@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Warrior2
   m_EditorClassIdentifier: 
   skillName: Body Smash
+  description: aaaaaaaa
   image: {fileID: 21300000, guid: 128909c1b228184489d2f831bcd64bde, type: 3}
-  quantity: 10
+  quantity: 12
   effects: []
   dmgTarget: 1
   damage: 2

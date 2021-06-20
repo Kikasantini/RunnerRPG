@@ -31,9 +31,16 @@ public class GameControl10 : MonoBehaviour
     public GameObject giftLid;
     public GameObject skillPrize;
     public GameObject coinPrize;
+    public GameObject skillInfoPanel;
 
     private Vector2 posicaoInicial = new Vector2(0, 0);
     private Vector2 posicaoFinal = new Vector2(0, 0);
+
+    // Skill info panel
+    public Text text;
+    public Text description;
+    private int skillIndex;
+    private bool canShowSkillInfo = false;
 
     private void Start()
     {
@@ -58,6 +65,7 @@ public class GameControl10 : MonoBehaviour
     {
         if (rows[0].rowStopped && rows[1].rowStopped && rows[2].rowStopped && coins.Value >= 10)
         {
+            canShowSkillInfo = false;
             prizeText.enabled = false;
 
             skillSprite.enabled = false;
@@ -83,14 +91,15 @@ public class GameControl10 : MonoBehaviour
         StartCoroutine(OpenGift());
 
         if (numberOfRewards == 3)
-            numberOfRewards = 10;  
+            numberOfRewards = 10;
+
+        skillIndex = rewardType;
 
         switch (rewardType)
         {
             case 0: // 10 ou 50 coins
-                Debug.Log("Entrou em 10 ou 50 coins. Reward é " + numberOfRewards * 5);
-                coins.Value += numberOfRewards * 5;
-                StartCoroutine(CoinPrize(numberOfRewards * 5));
+                coins.Value += numberOfRewards * 10;
+                StartCoroutine(CoinPrize(numberOfRewards * 10));
                 break;
             case 1: // Skill 1 (Mage)
                 skill[0].quantity += numberOfRewards;
@@ -149,19 +158,18 @@ public class GameControl10 : MonoBehaviour
     IEnumerator AnimatePrize(GameObject skillPrize)
     {
         posicaoFinal = skillPrize.transform.position;
-
         for (int i = 0; i < 20; i++)
         {
             posicaoFinal.y += (float)(i * 0.01);
             skillPrize.transform.position = posicaoFinal;
             yield return new WaitForSeconds(0.01f);
         }
+        canShowSkillInfo = true;
         yield return new WaitForSeconds(1f);
     }
 
     IEnumerator CoinPrize(int quantity)
     {
-        Debug.Log("Entrou em Coin Prize. Reward é " + quantity);
         coinPrize.SetActive(true);
         yourPRIZEText.SetActive(false);
         CoinAnimation(quantity);
@@ -234,7 +242,6 @@ public class GameControl10 : MonoBehaviour
 
     void CoinAnimation(int value)
     {
-        Debug.Log("Entrou em Coin Animation");
         if(value < 0) // gastando moeda // cor vermelha // animação pra baixo
         {
             Vector2 posInicial = new Vector2();
@@ -259,5 +266,15 @@ public class GameControl10 : MonoBehaviour
             coinAnim.DOFade(0, 2);
             coinAnim.transform.DOMoveY(3.7f, 1, false); // (float to, float duration, bool snapping)
         }
+    }
+
+    public void ShowSkillInfo()
+    {
+        if (!canShowSkillInfo)
+            return;
+
+        skillInfoPanel.SetActive(true);
+        text.text = skill[skillIndex - 1].skillName;
+        description.text = skill[skillIndex - 1].description;
     }
 }

@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94eff128c5b7e044382478cd5f892a19, type: 3}
   m_Name: Priest
   m_EditorClassIdentifier: 
-  characterName: 
+  characterName: Padre
   charImage: {fileID: 21300000, guid: d6a5c3853cde4e44893f75075010cb29, type: 3}
-  selected: 1
+  selected: 0
   stars: 3
-  health: 500
-  attack: 2
-  magDefense: 22
-  phyDefense: 33
+  health: 100
+  attack: 4
+  magDefense: 6
+  phyDefense: 6
   wood: 500
   iron: 500
   gold: 500

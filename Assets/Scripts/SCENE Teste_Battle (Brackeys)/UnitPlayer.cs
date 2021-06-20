@@ -21,10 +21,12 @@ public class UnitPlayer : Unit
     public void SetCharacter(CharacterSO characterSO)
     {
         character = characterSO;
-        unitName = character.name;
+        unitName = character.characterName;
         damage = character.attack;
         maxHP = currentHP = character.health;
         unitLevel = character.stars;
+        phyDef = character.phyDefense;
+        magDef = character.magDefense;
     }
 
 

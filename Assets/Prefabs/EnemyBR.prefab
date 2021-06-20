@@ -129,5 +129,7 @@ MonoBehaviour:
   unitName: Inimigo
   unitLevel: 10
   damage: 10
-  maxHP: 80
-  currentHP: 80
+  maxHP: 40
+  currentHP: 40
+  phyDef: 100
+  magDef: 50

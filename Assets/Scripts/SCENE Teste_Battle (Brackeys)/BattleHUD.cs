@@ -51,12 +51,10 @@ public class BattleHUD : MonoBehaviour
             if (i < unit.unitLevel)
             {
                 stars[i].color = Color.white;
-                Debug.Log("if" + unit.unitLevel);
             }
             else
             {
                 stars[i].color = Color.gray;
-                Debug.Log("else");
             }
         }
         for (int i = 0; i < 3; i++)

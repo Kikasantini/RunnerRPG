@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Mage de Merda
   charImage: {fileID: -6657997426889672124, guid: cc448a85eb2f8f74585cee79387eae13, type: 3}
-  selected: 0
+  selected: 1
   stars: 1
-  health: 100
-  attack: 3
-  magDefense: 0
-  phyDefense: 0
+  health: 80
+  attack: 4
+  magDefense: 8
+  phyDefense: 2
   wood: 500
   iron: 500
   gold: 500

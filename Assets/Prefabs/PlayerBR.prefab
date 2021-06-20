@@ -151,5 +151,7 @@ MonoBehaviour:
   damage: 0
   maxHP: 0
   currentHP: 0
+  phyDef: 0
+  magDef: 0
   character: {fileID: 0}
   anim: {fileID: 92437601053302989}
