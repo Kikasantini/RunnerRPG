@@ -25,6 +25,7 @@ public class BattleHUD : MonoBehaviour
     public Text enemyPercentage;
     public Text enemyHPtext;
 
+    private UnitBoss boss;
     /*
     
     // Slider genérico:
@@ -37,11 +38,13 @@ public class BattleHUD : MonoBehaviour
 
     public float percentage;
 
+    /*
     public void SetHUD(Unit unit)
     {
         nameText.text = unit.unitName;
         levelText.text = "Lvl " + unit.unitLevel;
     }
+    */
 
     public void SetHeroHUD(UnitPlayer unit)
     {
@@ -62,9 +65,17 @@ public class BattleHUD : MonoBehaviour
             skills[i].sprite = unit.character.skill[i].image;
             skillAmount[i].text = unit.character.skill[i].quantity.ToString();
         }
-        
 
-        SetHUD(unit);
+        nameText.text = unit.unitName;
+        //levelText.text = "Lvl " + unit.unitLevel;
+
+        //SetHUD(unit);
+    }
+
+    public void SetBossHUD(UnitBoss unit)
+    {
+        nameText.text = unit.unitName;
+        levelText.text = "Lvl " + unit.unitLevel;
     }
 
 

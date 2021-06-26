@@ -11,6 +11,9 @@ public class BattleSystemBR : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
 
+    public BossSO[] boss;
+    private int bossIndex = 1; // 0 ou 1
+
     // 3 characters: mage, warrior, priest
     public CharacterSO[] character;
 
@@ -18,7 +21,7 @@ public class BattleSystemBR : MonoBehaviour
     public Transform enemyBattleStation;
 
     UnitPlayer playerUnit;
-    Unit enemyUnit;
+    UnitBoss enemyUnit;
 
     public Text dialogueText;
 
@@ -71,10 +74,13 @@ public class BattleSystemBR : MonoBehaviour
         playerUnit.SetCharacter(selectedCharacter);
 
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
-        enemyUnit = enemyGO.GetComponent<Unit>();
+        //enemyUnit = enemyGO.GetComponent<Unit>();
+        enemyUnit = enemyGO.GetComponent<UnitBoss>();
+
+        enemyUnit.SetBoss(boss[bossIndex]);
 
         playerHUD.SetHeroHUD(playerUnit);
-        enemyHUD.SetHUD(enemyUnit);
+        enemyHUD.SetBossHUD(enemyUnit);
 
         playerHUD.SetPlayerBar(playerUnit.currentHP, playerUnit.maxHP);
         enemyHUD.SetEnemyBar(enemyUnit.currentHP, enemyUnit.maxHP);
@@ -268,5 +274,10 @@ public class BattleSystemBR : MonoBehaviour
         state = BattleStateBR.START;
         Invoke(nameof(SetupBattle), 5f);
         playerUnit.Idle();
+    }
+
+    IEnumerator Wait(float sec)
+    {
+        yield return new WaitForSeconds(sec);
     }
 }

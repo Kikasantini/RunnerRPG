@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BossB
   m_EditorClassIdentifier: 
   name: "Boss F\xEDsico"
-  level: 0
+  level: 1
   bossSprite: {fileID: 0}
   hp: 50
   baseDamage: 5

@@ -1018,7 +1018,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &333489470
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3727,6 +3727,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 3594843534550834993, guid: f5dca119c605db0428530d096b215c7e, type: 3}
   enemyPrefab: {fileID: 3594843534550834993, guid: 31e28d8aeb3f5ad44be94bf5799fe8b4, type: 3}
+  boss:
+  - {fileID: 11400000, guid: 2ed3cb3bc3054ec47aa3d046468d1324, type: 2}
+  - {fileID: 11400000, guid: 7960fb90624418c48b43bf0641305dd2, type: 2}
   character:
   - {fileID: 11400000, guid: 746cdeb44df1fc14f89d182aedaa335a, type: 2}
   - {fileID: 11400000, guid: 7a87513c9c3f9824891900fd99b25108, type: 2}
