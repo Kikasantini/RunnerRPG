@@ -5,12 +5,11 @@ using UnityEngine.UI;
 
 public class BattleHUD : MonoBehaviour
 {
-
-    // Brackeys:
     public Text nameText;
     public Text levelText;
 
     public Image[] stars;
+    public Image[] panelStars;
 
     public Image[] skills;
     public Text[] skillAmount;
@@ -26,38 +25,25 @@ public class BattleHUD : MonoBehaviour
     public Text enemyHPtext;
 
     private UnitBoss boss;
-    /*
-    
-    // Slider genérico:
-    public Image sl;
-    public Text hpText;
-    public Text hpText2;
 
-    */
+    private float percentage;
 
-
-    public float percentage;
-
-    /*
-    public void SetHUD(Unit unit)
-    {
-        nameText.text = unit.unitName;
-        levelText.text = "Lvl " + unit.unitLevel;
-    }
-    */
 
     public void SetHeroHUD(UnitPlayer unit)
     {
-        // Teste estrelas:
+        // Estrelas:
         for (int i = 0; i < stars.Length; i++)
         {
             if (i < unit.unitLevel)
             {
                 stars[i].color = Color.white;
+                panelStars[i].color = Color.white;
+
             }
             else
             {
                 stars[i].color = Color.gray;
+                panelStars[i].color = Color.gray;
             }
         }
         for (int i = 0; i < 3; i++)
@@ -67,9 +53,6 @@ public class BattleHUD : MonoBehaviour
         }
 
         nameText.text = unit.unitName;
-        //levelText.text = "Lvl " + unit.unitLevel;
-
-        //SetHUD(unit);
     }
 
     public void SetBossHUD(UnitBoss unit)
@@ -94,19 +77,4 @@ public class BattleHUD : MonoBehaviour
         enemyPercentage.text = System.Math.Round(percentage * 100, 1) + "%";
         enemyHPtext.text = (System.Math.Round((float)hp, 1)).ToString() + " / " + max.ToString();
     }
-
-
-    /*
-
-    // Slider genérico:
-    public void SetHpBar(int hp, int max)
-    {
-        percentage = (float)hp / max;
-        sl.fillAmount = percentage;
-        hpText.text = System.Math.Round(percentage * 100, 1) + "%";
-        hpText2.text = (System.Math.Round((float)hp, 1)).ToString();
-    }
-
-    */
-
 }

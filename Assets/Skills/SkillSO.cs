@@ -21,4 +21,6 @@ public class SkillSO : ScriptableObject
     public int damage;
     public bool isMagic;
 
+    public GameObject particle;
+
 }

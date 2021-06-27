@@ -8,6 +8,11 @@ public class UnitBoss : Unit
 
     public Animator anim;
 
+    public bool buffed;
+
+
+    public GameObject activeBuffParticle;
+
     // Start is called before the first frame update
     void Start()
     {

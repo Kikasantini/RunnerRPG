@@ -47,10 +47,19 @@ public class BattleSystemBR : MonoBehaviour
 
     private int selectedSkills = 0;
     private int battleID = 0;
-    private int bossMax = 2; // número de bosses diferentes
+    //private int bossMax = 2; // número de bosses diferentes // substituí por (boss.Length - 1)
 
     private float bossBuff = 0.5f; // % de aumento do ataque do boss
     private bool bossBuffed;
+
+    // Painel de início de batalha:
+    public Text playerName;
+    public Text bossName;
+    public Text bossLevel;
+    public Text battleNumber;
+
+    public GameObject hitParticle;
+    public GameObject bossBuffedParticle;
 
     void Start()
     {
@@ -105,6 +114,11 @@ public class BattleSystemBR : MonoBehaviour
         playerHUD.SetPlayerBar(playerUnit.currentHP, playerUnit.maxHP);
         enemyHUD.SetEnemyBar(enemyUnit.currentHP, enemyUnit.maxHP);
 
+        playerName.text = playerUnit.unitName;
+        bossName.text = enemyUnit.unitName;
+        bossLevel.text = "Lvl " + enemyUnit.unitLevel;
+        battleNumber.text = "BATTLE # " + battleID;
+
         state = BattleStateBR.PLAYERTURN;
         PlayerTurn();
     }
@@ -114,8 +128,11 @@ public class BattleSystemBR : MonoBehaviour
         bossBuffed = false;
         // Chance do boss se buffar:
         float abc = Random.Range(0f, 1f);
-        if (abc >= 0.8) // boss is buffed, precisa mostrar o buff nele!!
+        if (abc >= 0.9) // boss is buffed, precisa mostrar o buff nele!!
             bossBuffed = true;
+
+        if (bossBuffed == true)
+            enemyUnit.activeBuffParticle = CreateParticle(bossBuffedParticle, enemyUnit.transform, destroySelf: false);
 
         dialogueText.text = "Choose your next move..";
 
@@ -149,6 +166,11 @@ public class BattleSystemBR : MonoBehaviour
             Debug.Log("Dano depois = " + dmg);
         }
 
+        if (skill.damage > 0)
+        {
+            CreateParticle(skill.particle, enemyUnit.transform);
+        }
+
         enemyUnit.TakeDamage(dmg);
 
         foreach (SkillEffect effect in skill.effects)
@@ -158,6 +180,7 @@ public class BattleSystemBR : MonoBehaviour
                 case Target.self:
                     playerUnit.ApplyEffect(effect, dmg);
                     playerHUD.SetPlayerBar(playerUnit.currentHP, playerUnit.maxHP);
+                    CreateParticle(skill.particle, playerUnit.transform);
                     break;
 
                 case Target.boss:
@@ -165,6 +188,16 @@ public class BattleSystemBR : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public GameObject CreateParticle(GameObject particle, Transform t, bool destroySelf = true)
+    {
+        GameObject go = Instantiate(particle);
+        go.transform.position = t.position;
+        if (destroySelf) { 
+            Destroy(go, 3f);
+        }
+        return go;
     }
 
     public void OnAttackButton()
@@ -213,7 +246,7 @@ public class BattleSystemBR : MonoBehaviour
     public void PlayerAttack()
     {
         playerUnit.Attack();
-
+        CreateParticle(hitParticle, enemyUnit.transform);
         // Damage the enemy
         bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
 
@@ -251,7 +284,7 @@ public class BattleSystemBR : MonoBehaviour
 
             boss[bossIndex].next = false;
 
-            if (bossIndex == (bossMax - 1))
+            if (bossIndex == (boss.Length - 1))
                 boss[0].next = true;
             else
                 boss[bossIndex + 1].next = true;
@@ -276,7 +309,13 @@ public class BattleSystemBR : MonoBehaviour
         else
             damage = enemyUnit.damage;
 
+        CreateParticle(hitParticle, playerUnit.transform);
+
         Debug.Log("dano do boss = " + damage);
+
+        if (enemyUnit.activeBuffParticle != null) {
+            Destroy(enemyUnit.activeBuffParticle);
+        }
 
         bool isDead = playerUnit.TakeDamage(damage);
 

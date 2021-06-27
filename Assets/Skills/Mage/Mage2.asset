@@ -15,7 +15,7 @@ MonoBehaviour:
   skillName: Absorb Energy
   description: Deals X damage to the opponent and heals you a % based on that damage.
   image: {fileID: 21300000, guid: d17f57265d0fcbf44889281eeeede36d, type: 3}
-  quantity: 32
+  quantity: 28
   effects:
   - intensity: 1
     target: 0
@@ -23,3 +23,4 @@ MonoBehaviour:
   dmgTarget: 1
   damage: 4
   isMagic: 0
+  particle: {fileID: 100004, guid: 0c72211213c7ef345a86f699f342f285, type: 3}
