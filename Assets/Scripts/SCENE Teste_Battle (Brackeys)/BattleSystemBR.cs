@@ -11,6 +11,9 @@ public class BattleSystemBR : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
 
+    public GameObject youWonPanel;
+    public Text youWonText;
+
     public BossSO[] boss;
     private int bossIndex = 1; // 0 ou 1
 
@@ -228,11 +231,16 @@ public class BattleSystemBR : MonoBehaviour
         {
             StartCoroutine(DeathAnimation(enemyUnit));
             dialogueText.text = "You won the battle";
+            youWonText.text = "YOU WON";
+            youWonPanel.SetActive(true);
+
         }
         else if(state == BattleStateBR.LOST)
         {
             //StartCoroutine(DeathAnimation(playerUnit));
             dialogueText.text = "You were defeated";
+            youWonText.text = "YOU LOST";
+            youWonPanel.SetActive(true);
         }
 
     }
