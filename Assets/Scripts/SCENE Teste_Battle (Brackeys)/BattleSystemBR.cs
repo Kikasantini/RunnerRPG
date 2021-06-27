@@ -19,7 +19,7 @@ public class BattleSystemBR : MonoBehaviour
     public Text youWonText;
 
     public BossSO[] boss;
-    private int bossIndex = 0;
+    private int bossIndex;
 
     // 3 characters: mage, warrior, priest
     public CharacterSO[] character;
@@ -41,20 +41,16 @@ public class BattleSystemBR : MonoBehaviour
     public Button button2;
     public Button button3;
     public Image[] buttonSelected;
-    //public Image buttonSelected2;
-    //public Image buttonSelected3;
 
     private bool[] skillButtons;
     public AnimatorOverrideController[] heroesAnimators;
-    //private bool firstBattle;
 
     private int selectedSkills = 0;
     private int battleID = 0;
-
+    private int bossMax = 2; // número de bosses diferentes
 
     void Start()
     {
-        //firstBattle = true;
         Debug.Log("Battle ID: " + battleID);
         state = BattleStateBR.START;
         skillButtons = new bool[3];
@@ -63,6 +59,7 @@ public class BattleSystemBR : MonoBehaviour
 
     void SetupBattle() // transformou isso em coroutine = 18:25 https://www.youtube.com/watch?v=_1pz_ohupPs
     {
+        bossIndex = 0;
         selectedSkills = 0;
         playerGO = Instantiate(playerPrefab, playerBattleStation);
         playerUnit = playerGO.GetComponent<UnitPlayer>();
@@ -84,7 +81,6 @@ public class BattleSystemBR : MonoBehaviour
         playerUnit.SetCharacter(selectedCharacter);
 
         enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
-        //enemyUnit = enemyGO.GetComponent<Unit>();
         enemyUnit = enemyGO.GetComponent<UnitBoss>();
 
 
@@ -123,7 +119,6 @@ public class BattleSystemBR : MonoBehaviour
         buttonSelected[0].enabled = false;
         buttonSelected[1].enabled = false;
         buttonSelected[2].enabled = false;
-
     }
 
     public void CastSkill (SkillSO skill)
@@ -161,7 +156,6 @@ public class BattleSystemBR : MonoBehaviour
                     break;
             }
         }
-        
     }
 
     public void OnAttackButton()
@@ -169,20 +163,16 @@ public class BattleSystemBR : MonoBehaviour
         if (state != BattleStateBR.PLAYERTURN)
             return;
 
-        // ver quais skills estão selecionadas
-        if (skillButtons[0])
+        if (skillButtons[0]) // skill 1 selecionada
         {
-            // skill 1 selecionada
             CastSkill(selectedCharacter.skill[0]);
         }
-        if (skillButtons[1])
+        if (skillButtons[1]) // skill 2 selecionada
         {
-            // skill 2 selecionada
             CastSkill(selectedCharacter.skill[1]);
         }
-        if (skillButtons[2])
+        if (skillButtons[2]) // skill 3 selecionada
         {
-            // skill 3 selecionada
             CastSkill(selectedCharacter.skill[2]);
         }
 
@@ -197,7 +187,6 @@ public class BattleSystemBR : MonoBehaviour
             buttonSelected[index].enabled = !buttonSelected[index].enabled;
             selectedSkills++;
 
-            // tem que atualizar a quantidade de skills do char
             selectedCharacter.skill[index].quantity--;
             playerHUD.SetHeroHUD(playerUnit);
         }
@@ -227,15 +216,13 @@ public class BattleSystemBR : MonoBehaviour
         dialogueText.text = "The attack is successful";
 
         // Check if enemy is dead
-        if (isDead)
+        if (isDead) // End the battle
         {
-            // End the battle
             state = BattleStateBR.WON;
             EndBattle();
         }
-        else
+        else // Enemy turn
         {
-            // Enemy turn
             state = BattleStateBR.ENEMYTURN;
             Invoke(nameof(EnemyTurn), 2f);
         }
@@ -252,21 +239,23 @@ public class BattleSystemBR : MonoBehaviour
             youWonText.text = "YOU WON";
             youWonPanel.SetActive(true);
             battleID++;
-            // mudar boss que tá com next == true:
-            boss[0].next = !boss[0].next;
-            boss[1].next = !boss[1].next;
+
+            boss[bossIndex].next = false;
+
+            if (bossIndex == (bossMax - 1))
+                boss[0].next = true;
+            else
+                boss[bossIndex + 1].next = true;
 
             Debug.Log("Próxima battle ID: " + battleID);
 
         }
         else if(state == BattleStateBR.LOST)
         {
-            //StartCoroutine(DeathAnimation(playerUnit));
             dialogueText.text = "You were defeated";
             youWonText.text = "YOU LOST";
             youWonPanel.SetActive(true);
         }
-
     }
 
     void EnemyTurn()
@@ -288,7 +277,6 @@ public class BattleSystemBR : MonoBehaviour
             state = BattleStateBR.PLAYERTURN;
             PlayerTurn();
         }
-
     }
 
     IEnumerator DeathAnimation(Unit unit)
@@ -299,16 +287,6 @@ public class BattleSystemBR : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
-
-    /*
-    private void RestartBattle()
-    {
-        //firstBattle = false;
-        state = BattleStateBR.START;
-        Invoke(nameof(SetupBattle), 5f);
-        playerUnit.Idle();
-    }
-    */
 
     IEnumerator Wait(float sec)
     {

@@ -16,7 +16,8 @@ MonoBehaviour:
   level: 1
   bossSprite: {fileID: 0}
   hp: 50
-  baseDamage: 5
+  baseDamage: 30
   magDef: 8
   phyDef: 2
   isMagic: 1
+  next: 0

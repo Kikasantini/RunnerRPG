@@ -17,7 +17,7 @@ MonoBehaviour:
   selected: 1
   stars: 1
   health: 80
-  attack: 4
+  attack: 5
   magDefense: 8
   phyDefense: 2
   wood: 500

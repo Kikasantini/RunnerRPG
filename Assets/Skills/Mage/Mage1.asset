@@ -15,8 +15,8 @@ MonoBehaviour:
   skillName: Blaze
   description: Deals X magical damage to the opponent.
   image: {fileID: 21300000, guid: b03eb7ad2bec616489b25355be049e7e, type: 3}
-  quantity: 21
+  quantity: 9
   effects: []
   dmgTarget: 1
-  damage: 10
+  damage: 20
   isMagic: 1
