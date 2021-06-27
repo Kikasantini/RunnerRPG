@@ -49,6 +49,9 @@ public class BattleSystemBR : MonoBehaviour
     private int battleID = 0;
     private int bossMax = 2; // número de bosses diferentes
 
+    private float bossBuff = 0.5f; // % de aumento do ataque do boss
+    private bool bossBuffed;
+
     void Start()
     {
         Debug.Log("Battle ID: " + battleID);
@@ -108,6 +111,12 @@ public class BattleSystemBR : MonoBehaviour
 
     void PlayerTurn()
     {
+        bossBuffed = false;
+        // Chance do boss se buffar:
+        float abc = Random.Range(0f, 1f);
+        if (abc >= 0.8) // boss is buffed, precisa mostrar o buff nele!!
+            bossBuffed = true;
+
         dialogueText.text = "Choose your next move..";
 
         selectedSkills = 0;
@@ -260,7 +269,16 @@ public class BattleSystemBR : MonoBehaviour
 
     void EnemyTurn()
     {
-        bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
+        int damage;
+
+        if (bossBuffed == true)
+            damage = (int)(enemyUnit.damage * (1 + bossBuff));
+        else
+            damage = enemyUnit.damage;
+
+        Debug.Log("dano do boss = " + damage);
+
+        bool isDead = playerUnit.TakeDamage(damage);
 
         playerHUD.SetPlayerBar(playerUnit.currentHP, playerUnit.maxHP);
 
