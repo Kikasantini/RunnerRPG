@@ -6,6 +6,9 @@ public enum BattleStateBR { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
 public class BattleSystemBR : MonoBehaviour
 {
+    private GameObject playerGO;
+    private GameObject enemyGO;
+
     private CharacterSO selectedCharacter = null; // tirei do SetupBattle()
 
     public GameObject playerPrefab;
@@ -57,7 +60,7 @@ public class BattleSystemBR : MonoBehaviour
     void SetupBattle() // transformou isso em coroutine = 18:25 https://www.youtube.com/watch?v=_1pz_ohupPs
     {
         selectedSkills = 0;
-        GameObject playerGO = Instantiate(playerPrefab, playerBattleStation);
+        playerGO = Instantiate(playerPrefab, playerBattleStation);
         playerUnit = playerGO.GetComponent<UnitPlayer>();
 
         //CharacterSO selectedCharacter = null;
@@ -76,7 +79,7 @@ public class BattleSystemBR : MonoBehaviour
         playerUnit.SetAnimator(heroesAnimators[heroIndex]);
         playerUnit.SetCharacter(selectedCharacter);
 
-        GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
+        enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         //enemyUnit = enemyGO.GetComponent<Unit>();
         enemyUnit = enemyGO.GetComponent<UnitBoss>();
 
@@ -287,5 +290,12 @@ public class BattleSystemBR : MonoBehaviour
     IEnumerator Wait(float sec)
     {
         yield return new WaitForSeconds(sec);
+    }
+
+    public void DestroyUnits()
+    {
+        Destroy(playerGO);
+        Destroy(enemyGO);
+        Start();
     }
 }
