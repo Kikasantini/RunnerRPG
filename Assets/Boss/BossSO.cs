@@ -16,6 +16,8 @@ public class BossSO : ScriptableObject
     public float phyDef;
     public bool isMagic;
 
+    public bool next;
+
     
     // hp final = hp + (level * 5)
     // dano final = baseDamage + (level * 5)

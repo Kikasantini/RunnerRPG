@@ -10,6 +10,7 @@ public class BattleSystemBR : MonoBehaviour
     private GameObject enemyGO;
 
     private CharacterSO selectedCharacter = null; // tirei do SetupBattle()
+    private BossSO selectedBoss = null;
 
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
@@ -18,7 +19,7 @@ public class BattleSystemBR : MonoBehaviour
     public Text youWonText;
 
     public BossSO[] boss;
-    private int bossIndex = 1; // 0 ou 1
+    private int bossIndex = 0;
 
     // 3 characters: mage, warrior, priest
     public CharacterSO[] character;
@@ -48,10 +49,13 @@ public class BattleSystemBR : MonoBehaviour
     //private bool firstBattle;
 
     private int selectedSkills = 0;
+    private int battleID = 0;
+
 
     void Start()
     {
         //firstBattle = true;
+        Debug.Log("Battle ID: " + battleID);
         state = BattleStateBR.START;
         skillButtons = new bool[3];
         SetupBattle();
@@ -83,7 +87,18 @@ public class BattleSystemBR : MonoBehaviour
         //enemyUnit = enemyGO.GetComponent<Unit>();
         enemyUnit = enemyGO.GetComponent<UnitBoss>();
 
-        enemyUnit.SetBoss(boss[bossIndex]);
+
+        foreach (BossSO c in boss)
+        {
+            if (c.next)
+            {
+                selectedBoss = c;
+                break;
+            }
+            bossIndex++;
+        }
+
+        enemyUnit.SetBoss(selectedBoss);
 
         playerHUD.SetHeroHUD(playerUnit);
         enemyHUD.SetBossHUD(enemyUnit);
@@ -236,6 +251,12 @@ public class BattleSystemBR : MonoBehaviour
             dialogueText.text = "You won the battle";
             youWonText.text = "YOU WON";
             youWonPanel.SetActive(true);
+            battleID++;
+            // mudar boss que tá com next == true:
+            boss[0].next = !boss[0].next;
+            boss[1].next = !boss[1].next;
+
+            Debug.Log("Próxima battle ID: " + battleID);
 
         }
         else if(state == BattleStateBR.LOST)
@@ -279,6 +300,7 @@ public class BattleSystemBR : MonoBehaviour
         }
     }
 
+    /*
     private void RestartBattle()
     {
         //firstBattle = false;
@@ -286,6 +308,7 @@ public class BattleSystemBR : MonoBehaviour
         Invoke(nameof(SetupBattle), 5f);
         playerUnit.Idle();
     }
+    */
 
     IEnumerator Wait(float sec)
     {
