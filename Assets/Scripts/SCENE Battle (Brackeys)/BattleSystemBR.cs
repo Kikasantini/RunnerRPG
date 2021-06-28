@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public enum BattleStateBR { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
@@ -47,7 +48,6 @@ public class BattleSystemBR : MonoBehaviour
 
     private int selectedSkills = 0;
     private int battleID = 0;
-    //private int bossMax = 2; // número de bosses diferentes // substituí por (boss.Length - 1)
 
     private float bossBuff = 0.5f; // % de aumento do ataque do boss
     private bool bossBuffed;
@@ -61,9 +61,17 @@ public class BattleSystemBR : MonoBehaviour
     public GameObject hitParticle;
     public GameObject bossBuffedParticle;
 
+    private bool isDead;
+
+    public Text[] pointsText;
+
     void Start()
     {
-        Debug.Log("Battle ID: " + battleID);
+        pointsText[0].DOFade(0, 0); // texto de dano no boss
+        pointsText[1].DOFade(0, 0); // texto de dano no boss
+        pointsText[2].DOFade(0, 0); // texto de dano no boss
+        pointsText[3].DOFade(0, 0); // texto de dano no player
+        //Debug.Log("Battle ID: " + battleID);
         state = BattleStateBR.START;
         skillButtons = new bool[3];
         SetupBattle();
@@ -126,16 +134,16 @@ public class BattleSystemBR : MonoBehaviour
     void PlayerTurn()
     {
         bossBuffed = false;
+
         // Chance do boss se buffar:
-        float abc = Random.Range(0f, 1f);
-        if (abc >= 0.9) // boss is buffed, precisa mostrar o buff nele!!
+        float abc = UnityEngine.Random.Range(0f, 1f);
+        if (abc >= 0.5)
             bossBuffed = true;
 
         if (bossBuffed == true)
             enemyUnit.activeBuffParticle = CreateParticle(bossBuffedParticle, enemyUnit.transform, destroySelf: false);
 
         dialogueText.text = "Choose your next move..";
-
         selectedSkills = 0;
 
         skillButtons[0] = false;
@@ -147,31 +155,41 @@ public class BattleSystemBR : MonoBehaviour
         buttonSelected[2].enabled = false;
     }
 
-    public void CastSkill (SkillSO skill)
+    IEnumerator CastSkill (SkillSO skill) // public void
     {
         int dmg = skill.damage;
+        float x;
+
+        Debug.Log("Entrou em Cast Skill. Dano base da skill é " + skill.damage);
 
         if (skill.isMagic)
         {
-            Debug.Log("é Magic. Enemy magDef = " + enemyUnit.magDef + ". Enemy phyDef = " + enemyUnit.phyDef);
-            Debug.Log("Dano antes = " + dmg);
-            dmg *= (1 - enemyUnit.magDef / 100);
-            Debug.Log("Dano depois = " + dmg);
+            x = enemyUnit.magDef / 100f;
+            dmg = (int)((1 - x) * dmg);
+            StartCoroutine(FlyingHPoints(dmg, 1));
+            Debug.Log("é Magic. Enemy magDef = " + enemyUnit.magDef + ". Enemy phyDef = " + enemyUnit.phyDef + ". DANO É " + dmg);
         }
         else
         {
-            Debug.Log("é Physic. Enemy magDef = " + enemyUnit.magDef + ". Enemy phyDef = " + enemyUnit.phyDef);
-            Debug.Log("Dano antes = " + dmg);
-            dmg *= (1 - enemyUnit.phyDef / 100);
-            Debug.Log("Dano depois = " + dmg);
+            x = enemyUnit.phyDef / 100f;
+            dmg = (int)((1 - x) * dmg);
+            StartCoroutine(FlyingHPoints(dmg, 2));
+            Debug.Log("é Physic. Enemy magDef = " + enemyUnit.magDef + ". Enemy phyDef = " + enemyUnit.phyDef + ". DANO É " + dmg);
         }
 
         if (skill.damage > 0)
         {
             CreateParticle(skill.particle, enemyUnit.transform);
+            isDead = enemyUnit.TakeDamage(dmg);
+            Debug.Log("Inimigo toma dano de = " + dmg);
+            enemyHUD.SetEnemyBar(enemyUnit.currentHP, enemyUnit.maxHP);
+            CheckIfDead(isDead);
         }
 
+        /*
         enemyUnit.TakeDamage(dmg);
+        Debug.Log("Inimigo tomou dano de " + dmg);
+        */
 
         foreach (SkillEffect effect in skill.effects)
         {
@@ -188,6 +206,9 @@ public class BattleSystemBR : MonoBehaviour
                     break;
             }
         }
+
+        yield return new WaitForSeconds(1f);
+
     }
 
     public GameObject CreateParticle(GameObject particle, Transform t, bool destroySelf = true)
@@ -205,20 +226,7 @@ public class BattleSystemBR : MonoBehaviour
         if (state != BattleStateBR.PLAYERTURN)
             return;
 
-        if (skillButtons[0]) // skill 1 selecionada
-        {
-            CastSkill(selectedCharacter.skill[0]);
-        }
-        if (skillButtons[1]) // skill 2 selecionada
-        {
-            CastSkill(selectedCharacter.skill[1]);
-        }
-        if (skillButtons[2]) // skill 3 selecionada
-        {
-            CastSkill(selectedCharacter.skill[2]);
-        }
-
-        PlayerAttack();
+        StartCoroutine(PlayerAttack());
     }
 
     public void OnClickSkillButton(int index)
@@ -243,27 +251,66 @@ public class BattleSystemBR : MonoBehaviour
         }
     }
 
-    public void PlayerAttack()
+    IEnumerator PlayerAttack() // public void
     {
-        playerUnit.Attack();
+        playerUnit.Attack(); // animação de ataque do player
+        yield return new WaitForSeconds(2f);
+
+        // SE SKILL FOR SHIELD, CRIAR A PARTÍCULA DO SHIELD AQUI
+
+        // BOSS ANIMAÇÃO DE DANO PARTE 1 (INÍCIO)
+
+        // partícula de hit no boss:
         CreateParticle(hitParticle, enemyUnit.transform);
-        // Damage the enemy
-        bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+        yield return new WaitForSeconds(0.5f);
 
-        enemyHUD.SetEnemyBar(enemyUnit.currentHP, enemyUnit.maxHP);
+        isDead = enemyUnit.TakeDamage(playerUnit.damage); // Dar o dano do hit básico no boss
+        Debug.Log("Boss tomou dano do hit = " + playerUnit.damage);
 
-        // Teste com função de HP Bar genérica:
-        //playerHUD.SetHpBar(playerUnit.currentHP, playerUnit.maxHP);
+        // MOSTRAR O DANO NA TELA AQUI (fazer uma função IEnumerator)
+        StartCoroutine(FlyingHPoints(playerUnit.damage, 0));
+
+        enemyHUD.SetEnemyBar(enemyUnit.currentHP, enemyUnit.maxHP);  // Atualizar a barra de HP do boss
+        CheckIfDead(isDead);
+
+        int a = 0;
+        float b;
+
+        if (skillButtons[0]) // skill 1 selecionada
+        {
+            StartCoroutine(CastSkill(selectedCharacter.skill[0]));
+            a++;
+        }
+        if (skillButtons[1]) // skill 2 selecionada
+        {
+            StartCoroutine(CastSkill(selectedCharacter.skill[1]));
+            a++;
+        }
+        if (skillButtons[2]) // skill 3 selecionada
+        {
+            StartCoroutine(CastSkill(selectedCharacter.skill[2]));
+            a++;
+        }
+
+        // delay de acordo com quantas skills usou:
+        b = (float)a;
+        yield return new WaitForSeconds(b/2);
+
+        // BOSS ANIMAÇÃO DE DANO PARTE 2 (FIM)
+
+        // BOSS ANIMAÇÃO DE ATAQUE
+
+        // PLAYER ANIMAÇÃO DE DANO
+
+        // PARTÍCULA DE HIT NO PLAYER
+
+
 
         dialogueText.text = "The attack is successful";
 
-        // Check if enemy is dead
-        if (isDead) // End the battle
-        {
-            state = BattleStateBR.WON;
-            EndBattle();
-        }
-        else // Enemy turn
+        CheckIfDead(isDead);
+
+        if (!isDead)
         {
             state = BattleStateBR.ENEMYTURN;
             Invoke(nameof(EnemyTurn), 2f);
@@ -289,7 +336,7 @@ public class BattleSystemBR : MonoBehaviour
             else
                 boss[bossIndex + 1].next = true;
 
-            Debug.Log("Próxima battle ID: " + battleID);
+            //Debug.Log("Próxima battle ID: " + battleID);
 
         }
         else if(state == BattleStateBR.LOST)
@@ -318,11 +365,10 @@ public class BattleSystemBR : MonoBehaviour
         }
 
         bool isDead = playerUnit.TakeDamage(damage);
+        StartCoroutine(FlyingHPoints(damage, 3)); // dano no player
 
         playerHUD.SetPlayerBar(playerUnit.currentHP, playerUnit.maxHP);
 
-        // Teste com função de HP Bar genérica:
-        //playerHUD.SetHpBar(playerUnit.currentHP, playerUnit.maxHP);
         if (isDead)
         {
             state = BattleStateBR.LOST;
@@ -345,15 +391,82 @@ public class BattleSystemBR : MonoBehaviour
         }
     }
 
-    IEnumerator Wait(float sec)
-    {
-        yield return new WaitForSeconds(sec);
-    }
-
     public void DestroyUnits()
     {
         Destroy(playerGO);
         Destroy(enemyGO);
         Start();
+    }
+
+    private void CheckIfDead(bool isDead)
+    {
+        // Check if enemy is dead
+        if (isDead) // End the battle
+        {
+            state = BattleStateBR.WON;
+            EndBattle();
+        }
+    }
+
+    IEnumerator FlyingHPoints(int points, int index)
+    {
+        Vector3 originalScale = new Vector3(0, 0, 0);
+        Vector3 newScale = new Vector3(0, 0, 0);
+        originalScale = pointsText[index].transform.localScale;
+        newScale = pointsText[index].transform.localScale;
+
+        float jump = 0.01f;
+
+        Vector2 pointsPosInit = new Vector2(0, 0);
+        pointsPosInit = pointsText[index].transform.position;
+        pointsText[index].text = "-" + points;
+
+        //pointsText[index].transform.DOScale(2f, 2.5f); // scale
+        pointsText[index].DOFade(1, 0.5f); // fade in
+
+        for (int i = 0; i < 50; i++)
+        {
+            pointsPosInit.y += jump;
+            pointsText[index].transform.position = pointsPosInit;
+
+            newScale.x += 0.01f;
+            newScale.y += 0.01f;
+            newScale.z += 0.01f;
+            pointsText[index].transform.localScale = newScale;
+
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        pointsText[index].DOFade(0, 0.5f); // fade out
+
+        for (int i = 50; i < 100; i++)
+        {
+            pointsPosInit.y += jump;
+            pointsText[index].transform.position = pointsPosInit;
+
+            newScale.x += 0.01f;
+            newScale.y += 0.01f;
+            newScale.z += 0.01f;
+            pointsText[index].transform.localScale = newScale;
+
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        pointsPosInit.y -= jump * 100;
+        pointsText[index].transform.position = pointsPosInit; // texto volta à posição original
+        pointsText[index].transform.localScale = originalScale; // texto volta ao tamanho original
+    }
+
+    IEnumerator GainingHPoints(int points)
+    {
+        for (int i = 50; i < 100; i++)
+        {
+
+            // escalar e rotacionar número
+            yield return new WaitForSeconds(0.01f);
+        }
+
     }
 }

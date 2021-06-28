@@ -15,7 +15,7 @@ MonoBehaviour:
   characterName: Mage de Merda
   charImage: {fileID: -6657997426889672124, guid: cc448a85eb2f8f74585cee79387eae13, type: 3}
   selected: 1
-  stars: 1
+  stars: 2
   health: 80
   attack: 5
   magDefense: 8
