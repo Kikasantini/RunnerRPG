@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: BossA
   m_EditorClassIdentifier: 
   name: "Boss M\xE1gico"
-  level: 1
+  level: 3
   bossSprite: {fileID: 0}
   hp: 50
-  baseDamage: 20
-  magDef: 8
-  phyDef: 2
+  baseDamage: 10
+  magDef: 50
+  phyDef: 10
   isMagic: 1
+  incrementoPhyDef: 0
+  incrementoMagDef: 0.2
   next: 0

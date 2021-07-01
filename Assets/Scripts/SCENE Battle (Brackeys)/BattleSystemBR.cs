@@ -10,20 +10,22 @@ public class BattleSystemBR : MonoBehaviour
     private GameObject playerGO;
     private GameObject enemyGO;
 
-    private CharacterSO selectedCharacter = null; // tirei do SetupBattle()
-    private BossSO selectedBoss = null;
-
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
 
     public GameObject youWonPanel;
     public Text youWonText;
 
-    public BossSO[] boss;
-    private int bossIndex;
+    public GameObject hideButtonsPanel;
 
-    // 3 characters: mage, warrior, priest
+    // Personagens e bosses:
     public CharacterSO[] character;
+    public BossSO[] boss;
+
+    private CharacterSO selectedCharacter = null;
+    private BossSO selectedBoss = null;
+
+    private int bossIndex;
 
     public Transform playerBattleStation;
     public Transform enemyBattleStation;
@@ -38,15 +40,16 @@ public class BattleSystemBR : MonoBehaviour
 
     public BattleStateBR state;
 
+    // Botões das skills:
     public Button button1;
     public Button button2;
     public Button button3;
     public Image[] buttonSelected;
-
-    private bool[] skillButtons;
-    public AnimatorOverrideController[] heroesAnimators;
-
     private int selectedSkills = 0;
+    private bool[] skillButtons;
+
+    public AnimatorOverrideController[] heroesAnimators;
+    
     private int battleID = 0;
 
     private float bossBuff = 0.5f; // % de aumento do ataque do boss
@@ -58,33 +61,32 @@ public class BattleSystemBR : MonoBehaviour
     public Text bossLevel;
     public Text battleNumber;
 
+    // Particles:
     public GameObject hitParticle;
     public GameObject bossBuffedParticle;
 
     private bool isDead;
 
+    // Pontinhos animados na tela (ganha/perde vida):
     public Text[] pointsText;
-
+    
     void Start()
     {
-        pointsText[0].DOFade(0, 0); // texto de dano no boss
-        pointsText[1].DOFade(0, 0); // texto de dano no boss
-        pointsText[2].DOFade(0, 0); // texto de dano no boss
-        pointsText[3].DOFade(0, 0); // texto de dano no player
-        //Debug.Log("Battle ID: " + battleID);
+        for (int i = 0; i < pointsText.Length; i++)
+            pointsText[i].DOFade(0, 0);
+
         state = BattleStateBR.START;
         skillButtons = new bool[3];
         SetupBattle();
     }
 
-    void SetupBattle() // transformou isso em coroutine = 18:25 https://www.youtube.com/watch?v=_1pz_ohupPs
+    void SetupBattle()
     {
         bossIndex = 0;
         selectedSkills = 0;
         playerGO = Instantiate(playerPrefab, playerBattleStation);
         playerUnit = playerGO.GetComponent<UnitPlayer>();
 
-        //CharacterSO selectedCharacter = null;
         int heroIndex = 0;
 
         foreach (CharacterSO c in character)
@@ -102,7 +104,6 @@ public class BattleSystemBR : MonoBehaviour
 
         enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<UnitBoss>();
-
 
         foreach (BossSO c in boss)
         {
@@ -133,14 +134,14 @@ public class BattleSystemBR : MonoBehaviour
 
     void PlayerTurn()
     {
+        hideButtonsPanel.SetActive(false);
         bossBuffed = false;
 
-        // Chance do boss se buffar:
-        float abc = UnityEngine.Random.Range(0f, 1f);
+        float abc = UnityEngine.Random.Range(0f, 1f); // Chance do boss se buffar
         if (abc >= 0.5)
             bossBuffed = true;
 
-        if (bossBuffed == true)
+        if (bossBuffed == true) // Ativa a partícula do boss buffado
             enemyUnit.activeBuffParticle = CreateParticle(bossBuffedParticle, enemyUnit.transform, destroySelf: false);
 
         dialogueText.text = "Choose your next move..";
@@ -155,7 +156,7 @@ public class BattleSystemBR : MonoBehaviour
         buttonSelected[2].enabled = false;
     }
 
-    IEnumerator CastSkill (SkillSO skill) // public void
+    IEnumerator CastSkill (SkillSO skill, int index) // public void
     {
         int dmg = skill.damage;
         float x;
@@ -166,30 +167,24 @@ public class BattleSystemBR : MonoBehaviour
         {
             x = enemyUnit.magDef / 100f;
             dmg = (int)((1 - x) * dmg);
-            StartCoroutine(FlyingHPoints(dmg, 1));
             Debug.Log("é Magic. Enemy magDef = " + enemyUnit.magDef + ". Enemy phyDef = " + enemyUnit.phyDef + ". DANO É " + dmg);
         }
         else
         {
             x = enemyUnit.phyDef / 100f;
             dmg = (int)((1 - x) * dmg);
-            StartCoroutine(FlyingHPoints(dmg, 2));
             Debug.Log("é Physic. Enemy magDef = " + enemyUnit.magDef + ". Enemy phyDef = " + enemyUnit.phyDef + ". DANO É " + dmg);
         }
 
         if (skill.damage > 0)
         {
             CreateParticle(skill.particle, enemyUnit.transform);
+            StartCoroutine(FlyingHPoints(dmg, index));
             isDead = enemyUnit.TakeDamage(dmg);
             Debug.Log("Inimigo toma dano de = " + dmg);
             enemyHUD.SetEnemyBar(enemyUnit.currentHP, enemyUnit.maxHP);
-            CheckIfDead(isDead);
+            //CheckIfDead(isDead);
         }
-
-        /*
-        enemyUnit.TakeDamage(dmg);
-        Debug.Log("Inimigo tomou dano de " + dmg);
-        */
 
         foreach (SkillEffect effect in skill.effects)
         {
@@ -226,6 +221,8 @@ public class BattleSystemBR : MonoBehaviour
         if (state != BattleStateBR.PLAYERTURN)
             return;
 
+        dialogueText.text = "Bang.. Pow.. BUM!!";
+        hideButtonsPanel.SetActive(true);
         StartCoroutine(PlayerAttack());
     }
 
@@ -251,44 +248,44 @@ public class BattleSystemBR : MonoBehaviour
         }
     }
 
-    IEnumerator PlayerAttack() // public void
+    IEnumerator PlayerAttack()
     {
         playerUnit.Attack(); // animação de ataque do player
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         // SE SKILL FOR SHIELD, CRIAR A PARTÍCULA DO SHIELD AQUI
 
-        // BOSS ANIMAÇÃO DE DANO PARTE 1 (INÍCIO)
+        // BOSS ANIMAÇÃO DE DANO
 
-        // partícula de hit no boss:
+        // Partícula de hit no boss:
         CreateParticle(hitParticle, enemyUnit.transform);
         yield return new WaitForSeconds(0.5f);
 
         isDead = enemyUnit.TakeDamage(playerUnit.damage); // Dar o dano do hit básico no boss
         Debug.Log("Boss tomou dano do hit = " + playerUnit.damage);
 
-        // MOSTRAR O DANO NA TELA AQUI (fazer uma função IEnumerator)
+        // Mostra o dano na tela:
         StartCoroutine(FlyingHPoints(playerUnit.damage, 0));
 
         enemyHUD.SetEnemyBar(enemyUnit.currentHP, enemyUnit.maxHP);  // Atualizar a barra de HP do boss
-        CheckIfDead(isDead);
+        //CheckIfDead(isDead);
 
         int a = 0;
         float b;
 
         if (skillButtons[0]) // skill 1 selecionada
         {
-            StartCoroutine(CastSkill(selectedCharacter.skill[0]));
+            StartCoroutine(CastSkill(selectedCharacter.skill[0], 1));
             a++;
         }
         if (skillButtons[1]) // skill 2 selecionada
         {
-            StartCoroutine(CastSkill(selectedCharacter.skill[1]));
+            StartCoroutine(CastSkill(selectedCharacter.skill[1], 2));
             a++;
         }
         if (skillButtons[2]) // skill 3 selecionada
         {
-            StartCoroutine(CastSkill(selectedCharacter.skill[2]));
+            StartCoroutine(CastSkill(selectedCharacter.skill[2], 3));
             a++;
         }
 
@@ -296,32 +293,24 @@ public class BattleSystemBR : MonoBehaviour
         b = (float)a;
         yield return new WaitForSeconds(b/2);
 
-        // BOSS ANIMAÇÃO DE DANO PARTE 2 (FIM)
-
-        // BOSS ANIMAÇÃO DE ATAQUE
-
-        // PLAYER ANIMAÇÃO DE DANO
-
-        // PARTÍCULA DE HIT NO PLAYER
 
 
-
-        dialogueText.text = "The attack is successful";
+        //dialogueText.text = "The attack is successful";
 
         CheckIfDead(isDead);
 
         if (!isDead)
         {
             state = BattleStateBR.ENEMYTURN;
-            Invoke(nameof(EnemyTurn), 2f);
+            Invoke(nameof(EnemyTurn), 0.5f);
         }
-
-        // Change state based on what happened
     }
 
     void EndBattle()
     {
-        if(state == BattleStateBR.WON)
+        Debug.Log("Entrou em END BATTLE");
+        hideButtonsPanel.SetActive(false);
+        if (state == BattleStateBR.WON)
         {
             StartCoroutine(DeathAnimation(enemyUnit));
             dialogueText.text = "You won the battle";
@@ -329,15 +318,14 @@ public class BattleSystemBR : MonoBehaviour
             youWonPanel.SetActive(true);
             battleID++;
 
+            boss[bossIndex].level++;
+            Debug.Log("level do boss = " + boss[bossIndex].level);
             boss[bossIndex].next = false;
 
             if (bossIndex == (boss.Length - 1))
                 boss[0].next = true;
             else
                 boss[bossIndex + 1].next = true;
-
-            //Debug.Log("Próxima battle ID: " + battleID);
-
         }
         else if(state == BattleStateBR.LOST)
         {
@@ -356,16 +344,20 @@ public class BattleSystemBR : MonoBehaviour
         else
             damage = enemyUnit.damage;
 
-        CreateParticle(hitParticle, playerUnit.transform);
+        // BOSS ANIMAÇÃO DE ATAQUE
 
-        Debug.Log("dano do boss = " + damage);
+        // PLAYER ANIMAÇÃO DE DANO
+
+        // PARTÍCULA DE HIT NO PLAYER
+
+        CreateParticle(hitParticle, playerUnit.transform);
 
         if (enemyUnit.activeBuffParticle != null) {
             Destroy(enemyUnit.activeBuffParticle);
         }
 
-        bool isDead = playerUnit.TakeDamage(damage);
-        StartCoroutine(FlyingHPoints(damage, 3)); // dano no player
+        bool isDead = playerUnit.TakeDamage(damage);  // dano no player
+        StartCoroutine(FlyingHPoints(damage, 3));
 
         playerHUD.SetPlayerBar(playerUnit.currentHP, playerUnit.maxHP);
 
@@ -373,6 +365,7 @@ public class BattleSystemBR : MonoBehaviour
         {
             state = BattleStateBR.LOST;
             playerUnit.Die();
+            Debug.Log("Entrou em IF IS DEAD (LOST), vai chamar END BATTLE");
             EndBattle();
         }
         else
@@ -398,17 +391,17 @@ public class BattleSystemBR : MonoBehaviour
         Start();
     }
 
-    private void CheckIfDead(bool isDead)
+    private void CheckIfDead(bool isDead) // Check if enemy is dead
     {
-        // Check if enemy is dead
-        if (isDead) // End the battle
+        if (isDead == true)
         {
             state = BattleStateBR.WON;
+            Debug.Log("Entrou em IF IS DEAD (WON!), vai chamar END BATTLE");
             EndBattle();
         }
     }
 
-    IEnumerator FlyingHPoints(int points, int index)
+    IEnumerator FlyingHPoints(int points, int index) // Animação de perder HP
     {
         Vector3 originalScale = new Vector3(0, 0, 0);
         Vector3 newScale = new Vector3(0, 0, 0);
@@ -421,7 +414,6 @@ public class BattleSystemBR : MonoBehaviour
         pointsPosInit = pointsText[index].transform.position;
         pointsText[index].text = "-" + points;
 
-        //pointsText[index].transform.DOScale(2f, 2.5f); // scale
         pointsText[index].DOFade(1, 0.5f); // fade in
 
         for (int i = 0; i < 50; i++)
@@ -458,15 +450,5 @@ public class BattleSystemBR : MonoBehaviour
         pointsText[index].transform.position = pointsPosInit; // texto volta à posição original
         pointsText[index].transform.localScale = originalScale; // texto volta ao tamanho original
     }
-
-    IEnumerator GainingHPoints(int points)
-    {
-        for (int i = 50; i < 100; i++)
-        {
-
-            // escalar e rotacionar número
-            yield return new WaitForSeconds(0.01f);
-        }
-
-    }
+    
 }

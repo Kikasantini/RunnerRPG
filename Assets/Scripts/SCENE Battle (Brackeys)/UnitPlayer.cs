@@ -29,7 +29,6 @@ public class UnitPlayer : Unit
         magDef = character.magDefense;
     }
 
-
     public void Attack()
     {
         anim.SetTrigger("Attack");

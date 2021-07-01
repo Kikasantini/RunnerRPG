@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
@@ -19,7 +17,7 @@ public class Unit : MonoBehaviour
     public virtual bool TakeDamage(int dmg)
     {
         currentHP -= dmg;
-
+        currentHP = Mathf.Max(currentHP, 0);
         if (currentHP <= 0)
             return true; // unit morreu
         else
@@ -39,6 +37,7 @@ public class Unit : MonoBehaviour
             case EffectType.heal:
                 Heal((int)effect.intensity);
                 break;
+
             case EffectType.shield:
                 blockNextDamage = true;
                 break;
@@ -48,4 +47,6 @@ public class Unit : MonoBehaviour
                 break;
         }
     }
+
+    
 }

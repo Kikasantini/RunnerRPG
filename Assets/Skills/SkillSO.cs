@@ -23,4 +23,18 @@ public class SkillSO : ScriptableObject
 
     public GameObject particle;
 
+    public bool HasEffect(EffectType type)
+    {
+        Debug.Log("1...");
+        foreach (SkillEffect se in effects)
+        {
+            Debug.Log("2...");
+            Debug.Log("Recebeu " + type + ". Comparou com " + se.effect);
+            if (se.effect == type) // NÃO TA ENTRANDO AQUI, NÃO TÁ COMPARANDO CERTO
+                return true;
+        }
+        Debug.Log("3...");
+        return false;
+    }
+
 }
