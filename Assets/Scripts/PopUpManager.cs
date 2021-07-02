@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PopUpManager : MonoBehaviour
 {
@@ -8,10 +9,11 @@ public class PopUpManager : MonoBehaviour
     public GameObject[] popUps;
     private GameObject chosenPopUp;
     public Transform spawnPoint;
-    private int count = 100;
     public GameObject button;
     public IntVariable fragments;
     public IntVariable coins;
+    public GameObject prizePanel;
+    public Text text;
 
     public IntVariable[] tokens;
 
@@ -55,13 +57,15 @@ public class PopUpManager : MonoBehaviour
             case 0: // Coins
                 amount = UnityEngine.Random.Range(5, 20);
                 coins.Value += amount;
-                Debug.Log("Ganhou " + amount + " coins");
+                //Debug.Log("Ganhou " + amount + " coin(s)");
+                text.text = amount + " coin(s)";
                 break;
 
             case 1: // Armor fragments
                 amount = UnityEngine.Random.Range(1, 11);
                 fragments.Value += amount;
-                Debug.Log("Ganhou " + amount + " upgrade fragments");
+                //Debug.Log("Ganhou " + amount + " upgrade fragment(s)");
+                text.text = amount + " fragment(s)";
                 break;
 
             case 2: // Tokens
@@ -76,6 +80,7 @@ public class PopUpManager : MonoBehaviour
     public void OnClick()
     {
         button.SetActive(false);
+        prizePanel.SetActive(true);
         GivePrize();
     }
 
@@ -96,7 +101,8 @@ public class PopUpManager : MonoBehaviour
 
         int type = UnityEngine.Random.Range(0, 5);
         tokens[type].Value += amount;
-        Debug.Log("Ganhou " + amount + " tokens do tipo " + tokens[type].name);
+        //Debug.Log("Ganhou " + amount + " tokens do tipo " + tokens[type].name);
+        text.text = amount + " " + tokens[type].name;
     }
 }
 
