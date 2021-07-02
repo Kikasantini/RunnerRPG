@@ -6,12 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Runner.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 1
     path: Assets/Scenes/CharMenu.unity
     guid: 88f77077425a69e46a5fb9b3c263bcd1
   - enabled: 1
@@ -23,7 +17,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Armor.unity
     guid: b2d7bb712e5b4ea4f9474ee529f2258f
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   m_configObjects: {}

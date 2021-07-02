@@ -13,6 +13,8 @@ public class PopUpManager : MonoBehaviour
     public IntVariable fragments;
     public IntVariable coins;
 
+    public IntVariable[] tokens;
+
     void FixedUpdate()
     {
 
@@ -50,22 +52,21 @@ public class PopUpManager : MonoBehaviour
 
         switch (randomPrize)
         {
-            case 0:
-                amount = UnityEngine.Random.Range(10, 51);
+            case 0: // Coins
+                amount = UnityEngine.Random.Range(5, 20);
                 coins.Value += amount;
                 Debug.Log("Ganhou " + amount + " coins");
                 break;
 
-            case 1:
-                amount = UnityEngine.Random.Range(10, 51);
+            case 1: // Armor fragments
+                amount = UnityEngine.Random.Range(1, 11);
                 fragments.Value += amount;
                 Debug.Log("Ganhou " + amount + " upgrade fragments");
                 break;
 
-            case 2:
+            case 2: // Tokens
                 amount = UnityEngine.Random.Range(1, 3);
                 GiveToken(amount);
-                Debug.Log("Ganhou " + amount + " tokens");
                 break;
         }
 
@@ -86,8 +87,16 @@ public class PopUpManager : MonoBehaviour
 
     private void GiveToken(int amount)
     {
-        // dar token aleatório
-        // chest, pants, boots, shoulderguards, gloves, weapon
+        // TOKENS (type):
+        // 0 Chest
+        // 1 Gloves
+        // 2 Leggings
+        // 3 Shoes
+        // 4 Weapon
+
+        int type = UnityEngine.Random.Range(0, 5);
+        tokens[type].Value += amount;
+        Debug.Log("Ganhou " + amount + " tokens do tipo " + tokens[type].name);
     }
 }
 
