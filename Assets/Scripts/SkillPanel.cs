@@ -15,9 +15,9 @@ public class SkillPanel : MonoBehaviour
         name.text = "Name: " + skill[index].skillName;
         
         if (skill[index].isMagic)
-            type.text = "Type: Magical";
+            type.text = "Nature: Magical";
         else
-            type.text = "Type: Physical";
+            type.text = "Nature: Physical";
 
         description.text = skill[index].description;
         panel.SetActive(true);

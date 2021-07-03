@@ -38,9 +38,12 @@ public class GameControl10 : MonoBehaviour
 
     // Skill info panel
     public Text text;
+    public Text type;
     public Text description;
     private int skillIndex;
     private bool canShowSkillInfo = false;
+
+    public Button spinButton;
 
     private void Start()
     {
@@ -57,6 +60,7 @@ public class GameControl10 : MonoBehaviour
             }
             if (rows[0].rowStopped && rows[1].rowStopped && rows[2].rowStopped && !resultsChecked && podePremiar == true)
             {
+            spinButton.interactable = true;
                 CheckResults();
             }
     }
@@ -72,6 +76,7 @@ public class GameControl10 : MonoBehaviour
             coinPrize.SetActive(false);
 
             podePremiar = true;
+            spinButton.interactable = false;
             HandlePulled();
             CoinAnimation(-10);
             coins.Value -= 10;
@@ -274,7 +279,13 @@ public class GameControl10 : MonoBehaviour
             return;
 
         skillInfoPanel.SetActive(true);
-        text.text = skill[skillIndex - 1].skillName;
+        text.text = "Name: "+ skill[skillIndex - 1].skillName;
+        
+        if (skill[skillIndex - 1].isMagic)
+            type.text = "Nature: Magical";
+        else
+            type.text = "Nature: Physical";
+
         description.text = skill[skillIndex - 1].description;
     }
 }
