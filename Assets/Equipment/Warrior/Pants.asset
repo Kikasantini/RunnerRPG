@@ -13,10 +13,19 @@ MonoBehaviour:
   m_Name: Pants
   m_EditorClassIdentifier: 
   level: 0
-  incPDef: 0
+  totalPDef: 0
+  totalMDef: 0
+  totalAttack: 0
+  totalHP: 0
+  incPDef: 1
   incMDef: 0
   incAttack: 0
-  incHP: 0
+  incHP: 3
   incTokenCost: 0
   incFragCost: 0
   incGoldCost: 0
+  tokenCost: 0
+  fragCost: 0
+  goldCost: 0
+  sprite: {fileID: 21300000, guid: aa5e72be8bd3d0847bcfdd6b23d09dbc, type: 3}
+  cost: {fileID: 11400000, guid: 15e65941a0a2c804aaa89ff90a67332b, type: 2}

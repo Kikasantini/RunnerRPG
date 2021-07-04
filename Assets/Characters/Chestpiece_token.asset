@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ecb5b8024f8aa349b430fd49c17834d, type: 3}
-  m_Name: Gloves
+  m_Name: Chestpiece_token
   m_EditorClassIdentifier: 
-  Value: 3
-  Sprite: {fileID: 21300000, guid: bdc81192e3ece7d498128e039f7b81ef, type: 3}
+  Value: 5
+  Sprite: {fileID: 21300000, guid: 96637478ba2ffb34e862e3333c281ac6, type: 3}

@@ -12,18 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486e45af9d020154da57091ee931cc42, type: 3}
   m_Name: Chest
   m_EditorClassIdentifier: 
-  level: 0
-  totalPDef: 0
-  totalMDef: 0
+  level: 2
+  totalPDef: 2
+  totalMDef: 6
   totalAttack: 0
-  totalHP: 0
-  incPDef: 0
-  incMDef: 0
+  totalHP: 20
+  incPDef: 1
+  incMDef: 3
   incAttack: 0
-  incHP: 0
-  incTokenCost: 0
-  incFragCost: 0
+  incHP: 10
+  incTokenCost: 1
+  incFragCost: 10
   incGoldCost: 0
-  tokenCost: 0
-  fragCost: 0
+  tokenCost: 4
+  fragCost: 30
   goldCost: 0
+  sprite: {fileID: 21300000, guid: da1c153d669931f44ad74d30ca350d69, type: 3}
+  cost: {fileID: 11400000, guid: 8c3f9a49e6aee6548825e8e97be68395, type: 2}

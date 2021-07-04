@@ -33,7 +33,7 @@ public class PopUpManager : MonoBehaviour
     public void SpawnChance()
     {
         int rand = UnityEngine.Random.Range(0, 11);
-        if (rand >= 9)
+        if (rand >= 9) // Padrão: 9
             SpawnPopUp();
     }
 
@@ -42,7 +42,7 @@ public class PopUpManager : MonoBehaviour
         enabled = true;
         button.SetActive(true);
         int index = UnityEngine.Random.Range(0, 10);
-        Debug.Log("index é " + index);
+        //Debug.Log("index é " + index);
         chosenPopUp = Instantiate(popUps[index]);
         chosenPopUp.transform.position = spawnPoint.position;
 

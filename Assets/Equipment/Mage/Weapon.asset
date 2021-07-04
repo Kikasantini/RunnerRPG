@@ -12,18 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486e45af9d020154da57091ee931cc42, type: 3}
   m_Name: Weapon
   m_EditorClassIdentifier: 
-  level: 0
+  level: 1
   totalPDef: 0
   totalMDef: 0
-  totalAttack: 0
+  totalAttack: 3
   totalHP: 0
   incPDef: 0
   incMDef: 0
-  incAttack: 0
+  incAttack: 1
   incHP: 0
-  incTokenCost: 0
-  incFragCost: 0
+  incTokenCost: 1
+  incFragCost: 5
   incGoldCost: 0
-  tokenCost: 0
-  fragCost: 0
+  tokenCost: 5
+  fragCost: 15
   goldCost: 0
+  sprite: {fileID: 21300000, guid: 191cd9b6b4ef01240b08357bbdf9867f, type: 3}
+  cost: {fileID: 11400000, guid: bf38856c4c7129a4eb2703f105c66143, type: 2}

@@ -13,10 +13,19 @@ MonoBehaviour:
   m_Name: Weapon
   m_EditorClassIdentifier: 
   level: 0
+  totalPDef: 0
+  totalMDef: 0
+  totalAttack: 0
+  totalHP: 0
   incPDef: 0
   incMDef: 0
-  incAttack: 0
+  incAttack: 1
   incHP: 0
   incTokenCost: 0
   incFragCost: 0
   incGoldCost: 0
+  tokenCost: 0
+  fragCost: 0
+  goldCost: 0
+  sprite: {fileID: 21300000, guid: 7bf000685e7bc8e4eb4ef73ccbdc86d8, type: 3}
+  cost: {fileID: 11400000, guid: bf38856c4c7129a4eb2703f105c66143, type: 2}

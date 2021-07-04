@@ -26,6 +26,10 @@ public class EquipmentSO : ScriptableObject
     public int fragCost;
     public int goldCost;
 
+    public Sprite sprite;
+
+    public IntVariable cost; // "moeda", token específico
+
     public void SetNewStats()
     {
         totalHP += incHP;
