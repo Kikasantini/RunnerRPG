@@ -15,26 +15,25 @@ public class PopUpManager : MonoBehaviour
     public GameObject prizePanel;
     public Text text;
     //public Transform spawnPos;
-
+    private float tempo;
     public Image prizeSprite;
 
     public IntVariable[] tokens;
 
-    void FixedUpdate()
+    void Update()
     {
-
-        if (enabled == false)
+        tempo += Time.deltaTime;
+        if (enabled == false && tempo >= 10) // a cada 10 segundos tem 20% de chance de aparecer a PopUp
         {
             SpawnChance();
+            tempo = 0;
         }
-
-        
     }
 
     public void SpawnChance()
     {
-        int rand = UnityEngine.Random.Range(0, 500);
-        if (rand == 10)
+        int rand = UnityEngine.Random.Range(0, 11);
+        if (rand >= 9)
             SpawnPopUp();
     }
 
@@ -91,6 +90,7 @@ public class PopUpManager : MonoBehaviour
 
     private void DestroyPopUp()
     {
+        button.SetActive(false);
         Destroy(chosenPopUp);
         enabled = false;
     }

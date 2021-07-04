@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Warrior1
   m_EditorClassIdentifier: 
   skillName: Cleave
-  description: aaaaaaaa
+  description: Deals X base damage to the opponent.
   image: {fileID: 21300000, guid: a9d9f232d3da8b3488ccd153e6a32359, type: 3}
   quantity: 11
   effects: []
   dmgTarget: 1
   damage: 4
   isMagic: 0
+  particle: {fileID: 0}

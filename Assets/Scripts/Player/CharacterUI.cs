@@ -10,14 +10,15 @@ public class CharacterUI : MonoBehaviour
 
     private void Start()
     {
+        characterSO.SetStats();
         UpdateUI();
     }
     public void UpdateUI()
     {
-        health.text = "Health: " + characterSO.health;
-        attack.text = "Attack: " + characterSO.attack;
-        magDefense.text = "Magical defense: " + characterSO.magDefense;
-        phyDefense.text = "Physical defense: " + characterSO.phyDefense;
+        health.text = "Health: " + characterSO.totalHealth;
+        attack.text = "Attack: " + characterSO.totalAttack;
+        magDefense.text = "Magical defense: " + characterSO.totalMDef;
+        phyDefense.text = "Physical defense: " + characterSO.totalPDef;
         skill_1.text = characterSO.skill[0].quantity.ToString();
         skill_2.text = characterSO.skill[1].quantity.ToString();
         skill_3.text = characterSO.skill[2].quantity.ToString();

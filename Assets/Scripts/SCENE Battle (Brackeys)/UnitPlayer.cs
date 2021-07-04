@@ -22,11 +22,11 @@ public class UnitPlayer : Unit
     {
         character = characterSO;
         unitName = character.characterName;
-        damage = character.attack;
-        maxHP = currentHP = character.health;
+        damage = character.totalAttack;
+        maxHP = currentHP = character.totalHealth;
         unitLevel = character.stars;
-        phyDef = character.phyDefense;
-        magDef = character.magDefense;
+        phyDef = character.totalPDef;
+        magDef = character.totalMDef;
     }
 
     public void Attack()

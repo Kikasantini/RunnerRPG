@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mage1
   m_EditorClassIdentifier: 
   skillName: Blaze
-  description: Deals X magical damage to the opponent.
+  description: Deals X base damage to the opponent.
   image: {fileID: 21300000, guid: b03eb7ad2bec616489b25355be049e7e, type: 3}
   quantity: 37
   effects: []

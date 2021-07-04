@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Warrior3
   m_EditorClassIdentifier: 
   skillName: Shock Wave
-  description: aaaaaaaa
+  description: ???????
   image: {fileID: 21300000, guid: b632c8084b7f58e4d80149d7d9986b8f, type: 3}
   quantity: 14
   effects: []
   dmgTarget: 1
   damage: 12
   isMagic: 0
+  particle: {fileID: 0}

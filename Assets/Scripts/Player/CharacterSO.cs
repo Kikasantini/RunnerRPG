@@ -12,20 +12,26 @@ public class CharacterSO : ScriptableObject
     public bool selected = false;
     public int stars;
 
+    // Base stats:
     public int health;
     public int attack;
     public int magDefense;
     public int phyDefense;
 
-    //public int skill1;
-    //public int skill2;
-    //public int skill3;
+    // Stats com a gear:
+    public int totalHealth;
+    public int totalAttack;
+    public int totalMDef;
+    public int totalPDef;
 
-    public int wood;
-    public int iron;
-    public int gold;
+    //public int wood;
+    //public int iron;
+    //public int gold;
 
     public SkillSO[] skill;
+
+    public EquipmentSO[] equip;
+
     public void ActivateChar()
     {
         selected = true;
@@ -34,5 +40,13 @@ public class CharacterSO : ScriptableObject
     public void DeactivateChars()
     {
         selected = false;
+    }
+
+    public void SetStats()
+    {
+        totalHealth = health + equip[0].totalHP + equip[1].totalHP + equip[2].totalHP + equip[3].totalHP + equip[4].totalHP;
+        totalAttack = attack + equip[0].totalAttack + equip[1].totalAttack + equip[2].totalAttack + equip[3].totalAttack + equip[4].totalAttack;
+        totalMDef = magDefense + equip[0].totalMDef + equip[1].totalMDef + equip[2].totalMDef + equip[3].totalMDef + equip[4].totalMDef;
+        totalPDef = phyDefense + equip[0].totalPDef + equip[1].totalPDef + equip[2].totalPDef + equip[3].totalPDef + equip[4].totalPDef;
     }
 }

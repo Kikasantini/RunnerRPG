@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Priest1
   m_EditorClassIdentifier: 
   skillName: Booming Strike
-  description: aaaaaaaa
+  description: Deals X base damage to the opponent.
   image: {fileID: 21300000, guid: e28b52ca864d5c44aad408f8efba69b5, type: 3}
   quantity: 5
   effects: []
   dmgTarget: 1
   damage: 6
   isMagic: 0
+  particle: {fileID: 0}

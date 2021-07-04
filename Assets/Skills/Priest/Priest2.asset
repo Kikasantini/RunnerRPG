@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Priest2
   m_EditorClassIdentifier: 
   skillName: Word of Life
-  description: aaaaaaaa
+  description: Deals X base damage to the opponent and heals you for X rounds.
   image: {fileID: 21300000, guid: cdee32841e4159f46b83af3d18e6bdd3, type: 3}
   quantity: 10
   effects: []
   dmgTarget: 1
   damage: 4
   isMagic: 1
+  particle: {fileID: 0}

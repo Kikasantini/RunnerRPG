@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Mage3
   m_EditorClassIdentifier: 
   skillName: Stone Skin
-  description: Shields you for 1 turn.
+  description: Shields you for 1 turn, blocking a % of the damage received. There's
+    a small chance of blocking the attack completely.
   image: {fileID: 21300000, guid: ecdc52a087ed44d4cb947ea0f3d2814c, type: 3}
-  quantity: 18
+  quantity: 20
   effects:
   - intensity: 0
     target: 0
