@@ -5,11 +5,20 @@ using UnityEngine;
 public class CheatButtons : MonoBehaviour
 {
     public IntVariable coins;
+    public IntVariable fragments;
+    public IntVariable[] tokens;
     public CharacterSO[] characters;
 
     public void CoinsCheat()
     {
         coins.Value += 100;
+        fragments.Value += 1000;
+        tokens[0].Value += 100;
+        tokens[1].Value += 100;
+        tokens[2].Value += 100;
+        tokens[3].Value += 100;
+        tokens[4].Value += 100;
+
     }
 
     public void SkillCheat()
@@ -23,6 +32,24 @@ public class CheatButtons : MonoBehaviour
         }
         
 
+    }
+
+    public void ResetAllGear()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                characters[i].equip[j].level = 0;
+                characters[i].equip[j].totalHP = 0;
+                characters[i].equip[j].totalAttack = 0;
+                characters[i].equip[j].totalMDef = 0;
+                characters[i].equip[j].totalPDef = 0;
+                //characters[i].equip[j].tokenCost = 0;
+                //characters[i].equip[j].fragCost = 0;
+            }
+            
+        }
     }
 
 

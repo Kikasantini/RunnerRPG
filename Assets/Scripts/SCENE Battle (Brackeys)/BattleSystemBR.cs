@@ -134,6 +134,7 @@ public class BattleSystemBR : MonoBehaviour
 
     void PlayerTurn()
     {
+        playerUnit.StartTurn();
         hideButtonsPanel.SetActive(false);
         bossBuffed = false;
 
@@ -193,7 +194,13 @@ public class BattleSystemBR : MonoBehaviour
                 case Target.self:
                     playerUnit.ApplyEffect(effect, dmg);
                     playerHUD.SetPlayerBar(playerUnit.currentHP, playerUnit.maxHP);
-                    CreateParticle(skill.particle, playerUnit.transform);
+                    if (effect.effect == EffectType.heal) { 
+                        CreateParticle(skill.particle, playerUnit.transform);
+                    }
+                    else if (effect.effect == EffectType.shield)
+                    {
+                        playerUnit.activeParticle = CreateParticle(skill.particle, playerUnit.transform, false);
+                    }
                     break;
 
                 case Target.boss:
@@ -355,7 +362,7 @@ public class BattleSystemBR : MonoBehaviour
         if (enemyUnit.activeBuffParticle != null) {
             Destroy(enemyUnit.activeBuffParticle);
         }
-
+        damage = playerUnit.DamageTaken(damage);
         bool isDead = playerUnit.TakeDamage(damage);  // dano no player
         StartCoroutine(FlyingHPoints(damage, 3));
 

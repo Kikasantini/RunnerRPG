@@ -12,7 +12,7 @@ public class Unit : MonoBehaviour
 
     SkillEffect dotEffect;
 
-    bool blockNextDamage;
+    protected bool useMageShield;
 
     public virtual bool TakeDamage(int dmg)
     {
@@ -30,6 +30,11 @@ public class Unit : MonoBehaviour
         currentHP = Mathf.Min(currentHP, maxHP);
     }
 
+    public virtual void StartTurn()
+    {
+      
+    }
+
     public void ApplyEffect (SkillEffect effect, int dmg)
     {
         switch (effect.effect)
@@ -39,7 +44,7 @@ public class Unit : MonoBehaviour
                 break;
 
             case EffectType.shield:
-                blockNextDamage = true;
+                useMageShield = true;
                 break;
 
             case EffectType.healAccordingToDamage:

@@ -117,63 +117,58 @@ public class SetArmorUI : MonoBehaviour
 
         // Stats:
         int ohno = 0;
-        if(character.equip[index].incHP > 0)
+        if(character.equip[index].CheckHPInc() > 0)
         {
-            stat[ohno].text = "Health " + "<color=#0bb900><b>" + "+ " + character.equip[index].incHP + "</b></color>";
+            stat[ohno].text = "Health " + "<color=#0bb900><b>" + "+ " + character.equip[index].CheckHPInc() + "</b></color>";
             ohno++;
         }
-        if (character.equip[index].incAttack > 0)
+        if (character.equip[index].CheckAttackInc() > 0)
         {
-            stat[ohno].text = "Attack " + "<color=#0bb900><b>" + "+ " + character.equip[index].incAttack + "</b></color>";
+            stat[ohno].text = "Attack " + "<color=#0bb900><b>" + "+ " + character.equip[index].CheckAttackInc() + "</b></color>";
             ohno++;
         }
-        if (character.equip[index].incMDef > 0)
+        if (character.equip[index].CheckMDefInc() > 0)
         {
-            stat[ohno].text = "M. Defense " + "<color=#0bb900><b>" + "+ " + character.equip[index].incMDef + "</b></color>";
+            stat[ohno].text = "M. Defense " + "<color=#0bb900><b>" + "+ " + character.equip[index].CheckMDefInc() + "</b></color>";
             ohno++;
         }
-        if (character.equip[index].incPDef > 0)
+        if (character.equip[index].CheckPDefInc() > 0)
         {
-            stat[ohno].text = "P. Defense " + "<color=#0bb900><b>" + "+ " + character.equip[index].incPDef + "</b></color>";
+            stat[ohno].text = "P. Defense " + "<color=#0bb900><b>" + "+ " + character.equip[index].CheckPDefInc() + "</b></color>";
             ohno++;
         }
 
         // Cost:
         tokenSprite.sprite = character.equip[index].cost.Sprite;
-        fragCost.text = character.equip[index].fragCost.ToString();
-        tokenCost.text = character.equip[index].tokenCost.ToString();
+        fragCost.text = character.equip[index].CheckFragCost().ToString();
+        tokenCost.text = character.equip[index].CheckTokenCost().ToString();
 
-        if (character.equip[index].fragCost > frags.Value)
-            fragCost.text = "<color=#ec191e>" + character.equip[index].fragCost + "</color>";
+        if (character.equip[index].CheckFragCost() > frags.Value)
+            fragCost.text = "<color=#ec191e>" + character.equip[index].CheckFragCost() + "</color>";
 
-        if (character.equip[index].tokenCost > tokens[index].Value)
-            tokenCost.text = "<color=#ec191e>" + character.equip[index].tokenCost + "</color>";
+        if (character.equip[index].CheckTokenCost() > tokens[index].Value)
+            tokenCost.text = "<color=#ec191e>" + character.equip[index].CheckTokenCost() + "</color>";
 
     }
 
     public void OnClickUpgrade()
     {
         // Não pode upar o equipamento:
-        if (character.equip[gamb].fragCost > frags.Value || character.equip[gamb].tokenCost > tokens[gamb].Value)
+        if (character.equip[gamb].CheckTokenCost() > frags.Value || character.equip[gamb].CheckFragCost() > tokens[gamb].Value)
         {
             StartCoroutine(ShowDialogueText("Not enought mats"));
             return;
         }
 
-        // Pode upar o equipamento:
-        character.equip[gamb].level++;
-        character.equip[gamb].totalHP += character.equip[gamb].incHP;
-        character.equip[gamb].totalAttack += character.equip[gamb].incAttack;
-        character.equip[gamb].totalMDef += character.equip[gamb].incMDef;
-        character.equip[gamb].totalPDef += character.equip[gamb].incPDef;
+        // Atualizando quantidade de tokens e fragments do player:
+        frags.Value -= character.equip[gamb].CheckFragCost();
+        tokens[gamb].Value -= character.equip[gamb].CheckTokenCost();
 
-        character.equip[gamb].tokenCost += character.equip[gamb].incTokenCost;
-        character.equip[gamb].fragCost += character.equip[gamb].incFragCost;
-        character.equip[gamb].goldCost += character.equip[gamb].incGoldCost;
+        // Upando o equipamento:
+        character.equip[gamb].Upgrade();
 
-        // Atualizando quantidade de tokens e fragments:
-        frags.Value -= character.equip[gamb].fragCost;
-        tokens[gamb].Value -= character.equip[gamb].tokenCost;
+        // Atualizando o custo do upgrade:
+        //character.equip[gamb].costUpdate();
 
         StartCoroutine(ShowDialogueText("Equipment successfully upgraded"));
 

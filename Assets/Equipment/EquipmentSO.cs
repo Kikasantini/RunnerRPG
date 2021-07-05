@@ -5,36 +5,87 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Equipment", menuName = "Equipment")]
 public class EquipmentSO : ScriptableObject
 {
+    // ******************************* *********** ******************************* 
+    // Pode ALTERAR:
 
-    public int level;
+    // Custo do primeiro upgrade:
+    public int tokenCost;
+    public int fragCost;
 
-    public int totalPDef;
-    public int totalMDef;
-    public int totalAttack;
-    public int totalHP;
+    // Incremento no custo de cada upgrade (esse valor ainda vai ser multiplicado pelo level):
+    public int incTokenCost;
+    public int incFragCost;
 
+    // ALTERAR de acordo com o personagem:
     public int incPDef;
     public int incMDef;
     public int incAttack;
     public int incHP;
 
-    public int incTokenCost;
-    public int incFragCost;
-    public int incGoldCost;
+    // Multiplicadores:
+    // ALTERAR de acordo com o personagem:
+    public float multHP;
+    public float multAttack;
+    public float multMDef;
+    public float multPDef;
 
-    public int tokenCost;
-    public int fragCost;
-    public int goldCost;
+    // ******************************* *********** ******************************* 
+
+    // Não alterar valores abaixo
+    // Não alterar:
+    public int totalPDef;
+    public int totalMDef;
+    public int totalAttack;
+    public int totalHP;
+
+    public int level;
 
     public Sprite sprite;
 
     public IntVariable cost; // "moeda", token específico
 
-    public void SetNewStats()
+    public void Upgrade()
     {
-        totalHP += incHP;
-        totalAttack += incAttack;
-        totalMDef += incMDef;
-        totalPDef += incPDef;
+        level++;
+        totalHP += incHP + (int)(level * multHP);
+        totalAttack += incAttack + (int)(level * multAttack);
+        totalMDef += incMDef + (int)(level * multMDef);
+        totalPDef += incPDef + (int)(level * multPDef);
+    }
+
+    public void costUpdate()
+    {
+        //tokenCost += incTokenCost;
+        //fragCost += incFragCost;
+    }
+
+    public int CheckHPInc()
+    {
+        return (incHP + (int)(level * multHP));
+    }
+
+    public int CheckAttackInc()
+    {
+        return(incAttack + (int)(level * multAttack));
+    }
+
+    public int CheckMDefInc()
+    {
+        return (incMDef + (int)(level * multMDef));
+    }
+
+    public int CheckPDefInc()
+    {
+        return (incPDef + (int)(level * multPDef));
+    }
+
+    public int CheckTokenCost()
+    {
+        return (tokenCost + incTokenCost * (level + 1));
+    }
+
+    public int CheckFragCost()
+    {
+        return (fragCost + incFragCost * (level + 1));
     }
 }

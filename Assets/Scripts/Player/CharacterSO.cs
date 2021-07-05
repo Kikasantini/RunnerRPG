@@ -24,10 +24,6 @@ public class CharacterSO : ScriptableObject
     public int totalMDef;
     public int totalPDef;
 
-    //public int wood;
-    //public int iron;
-    //public int gold;
-
     public SkillSO[] skill;
 
     public EquipmentSO[] equip;

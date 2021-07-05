@@ -4,6 +4,8 @@ using UnityEngine;
 public class InventoryAnimation : MonoBehaviour
 {
     public GameObject inventoryPanel;
+    private int a = 27;
+    private float b = .05f;
 
     public void OpenInventory()
     {
@@ -18,11 +20,11 @@ public class InventoryAnimation : MonoBehaviour
         posOriginal = inventoryPanel.transform.position;
         posNew = inventoryPanel.transform.position;
 
-        for (int i = 0; i < 130; i++)
+        for (int i = 0; i < a; i++)
         {
-            posNew.y -= .01f;
+            posNew.y -= b;
             inventoryPanel.transform.position = posNew;
-            yield return new WaitForSeconds(.001f);
+            yield return null;
 
         }
 
@@ -32,7 +34,7 @@ public class InventoryAnimation : MonoBehaviour
     {
         Vector2 posNew = new Vector2(0, 0);
         posNew = inventoryPanel.transform.position;
-        posNew.y += (float)(130 * .01);
+        posNew.y += (float)(a * b);
         inventoryPanel.transform.position = posNew;
         inventoryPanel.SetActive(false);
     }

@@ -20,9 +20,10 @@ MonoBehaviour:
   attack: 4
   magDefense: 2
   phyDefense: 12
-  wood: 500
-  iron: 500
-  gold: 500
+  totalHealth: 120
+  totalAttack: 4
+  totalMDef: 2
+  totalPDef: 12
   skill:
   - {fileID: 11400000, guid: 30879b08a6bfd1945b5a0fcdb9c78447, type: 2}
   - {fileID: 11400000, guid: c41e328c9ea7d9b468c8900e0fcc9285, type: 2}

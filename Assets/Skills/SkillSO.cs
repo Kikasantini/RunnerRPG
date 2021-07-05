@@ -23,6 +23,8 @@ public class SkillSO : ScriptableObject
 
     public GameObject particle;
 
+    public GameObject effectParticle;
+
     public bool HasEffect(EffectType type)
     {
         Debug.Log("1...");
