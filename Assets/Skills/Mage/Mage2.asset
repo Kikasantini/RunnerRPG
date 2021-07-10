@@ -13,14 +13,17 @@ MonoBehaviour:
   m_Name: Mage2
   m_EditorClassIdentifier: 
   skillName: Absorb Energy
-  description: Deals X base damage to the opponent and heals you based on that damage.
+  descriptionPt1: Deals
+  descriptionPt2: base damage to the opponent and heals you for double the damage
+    caused.
   image: {fileID: 21300000, guid: d17f57265d0fcbf44889281eeeede36d, type: 3}
-  quantity: 0
+  quantity: 10
   effects:
   - intensity: 3
     target: 0
     effect: 3
   dmgTarget: 1
   damage: 5
-  isMagic: 0
+  isMagic: 1
   particle: {fileID: 100004, guid: 0c72211213c7ef345a86f699f342f285, type: 3}
+  effectParticle: {fileID: 0}

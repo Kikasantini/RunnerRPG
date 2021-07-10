@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2085606701942536939}
   - component: {fileID: 9213380314719262638}
+  - component: {fileID: 524721682260658866}
   m_Layer: 0
   m_Name: warriorTONI
   m_TagString: Untagged
@@ -25,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2010518951662983142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.12377976, y: 1.237319, z: 0.012373191}
+  m_LocalPosition: {x: -0.007, y: 0.17, z: 0}
+  m_LocalScale: {x: 0.09921071, y: 0.9917112, z: 0.009917113}
   m_Children: []
   m_Father: {fileID: 6446311429286597772}
   m_RootOrder: 0
@@ -82,6 +83,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &524721682260658866
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010518951662983142}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: cfce9def1dc7590418abeee06e29c690, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3594843534550834993
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,4 +154,6 @@ MonoBehaviour:
   phyDef: 0
   magDef: 0
   boss: {fileID: 11400000, guid: 2ed3cb3bc3054ec47aa3d046468d1324, type: 2}
-  anim: {fileID: 0}
+  anim: {fileID: 524721682260658866}
+  buffed: 0
+  activeBuffParticle: {fileID: 0}

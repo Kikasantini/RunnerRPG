@@ -286,6 +286,15 @@ public class GameControl10 : MonoBehaviour
         else
             type.text = "Nature: Physical";
 
-        description.text = skill[skillIndex - 1].description;
+        //description.text = skill[skillIndex - 1].description;
+
+        if (skill[skillIndex - 1].damage > 0)
+        {
+            description.text = skill[skillIndex - 1].descriptionPt1 + " " + skill[skillIndex - 1].damage + " " + skill[skillIndex - 1].descriptionPt2;
+        }
+        else
+        {
+            description.text = skill[skillIndex - 1].descriptionPt1;
+        }
     }
 }

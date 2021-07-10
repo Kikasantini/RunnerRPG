@@ -8,6 +8,24 @@ public class CheatButtons : MonoBehaviour
     public IntVariable fragments;
     public IntVariable[] tokens;
     public CharacterSO[] characters;
+    public BossSO[] boss;
+
+    public void GiveEverything()
+    {
+        CoinsCheat();
+        SkillCheat();
+    }
+
+    public void ClearEverything()
+    {
+        ResetAllGear();
+        ResetCoinsAndFrags();
+        ResetSkills();
+
+        boss[0].level = 0;
+        boss[1].level = 0;
+
+    }
 
     public void CoinsCheat()
     {
@@ -45,12 +63,30 @@ public class CheatButtons : MonoBehaviour
                 characters[i].equip[j].totalAttack = 0;
                 characters[i].equip[j].totalMDef = 0;
                 characters[i].equip[j].totalPDef = 0;
-                //characters[i].equip[j].tokenCost = 0;
-                //characters[i].equip[j].fragCost = 0;
             }
             
         }
     }
 
+    public void ResetCoinsAndFrags()
+    {
+        coins.Value = 0;
+        fragments.Value = 0;
+        tokens[0].Value = 0;
+        tokens[1].Value = 0;
+        tokens[2].Value = 0;
+        tokens[3].Value = 0;
+        tokens[4].Value = 0;
+    }
 
+    public void ResetSkills()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                characters[i].skill[j].quantity = 0;
+            }
+        }
+    }
 }

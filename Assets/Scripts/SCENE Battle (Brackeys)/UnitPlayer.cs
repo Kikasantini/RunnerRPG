@@ -2,13 +2,10 @@ using UnityEngine;
 
 public class UnitPlayer : Unit
 {
-
     public CharacterSO character;
-
     public Animator anim;
-
     public GameObject activeParticle;
-
+    public Sprite profilePic;
     private void Start()
     {
         if (anim == null)
@@ -35,6 +32,7 @@ public class UnitPlayer : Unit
         unitLevel = character.stars;
         phyDef = character.totalPDef;
         magDef = character.totalMDef;
+        profilePic = character.profilePic;
     }
 
     public void Attack()

@@ -19,7 +19,15 @@ public class SkillPanel : MonoBehaviour
         else
             type.text = "Nature: Physical";
 
-        description.text = skill[index].description;
+        if(skill[index].damage > 0)
+        {
+            description.text = skill[index].descriptionPt1 + " " + skill[index].damage + " " + skill[index].descriptionPt2;
+        }
+        else
+        {
+            description.text = skill[index].descriptionPt1;
+        }
+        
         panel.SetActive(true);
     }
 

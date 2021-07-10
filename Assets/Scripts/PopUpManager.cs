@@ -23,7 +23,7 @@ public class PopUpManager : MonoBehaviour
     void Update()
     {
         tempo += Time.deltaTime;
-        if (enabled == false && tempo >= 10) // a cada 10 segundos tem 20% de chance de aparecer a PopUp
+        if (enabled == false && tempo >= 10) // a cada 10 segundos tem 5% de chance de aparecer a PopUp
         {
             SpawnChance();
             tempo = 0;
@@ -32,8 +32,8 @@ public class PopUpManager : MonoBehaviour
 
     public void SpawnChance()
     {
-        int rand = UnityEngine.Random.Range(0, 11);
-        if (rand >= 9) // Padrão: 9
+        int rand = UnityEngine.Random.Range(1, 101);
+        if (rand >= 95)
             SpawnPopUp();
     }
 

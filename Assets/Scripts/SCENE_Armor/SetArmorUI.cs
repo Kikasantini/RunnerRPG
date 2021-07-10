@@ -167,9 +167,6 @@ public class SetArmorUI : MonoBehaviour
         // Upando o equipamento:
         character.equip[gamb].Upgrade();
 
-        // Atualizando o custo do upgrade:
-        //character.equip[gamb].costUpdate();
-
         StartCoroutine(ShowDialogueText("Equipment successfully upgraded"));
 
         SetUI();

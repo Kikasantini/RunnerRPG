@@ -8,6 +8,7 @@ public class CharacterSO : ScriptableObject
 {
     public string characterName;
     public Sprite charImage;
+    public Sprite profilePic;
 
     public bool selected = false;
     public int stars;

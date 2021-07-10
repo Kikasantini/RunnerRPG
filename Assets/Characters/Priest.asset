@@ -14,15 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Padre
   charImage: {fileID: 21300000, guid: d6a5c3853cde4e44893f75075010cb29, type: 3}
+  profilePic: {fileID: 21300000, guid: a9a7b488b24998e438bb91de6dd11c74, type: 3}
   selected: 0
   stars: 3
   health: 100
   attack: 4
   magDefense: 6
   phyDefense: 6
-  wood: 500
-  iron: 500
-  gold: 500
+  totalHealth: 100
+  totalAttack: 4
+  totalMDef: 6
+  totalPDef: 6
   skill:
   - {fileID: 11400000, guid: b8bd7896b3d132b4dacf94e32969e7e4, type: 2}
   - {fileID: 11400000, guid: 73e13604a4d6f604ba8b4d161115ee74, type: 2}

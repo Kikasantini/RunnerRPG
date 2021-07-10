@@ -29,6 +29,7 @@ public class BattleSystemBR : MonoBehaviour
 
     public Transform playerBattleStation;
     public Transform enemyBattleStation;
+    public Transform enemyParticlesSpot;
 
     UnitPlayer playerUnit;
     UnitBoss enemyUnit;
@@ -69,7 +70,15 @@ public class BattleSystemBR : MonoBehaviour
 
     // Pontinhos animados na tela (ganha/perde vida):
     public Text[] pointsText;
-    
+
+    // Profile pics (on Start Panel):
+    public Image playerPic;
+    public Image bossPic;
+    // Boss description:
+    public Text bossDescription;
+    string[] description = new string[5];
+
+
     void Start()
     {
         for (int i = 0; i < pointsText.Length; i++)
@@ -104,6 +113,7 @@ public class BattleSystemBR : MonoBehaviour
 
         enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<UnitBoss>();
+        
 
         foreach (BossSO c in boss)
         {
@@ -116,6 +126,7 @@ public class BattleSystemBR : MonoBehaviour
         }
 
         enemyUnit.SetBoss(selectedBoss);
+        enemyUnit.UpdateAnimator();
 
         playerHUD.SetHeroHUD(playerUnit);
         enemyHUD.SetBossHUD(enemyUnit);
@@ -123,10 +134,15 @@ public class BattleSystemBR : MonoBehaviour
         playerHUD.SetPlayerBar(playerUnit.currentHP, playerUnit.maxHP);
         enemyHUD.SetEnemyBar(enemyUnit.currentHP, enemyUnit.maxHP);
 
+        // Start panel:
+        StartCoroutine(BossDescription());
         playerName.text = playerUnit.unitName;
         bossName.text = enemyUnit.unitName;
         bossLevel.text = "Lvl " + enemyUnit.unitLevel;
         battleNumber.text = "BATTLE # " + battleID;
+        playerPic.sprite = playerUnit.profilePic;
+        bossPic.sprite = enemyUnit.profilePic;
+
 
         state = BattleStateBR.PLAYERTURN;
         PlayerTurn();
@@ -143,7 +159,7 @@ public class BattleSystemBR : MonoBehaviour
             bossBuffed = true;
 
         if (bossBuffed == true) // Ativa a partícula do boss buffado
-            enemyUnit.activeBuffParticle = CreateParticle(bossBuffedParticle, enemyUnit.transform, destroySelf: false);
+            enemyUnit.activeBuffParticle = CreateParticle(bossBuffedParticle, enemyParticlesSpot.transform, destroySelf: false);
 
         dialogueText.text = "Choose your next move..";
         selectedSkills = 0;
@@ -179,7 +195,7 @@ public class BattleSystemBR : MonoBehaviour
 
         if (skill.damage > 0)
         {
-            CreateParticle(skill.particle, enemyUnit.transform);
+            CreateParticle(skill.particle, enemyParticlesSpot.transform);
             StartCoroutine(FlyingHPoints(dmg, index));
             isDead = enemyUnit.TakeDamage(dmg);
             Debug.Log("Inimigo toma dano de = " + dmg);
@@ -265,7 +281,7 @@ public class BattleSystemBR : MonoBehaviour
         // BOSS ANIMAÇÃO DE DANO
 
         // Partícula de hit no boss:
-        CreateParticle(hitParticle, enemyUnit.transform);
+        CreateParticle(hitParticle, enemyParticlesSpot.transform);
         yield return new WaitForSeconds(0.5f);
 
         isDead = enemyUnit.TakeDamage(playerUnit.damage); // Dar o dano do hit básico no boss
@@ -319,7 +335,8 @@ public class BattleSystemBR : MonoBehaviour
         hideButtonsPanel.SetActive(false);
         if (state == BattleStateBR.WON)
         {
-            StartCoroutine(DeathAnimation(enemyUnit));
+            //StartCoroutine(DeathAnimation(enemyUnit));
+            enemyUnit.Die();
             dialogueText.text = "You won the battle";
             youWonText.text = "YOU WON";
             youWonPanel.SetActive(true);
@@ -352,6 +369,7 @@ public class BattleSystemBR : MonoBehaviour
             damage = enemyUnit.damage;
 
         // BOSS ANIMAÇÃO DE ATAQUE
+        enemyUnit.Attack();
 
         // PLAYER ANIMAÇÃO DE DANO
 
@@ -381,7 +399,7 @@ public class BattleSystemBR : MonoBehaviour
             PlayerTurn();
         }
     }
-
+    /*
     IEnumerator DeathAnimation(Unit unit)
     {
         for (int i = 0; i < 10; i++)
@@ -390,7 +408,7 @@ public class BattleSystemBR : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
-
+    */
     public void DestroyUnits()
     {
         Destroy(playerGO);
@@ -457,5 +475,32 @@ public class BattleSystemBR : MonoBehaviour
         pointsText[index].transform.position = pointsPosInit; // texto volta à posição original
         pointsText[index].transform.localScale = originalScale; // texto volta ao tamanho original
     }
-    
+ 
+    IEnumerator BossDescription()
+    {
+        bossDescription.enabled = true;
+
+        if (enemyUnit.isMagic)
+            description[0] = "Nature of attack: Magical";
+        else
+            description[0] = "Nature of attack: Physical";
+
+        description[1] = "Base damage: " + enemyUnit.damage;
+        description[2] = "Magical defense: " + enemyUnit.magDef;
+        description[3] = "Physical defense: " + enemyUnit.phyDef;
+        description[4] = "Health: " + enemyUnit.maxHP;
+
+        int j = 0;
+        for (int i = 0; i < 10; i++)
+        {
+            bossDescription.text = description[j];
+            yield return new WaitForSeconds(3);
+            
+            j++;
+
+            if (j == (description.Length))
+                j = 0;
+        }
+        bossDescription.enabled = false;
+    }
 }

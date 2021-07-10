@@ -7,6 +7,7 @@ public class BossSO : ScriptableObject
     public string name;
     public int level = 1;
     public Sprite bossSprite;
+    public Sprite profilePic;
 
     public int hp;
     public int baseDamage;
@@ -17,5 +18,8 @@ public class BossSO : ScriptableObject
     public float incrementoPhyDef;
     public float incrementoMagDef;
 
+    public AnimatorOverrideController bossAnimator;
+
     public bool next;
+
 }

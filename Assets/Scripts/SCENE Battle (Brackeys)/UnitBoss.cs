@@ -6,7 +6,16 @@ public class UnitBoss : Unit
     public Animator anim;
     public bool buffed;
     public GameObject activeBuffParticle;
+    public Sprite profilePic;
+    public bool isMagic;
 
+    public void Start()
+    {
+        if (anim == null)
+        {
+            anim = GetComponentInChildren<Animator>();
+        }
+    }
     public void SetBoss(BossSO bossSO)
     {
         boss = bossSO;
@@ -16,26 +25,33 @@ public class UnitBoss : Unit
         unitLevel = boss.level;
         phyDef = (int)(boss.phyDef * (1 + boss.incrementoPhyDef));
         magDef = (int)(boss.magDef * (1 + boss.incrementoMagDef));
+        profilePic = boss.profilePic;
+        isMagic = boss.isMagic;
+    }
+
+    public void UpdateAnimator()
+    {
+        anim.runtimeAnimatorController = boss.bossAnimator;
     }
 
     public void Attack()
     {
-
+        anim.SetTrigger("Attack");
     }
 
-    public bool TakeDamage(int dmg)
+    public override bool TakeDamage(int dmg)
     {
+        anim.SetTrigger("Take Hit");
         currentHP -= dmg;
         currentHP = Mathf.Max(currentHP, 0);
         if (currentHP <= 0)
             return true; // unit morreu
         else
             return false;
-
     }
 
     public void Die()
     {
-
+        anim.SetTrigger("Defeat");
     }
 }
