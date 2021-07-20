@@ -4504,18 +4504,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: edc88e4d3f267644ebb28ddf9d27ff67, type: 3}
-    m_FontSize: 60
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 5
     m_MaxSize: 67
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Sounds
+  m_Text: Sound Effects
 --- !u!222 &613724814
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10032,6 +10032,7 @@ GameObject:
   - component: {fileID: 1210090700}
   - component: {fileID: 1210090699}
   - component: {fileID: 1210090698}
+  - component: {fileID: 1210090701}
   m_Layer: 6
   m_Name: QUIT Button
   m_TagString: Untagged
@@ -10102,7 +10103,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1210090699}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1210090701}
+        m_TargetAssemblyTypeName: QuitGame, Assembly-CSharp
+        m_MethodName: CloseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1210090699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10141,6 +10154,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1210090696}
   m_CullTransparentMesh: 1
+--- !u!114 &1210090701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210090696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8ea8613f3d94b9498cf42e3e882ac2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1215577093
 GameObject:
   m_ObjectHideFlags: 0
@@ -15364,10 +15389,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: edc88e4d3f267644ebb28ddf9d27ff67, type: 3}
-    m_FontSize: 60
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 5
     m_MaxSize: 67
     m_Alignment: 3
     m_AlignByGeometry: 0

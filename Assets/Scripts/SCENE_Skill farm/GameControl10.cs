@@ -44,6 +44,7 @@ public class GameControl10 : MonoBehaviour
     private bool canShowSkillInfo = false;
 
     public Button spinButton;
+    public Button goBackButton;
 
     private void Start()
     {
@@ -60,7 +61,8 @@ public class GameControl10 : MonoBehaviour
             }
             if (rows[0].rowStopped && rows[1].rowStopped && rows[2].rowStopped && !resultsChecked && podePremiar == true)
             {
-            spinButton.interactable = true;
+                spinButton.interactable = true;
+                goBackButton.interactable = true;
                 CheckResults();
             }
     }
@@ -77,6 +79,7 @@ public class GameControl10 : MonoBehaviour
 
             podePremiar = true;
             spinButton.interactable = false;
+            goBackButton.interactable = false;
             HandlePulled();
             CoinAnimation(-10);
             coins.Value -= 10;

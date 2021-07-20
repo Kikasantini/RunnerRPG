@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,6 +29,8 @@ public class LevelManager : MonoBehaviour
 
     public void AddExpPoints(int exp)
     {
+        // Mudar exp de acordo com battle ID aqui.
+
         levelMaxExp = 10 + (playerLevel.Value + 1) * playerLevel.Value;
         if ((totalExp + exp) < levelMaxExp)
         {
@@ -43,7 +43,6 @@ public class LevelManager : MonoBehaviour
             levelMaxExp = 10 + (playerLevel.Value + 1) * playerLevel.Value;
             UpdateLevelUI();
         }
-        //Debug.Log(totalExp + " " + levelMaxExp);
         SetProgressBar(totalExp, levelMaxExp);
     }
 

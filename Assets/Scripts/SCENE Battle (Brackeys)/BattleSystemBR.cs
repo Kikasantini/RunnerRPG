@@ -61,6 +61,7 @@ public class BattleSystemBR : MonoBehaviour
     public Text bossName;
     public Text bossLevel;
     public Text battleNumber;
+    public GameObject startPanel;
 
     // Particles:
     public GameObject hitParticle;
@@ -78,6 +79,8 @@ public class BattleSystemBR : MonoBehaviour
     public Text bossDescription;
     string[] description = new string[5];
 
+    // Prize upon winning:
+    public IntVariable coins;
 
     void Start()
     {
@@ -313,10 +316,10 @@ public class BattleSystemBR : MonoBehaviour
             dialogueText.text = "You won the battle";
             youWonText.text = "YOU WON";
             youWonPanel.SetActive(true);
-            
+
             // Give prize:
-            //
-            //
+            coins.Value += 50;
+            // Dar xp aqui!
 
             battleID++;
             boss[bossIndex].level++;
@@ -468,5 +471,18 @@ public class BattleSystemBR : MonoBehaviour
                 j = 0;
         }
         bossDescription.enabled = false;
+    }
+    
+    public void ChargePlayerAndStartBattle()
+    {
+        if (coins.Value < 10)
+        {
+            return;
+        }
+
+        // desativar start panel
+        startPanel.SetActive(false);
+        coins.Value -= 10;
+
     }
 }

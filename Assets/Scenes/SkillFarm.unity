@@ -453,7 +453,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.31463423, g: 0, b: 0.990566, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1959,6 +1959,7 @@ MonoBehaviour:
   type: {fileID: 1631768624}
   description: {fileID: 1420101448}
   spinButton: {fileID: 868001573}
+  goBackButton: {fileID: 99419988}
 --- !u!4 &609271331
 Transform:
   m_ObjectHideFlags: 0

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Fragments
   m_EditorClassIdentifier: 
   Value: 0
-  Sprite: {fileID: 21300000, guid: e77f091bc25c83945be9dc9349da5cbe, type: 3}
+  Sprite: {fileID: 21300000, guid: 1e833a68314607b4f88d7b5d99664206, type: 3}
   nickname: 

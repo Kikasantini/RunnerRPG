@@ -42,12 +42,13 @@ public class SetArmorUI : MonoBehaviour
     public Text fragCost;
     public Text tokenCost;
 
-
     public GameObject upgradeButton;
-
 
     // Gambiarra
     private int gamb;
+
+    // Setinhas verdinhas
+    public GameObject[] setinha;
 
     void Start()
     {
@@ -67,6 +68,7 @@ public class SetArmorUI : MonoBehaviour
 
         SetUI();
     }
+
 
     public void SetUI()
     {
@@ -90,8 +92,23 @@ public class SetArmorUI : MonoBehaviour
 
     public void SetArmorSprites()
     {
+        bool canUpgrade;
+
         for (int i = 0; i < equipSprites.Length; i++)
+        {
             equipSprites[i].sprite = character.equip[i].sprite;
+            canUpgrade = CheckIfCanUpgrade(i);
+            if (canUpgrade)
+            {
+                setinha[i].SetActive(true);
+            }
+            else
+            {
+                setinha[i].SetActive(false);
+            }
+        }
+
+
     }
 
     public void SetInventory()
@@ -154,14 +171,14 @@ public class SetArmorUI : MonoBehaviour
         if (character.equip[index].CheckTokenCost() > tokens[index].Value)
             tokenCost.text = "<color=#ec191e>" + character.equip[index].CheckTokenCost() + "</color>";
 
-        bool canUpgrade = CheckIfCanUpgrade();
+        bool canUpgrade = CheckIfCanUpgrade(gamb);
        
         if (canUpgrade)
             upgradeButton.SetActive(true);
             
     }
 
-    public bool CheckIfCanUpgrade()
+    public bool CheckIfCanUpgrade(int gamb)
     {
         return !(character.equip[gamb].CheckTokenCost() > tokens[gamb].Value || character.equip[gamb].CheckFragCost() > frags.Value);
     }

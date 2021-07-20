@@ -111,7 +111,6 @@ public class StarsUpgrade : MonoBehaviour
         character.stars++;
         coins.Value -= cost;
         //UpdateStarsUI();
-        Debug.Log("Upou.");
         upgradePanel.SetActive(false);
     }
 
