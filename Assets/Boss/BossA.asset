@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BossA
   m_EditorClassIdentifier: 
   name: "Boss M\xE1gico"
-  level: 2
+  level: 0
   bossSprite: {fileID: 0}
   profilePic: {fileID: 21300000, guid: 7b3be57ba9b25ad4f8498490cb7996db, type: 3}
   hp: 10
@@ -24,4 +24,4 @@ MonoBehaviour:
   incrementoPhyDef: 0
   incrementoMagDef: 0.2
   bossAnimator: {fileID: 22100000, guid: c7cbdc17672834c4fa8ebc5da79fd68d, type: 2}
-  next: 0
+  next: 1

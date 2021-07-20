@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Value: 0
   Sprite: {fileID: 21300000, guid: edef031dccddfa04aa6bf8b942d671e3, type: 3}
+  nickname: Weapon

@@ -5,4 +5,5 @@ public class IntVariable : ScriptableObject
 {
     public int Value;
     public Sprite Sprite;
+    public string nickname;
 }

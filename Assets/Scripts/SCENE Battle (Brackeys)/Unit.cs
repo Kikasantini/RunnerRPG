@@ -35,12 +35,29 @@ public class Unit : MonoBehaviour
       
     }
 
+    public int CalculateDamage (int dmg, bool isMagic)
+    {
+        float x;
+        if (isMagic)
+        {
+            x = magDef / 100f;
+            dmg = (int)((1 - x) * dmg);
+        }
+        else
+        {
+            x = phyDef / 100f;
+            dmg = (int)((1 - x) * dmg);
+        }
+        return dmg;
+    }
+
     public void ApplyEffect (SkillEffect effect, int dmg)
     {
         switch (effect.effect)
         {
             case EffectType.heal:
-                Heal((int)effect.intensity);
+                Heal(10);
+                //Heal((int)effect.intensity);
                 break;
 
             case EffectType.shield:

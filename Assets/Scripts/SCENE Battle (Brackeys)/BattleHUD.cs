@@ -10,6 +10,7 @@ public class BattleHUD : MonoBehaviour
 
     public Image[] stars;
     public Image[] panelStars;
+    public Color disabledStar;
 
     public Image[] skills;
     public Text[] skillAmount;
@@ -42,8 +43,8 @@ public class BattleHUD : MonoBehaviour
             }
             else
             {
-                stars[i].color = Color.gray;
-                panelStars[i].color = Color.gray;
+                stars[i].color = disabledStar;
+                panelStars[i].color = disabledStar;
             }
         }
         for (int i = 0; i < 3; i++)

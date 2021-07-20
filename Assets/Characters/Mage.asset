@@ -15,16 +15,16 @@ MonoBehaviour:
   characterName: Mage de Merda
   charImage: {fileID: -6657997426889672124, guid: cc448a85eb2f8f74585cee79387eae13, type: 3}
   profilePic: {fileID: 21300000, guid: 4c83b9f204bb3db4d93f8eedc7eba322, type: 3}
-  selected: 1
-  stars: 2
+  selected: 0
+  stars: 3
   health: 80
   attack: 5
-  magDefense: 8
-  phyDefense: 2
-  totalHealth: 120
-  totalAttack: 8
-  totalMDef: 24
-  totalPDef: 4
+  magDefense: 10
+  phyDefense: 80
+  totalHealth: 80
+  totalAttack: 5
+  totalMDef: 10
+  totalPDef: 80
   skill:
   - {fileID: 11400000, guid: e55dba10ef2246a4886cb334790196a5, type: 2}
   - {fileID: 11400000, guid: 79f3e159babb74f4a982e5eae4abc20e, type: 2}

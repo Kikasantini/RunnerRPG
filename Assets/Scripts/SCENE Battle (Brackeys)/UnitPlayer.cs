@@ -47,8 +47,9 @@ public class UnitPlayer : Unit
         return base.TakeDamage(damage);
     }
 
-    public int DamageTaken (int damage)
+    public int DamageTaken (int damage, bool isMagic = false)
     {
+
         if (useMageShield)
         {
             bool blockAttack = Random.Range(0, 100f) < 10;
@@ -57,9 +58,10 @@ public class UnitPlayer : Unit
                 return 0;
             }
             anim.SetTrigger("Take Hit");
-            return (int)(damage * Random.Range(0.2f, 0.4f));
+            damage = (int)(damage * Random.Range(0.2f, 0.4f));
         }
-        return damage;
+        return CalculateDamage(damage, isMagic);
+
     }
 
     public void Die()

@@ -235,7 +235,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.3, y: -118.53}
+  m_AnchoredPosition: {x: 0, y: -138}
   m_SizeDelta: {x: 611.91, y: 217.17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &81695603
@@ -3344,8 +3344,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -279}
-  m_SizeDelta: {x: 333.47, y: 103.77}
+  m_AnchoredPosition: {x: 0, y: -290.55}
+  m_SizeDelta: {x: 333.47, y: 126.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &916819155
 MonoBehaviour:
@@ -4724,6 +4724,7 @@ MonoBehaviour:
   tokenSprite: {fileID: 1010955751}
   fragCost: {fileID: 952379337}
   tokenCost: {fileID: 1212527530}
+  upgradeButton: {fileID: 916819153}
 --- !u!4 &1260247057
 Transform:
   m_ObjectHideFlags: 0

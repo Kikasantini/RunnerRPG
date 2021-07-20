@@ -1270,6 +1270,7 @@ MonoBehaviour:
   levelText: {fileID: 654164567}
   stars: []
   panelStars: []
+  disabledStar: {r: 0, g: 0, b: 0, a: 0}
   skills: []
   skillAmount: []
   slider: {fileID: 0}
@@ -1967,6 +1968,7 @@ MonoBehaviour:
   - {fileID: 1754395772}
   - {fileID: 828351142}
   - {fileID: 2056974038}
+  disabledStar: {r: 0, g: 0, b: 0, a: 0.19607843}
   skills:
   - {fileID: 1483242266}
   - {fileID: 1869386821}

@@ -175,32 +175,18 @@ public class BattleSystemBR : MonoBehaviour
 
     IEnumerator CastSkill (SkillSO skill, int index) // public void
     {
-        int dmg = skill.damage;
-        float x;
-
+        int dmg = enemyUnit.CalculateDamage(skill.damage, skill.isMagic);
+        
         Debug.Log("Entrou em Cast Skill. Dano base da skill é " + skill.damage);
-
-        if (skill.isMagic)
-        {
-            x = enemyUnit.magDef / 100f;
-            dmg = (int)((1 - x) * dmg);
-            Debug.Log("é Magic. Enemy magDef = " + enemyUnit.magDef + ". Enemy phyDef = " + enemyUnit.phyDef + ". DANO É " + dmg);
-        }
-        else
-        {
-            x = enemyUnit.phyDef / 100f;
-            dmg = (int)((1 - x) * dmg);
-            Debug.Log("é Physic. Enemy magDef = " + enemyUnit.magDef + ". Enemy phyDef = " + enemyUnit.phyDef + ". DANO É " + dmg);
-        }
 
         if (skill.damage > 0)
         {
+            Debug.Log("_______________________________ Entrou em skill.damage > 0");
             CreateParticle(skill.particle, enemyParticlesSpot.transform);
             StartCoroutine(FlyingHPoints(dmg, index));
             isDead = enemyUnit.TakeDamage(dmg);
             Debug.Log("Inimigo toma dano de = " + dmg);
             enemyHUD.SetEnemyBar(enemyUnit.currentHP, enemyUnit.maxHP);
-            //CheckIfDead(isDead);
         }
 
         foreach (SkillEffect effect in skill.effects)
@@ -274,10 +260,9 @@ public class BattleSystemBR : MonoBehaviour
     IEnumerator PlayerAttack()
     {
         playerUnit.Attack(); // animação de ataque do player
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f); // espera de 1 segundo
 
         // SE SKILL FOR SHIELD, CRIAR A PARTÍCULA DO SHIELD AQUI
-
         // BOSS ANIMAÇÃO DE DANO
 
         // Partícula de hit no boss:
@@ -285,16 +270,10 @@ public class BattleSystemBR : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         isDead = enemyUnit.TakeDamage(playerUnit.damage); // Dar o dano do hit básico no boss
-        Debug.Log("Boss tomou dano do hit = " + playerUnit.damage);
-
-        // Mostra o dano na tela:
-        StartCoroutine(FlyingHPoints(playerUnit.damage, 0));
-
+        StartCoroutine(FlyingHPoints(playerUnit.damage, 0)); // Mostrar o dano na tela
         enemyHUD.SetEnemyBar(enemyUnit.currentHP, enemyUnit.maxHP);  // Atualizar a barra de HP do boss
-        //CheckIfDead(isDead);
 
         int a = 0;
-        float b;
 
         if (skillButtons[0]) // skill 1 selecionada
         {
@@ -313,12 +292,8 @@ public class BattleSystemBR : MonoBehaviour
         }
 
         // delay de acordo com quantas skills usou:
-        b = (float)a;
+        float b = (float)a;
         yield return new WaitForSeconds(b/2);
-
-
-
-        //dialogueText.text = "The attack is successful";
 
         CheckIfDead(isDead);
 
@@ -331,19 +306,20 @@ public class BattleSystemBR : MonoBehaviour
 
     void EndBattle()
     {
-        Debug.Log("Entrou em END BATTLE");
         hideButtonsPanel.SetActive(false);
         if (state == BattleStateBR.WON)
         {
-            //StartCoroutine(DeathAnimation(enemyUnit));
             enemyUnit.Die();
             dialogueText.text = "You won the battle";
             youWonText.text = "YOU WON";
             youWonPanel.SetActive(true);
-            battleID++;
+            
+            // Give prize:
+            //
+            //
 
+            battleID++;
             boss[bossIndex].level++;
-            Debug.Log("level do boss = " + boss[bossIndex].level);
             boss[bossIndex].next = false;
 
             if (bossIndex == (boss.Length - 1))
@@ -368,19 +344,20 @@ public class BattleSystemBR : MonoBehaviour
         else
             damage = enemyUnit.damage;
 
+
+
         // BOSS ANIMAÇÃO DE ATAQUE
         enemyUnit.Attack();
 
         // PLAYER ANIMAÇÃO DE DANO
 
-        // PARTÍCULA DE HIT NO PLAYER
-
+        // Partícula de hit no player:
         CreateParticle(hitParticle, playerUnit.transform);
 
         if (enemyUnit.activeBuffParticle != null) {
             Destroy(enemyUnit.activeBuffParticle);
         }
-        damage = playerUnit.DamageTaken(damage);
+        damage = playerUnit.DamageTaken(damage, enemyUnit.isMagic);
         bool isDead = playerUnit.TakeDamage(damage);  // dano no player
         StartCoroutine(FlyingHPoints(damage, 3));
 
@@ -390,7 +367,6 @@ public class BattleSystemBR : MonoBehaviour
         {
             state = BattleStateBR.LOST;
             playerUnit.Die();
-            Debug.Log("Entrou em IF IS DEAD (LOST), vai chamar END BATTLE");
             EndBattle();
         }
         else
@@ -399,16 +375,7 @@ public class BattleSystemBR : MonoBehaviour
             PlayerTurn();
         }
     }
-    /*
-    IEnumerator DeathAnimation(Unit unit)
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            unit.transform.Rotate(0f, 0f, 9f);
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
-    */
+ 
     public void DestroyUnits()
     {
         Destroy(playerGO);
@@ -421,7 +388,6 @@ public class BattleSystemBR : MonoBehaviour
         if (isDead == true)
         {
             state = BattleStateBR.WON;
-            Debug.Log("Entrou em IF IS DEAD (WON!), vai chamar END BATTLE");
             EndBattle();
         }
     }

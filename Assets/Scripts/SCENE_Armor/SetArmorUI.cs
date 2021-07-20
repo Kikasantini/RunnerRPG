@@ -42,6 +42,10 @@ public class SetArmorUI : MonoBehaviour
     public Text fragCost;
     public Text tokenCost;
 
+
+    public GameObject upgradeButton;
+
+
     // Gambiarra
     private int gamb;
 
@@ -77,11 +81,11 @@ public class SetArmorUI : MonoBehaviour
     public void SetArmorLevel()
     {
         charName.text = "Character: " + character.characterName;
-        chestLevel.text = "Level " + character.equip[0].level;
-        glovesLevel.text = "Level " + character.equip[1].level;
-        pantsLevel.text = "Level " + character.equip[2].level;
-        shoesLevel.text = "Level " + character.equip[3].level;
-        weaponLevel.text = "Level " + character.equip[4].level;
+        chestLevel.text = "Level " + (character.equip[0].level + 1);
+        glovesLevel.text = "Level " + (character.equip[1].level + 1);
+        pantsLevel.text = "Level " + (character.equip[2].level + 1);
+        shoesLevel.text = "Level " + (character.equip[3].level + 1);
+        weaponLevel.text = "Level " + (character.equip[4].level + 1);
     }
 
     public void SetArmorSprites()
@@ -104,14 +108,15 @@ public class SetArmorUI : MonoBehaviour
 
     public void SetUpgradePanel(int index)
     {
+        upgradeButton.SetActive(false);
         gamb = index;
 
         stat[0].text = " ";
         stat[1].text = " ";
         stat[2].text = " ";
 
-        currentLevel.text = "Level " + character.equip[index].level;
-        nextLevel.text = "Level " + (character.equip[index].level + 1);
+        currentLevel.text = "Level " + (character.equip[index].level + 1);
+        nextLevel.text = "Level " + (character.equip[index].level + 1 + 1);
 
         equipSprite.sprite = character.equip[index].sprite;
 
@@ -149,17 +154,20 @@ public class SetArmorUI : MonoBehaviour
         if (character.equip[index].CheckTokenCost() > tokens[index].Value)
             tokenCost.text = "<color=#ec191e>" + character.equip[index].CheckTokenCost() + "</color>";
 
+        bool canUpgrade = CheckIfCanUpgrade();
+       
+        if (canUpgrade)
+            upgradeButton.SetActive(true);
+            
+    }
+
+    public bool CheckIfCanUpgrade()
+    {
+        return !(character.equip[gamb].CheckTokenCost() > tokens[gamb].Value || character.equip[gamb].CheckFragCost() > frags.Value);
     }
 
     public void OnClickUpgrade()
     {
-        // Não pode upar o equipamento:
-        if (character.equip[gamb].CheckTokenCost() > frags.Value || character.equip[gamb].CheckFragCost() > tokens[gamb].Value)
-        {
-            StartCoroutine(ShowDialogueText("Not enought mats"));
-            return;
-        }
-
         // Atualizando quantidade de tokens e fragments do player:
         frags.Value -= character.equip[gamb].CheckFragCost();
         tokens[gamb].Value -= character.equip[gamb].CheckTokenCost();
