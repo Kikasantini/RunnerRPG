@@ -3,10 +3,12 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    private int totalExp = 0;
+    //private int totalExp = 0; // Substituí por IntVariable xp
     private int levelMaxExp;
     public IntVariable playerLevel;
     public Text levelText;
+
+    public IntVariable xp;
 
     // Progress bar (Panel Info & Settings):
     public Image progressBar;
@@ -18,7 +20,7 @@ public class LevelManager : MonoBehaviour
     {
         UpdateLevelUI();
         levelMaxExp = 10 + (playerLevel.Value + 1) * playerLevel.Value;
-        SetProgressBar(totalExp, levelMaxExp);
+        SetProgressBar(xp.Value, levelMaxExp);
     }
 
     public void UpdateLevelUI()
@@ -32,18 +34,18 @@ public class LevelManager : MonoBehaviour
         // Mudar exp de acordo com battle ID aqui.
 
         levelMaxExp = 10 + (playerLevel.Value + 1) * playerLevel.Value;
-        if ((totalExp + exp) < levelMaxExp)
+        if ((xp.Value + exp) < levelMaxExp)
         {
-            totalExp += exp;
+            xp.Value += exp;
         }
         else
         {
-            totalExp = (totalExp + exp) - levelMaxExp;
+            xp.Value = (xp.Value + exp) - levelMaxExp;
             playerLevel.Value++;
             levelMaxExp = 10 + (playerLevel.Value + 1) * playerLevel.Value;
             UpdateLevelUI();
         }
-        SetProgressBar(totalExp, levelMaxExp);
+        SetProgressBar(xp.Value, levelMaxExp);
     }
 
     public void SetProgressBar(int exp, int max)

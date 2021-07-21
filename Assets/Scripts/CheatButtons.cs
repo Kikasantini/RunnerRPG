@@ -8,6 +8,7 @@ public class CheatButtons : MonoBehaviour
     public IntVariable fragments;
     public IntVariable[] tokens;
     public IntVariable level;
+    public IntVariable xp;
     public CharacterSO[] characters;
     public BossSO[] boss;
 
@@ -100,6 +101,7 @@ public class CheatButtons : MonoBehaviour
     public void ResetLevelAndStars()
     {
         level.Value = 0;
+        xp.Value = 0;
         characters[0].stars = 0;
         characters[1].stars = 0;
         characters[2].stars = 0;

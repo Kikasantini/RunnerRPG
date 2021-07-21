@@ -81,9 +81,18 @@ public class BattleSystemBR : MonoBehaviour
 
     // Prize upon winning:
     public IntVariable coins;
+    public IntVariable xp;
+    public Text coinPrizeText;
+    public Text xpPrizeText;
+    public GameObject coinImage;
+    public GameObject ripImage;
+
+    public Button goBackButton;
+    public GameObject panelOverGoBackButton;
 
     void Start()
     {
+        panelOverGoBackButton.SetActive(true);
         for (int i = 0; i < pointsText.Length; i++)
             pointsText[i].DOFade(0, 0);
 
@@ -141,8 +150,8 @@ public class BattleSystemBR : MonoBehaviour
         StartCoroutine(BossDescription());
         playerName.text = playerUnit.unitName;
         bossName.text = enemyUnit.unitName;
-        bossLevel.text = "Lvl " + enemyUnit.unitLevel;
-        battleNumber.text = "BATTLE # " + battleID;
+        bossLevel.text = "Lvl " + (enemyUnit.unitLevel + 1);
+        battleNumber.text = "BATTLE # " + (battleID + 1);
         playerPic.sprite = playerUnit.profilePic;
         bossPic.sprite = enemyUnit.profilePic;
 
@@ -309,17 +318,21 @@ public class BattleSystemBR : MonoBehaviour
 
     void EndBattle()
     {
+        panelOverGoBackButton.SetActive(false);
         hideButtonsPanel.SetActive(false);
+
+        // Chamar You Won Panel
+        Invoke("ActivateWonPanel", 2f);
+
         if (state == BattleStateBR.WON)
         {
             enemyUnit.Die();
             dialogueText.text = "You won the battle";
-            youWonText.text = "YOU WON";
-            youWonPanel.SetActive(true);
+            youWonText.text = "YOU WON!";
+            //youWonPanel.SetActive(true);
 
             // Give prize:
-            coins.Value += 50;
-            // Dar xp aqui!
+            GivePrize();
 
             battleID++;
             boss[bossIndex].level++;
@@ -334,7 +347,13 @@ public class BattleSystemBR : MonoBehaviour
         {
             dialogueText.text = "You were defeated";
             youWonText.text = "YOU LOST";
-            youWonPanel.SetActive(true);
+
+            coinPrizeText.enabled = false;
+            xpPrizeText.enabled = false;
+            coinImage.SetActive(false);
+            ripImage.SetActive(true);
+
+            //youWonPanel.SetActive(true);
         }
     }
 
@@ -480,9 +499,53 @@ public class BattleSystemBR : MonoBehaviour
             return;
         }
 
-        // desativar start panel
+        // desativar start panel:
         startPanel.SetActive(false);
         coins.Value -= 10;
 
     }
+
+    public void GivePrize()
+    {
+        int coinPrize;
+        int expPrize;
+
+        coinPrizeText.enabled = true;
+        xpPrizeText.enabled = true;
+        ripImage.SetActive(false);
+        coinImage.SetActive(true);
+
+        if (battleID < 5)
+        {
+            coinPrize = 5;
+            expPrize = 1;
+        }
+        else if(battleID < 10)
+        {
+            coinPrize = 10;
+            expPrize = 2;
+        }
+        else if(battleID < 20)
+        {
+            coinPrize = 50;
+            expPrize = 2;
+        }
+        else
+        {
+            coinPrize = (30 + battleID / 10);
+            expPrize = (1 + battleID / 10);
+        }
+
+        coins.Value += coinPrize;
+        xp.Value += expPrize;
+
+        coinPrizeText.text = "+" + coinPrize;
+        xpPrizeText.text = "+" + expPrize + " EXP";
+    }
+
+    public void ActivateWonPanel()
+    {
+        youWonPanel.SetActive(true);
+    }
+            
 }

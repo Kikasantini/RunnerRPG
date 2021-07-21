@@ -16,10 +16,10 @@ public class StarsUpgrade : MonoBehaviour
     //public Button upgradeButton;
     public GameObject upgradeButtonGO;
 
-    // Level mínimo para upar Stars:
-    private int star1 = 5;
-    private int star2 = 10;
-    private int star3 = 15;
+    // Level mínimo para upar Stars: (começa no 0)
+    private int star1 = 4;
+    private int star2 = 9;
+    private int star3 = 14;
 
     // Custo dos upgrades em coin:
     private int coins1 = 10;
@@ -64,7 +64,7 @@ public class StarsUpgrade : MonoBehaviour
         {
             if (level.Value < star1 || coins.Value < coins1)
             {
-                costText.text = "You must be <b>Level " + star1 + "</b> and have <b>" + coins1 + " coins</b> to upgrade.";
+                costText.text = "You must be <b>Level " + (star1 + 1) + "</b> and have <b>" + coins1 + " coins</b> to upgrade.";
                 return;
             }
         }
@@ -72,7 +72,7 @@ public class StarsUpgrade : MonoBehaviour
         {
             if (level.Value < star2 || coins.Value < coins2)
             {
-                costText.text = "You must be <b>Level " + star2 + " </b> and have <b>" + coins2 + " coins</b> to upgrade.";
+                costText.text = "You must be <b>Level " + (star2 + 1) + " </b> and have <b>" + coins2 + " coins</b> to upgrade.";
                 return;
             }
         }
@@ -80,7 +80,7 @@ public class StarsUpgrade : MonoBehaviour
         {
             if (level.Value < star3 || coins.Value < coins3)
             {
-                costText.text = "You must be <b>Level " + star3 + "</b> and have <b>" + coins3 + " coins</b> to upgrade.";
+                costText.text = "You must be <b>Level " + (star3 + 1) + "</b> and have <b>" + coins3 + " coins</b> to upgrade.";
                 return;
             }
         }

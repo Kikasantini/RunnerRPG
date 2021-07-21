@@ -3536,7 +3536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.89411765}
+  m_Color: {r: 0.85882354, g: 0.5406177, b: 0, a: 0.8392157}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4232,6 +4232,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cca48b8bf5a169c44943b58bab0f720a, type: 2}
   - {fileID: 11400000, guid: bf38856c4c7129a4eb2703f105c66143, type: 2}
   level: {fileID: 11400000, guid: 456f5138b2f75b04485a3050ee6c8221, type: 2}
+  xp: {fileID: 11400000, guid: cae49448d54fd6b4fb3adb2406fffbf0, type: 2}
   characters:
   - {fileID: 11400000, guid: 746cdeb44df1fc14f89d182aedaa335a, type: 2}
   - {fileID: 11400000, guid: 7a87513c9c3f9824891900fd99b25108, type: 2}
@@ -10982,6 +10983,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerLevel: {fileID: 11400000, guid: 456f5138b2f75b04485a3050ee6c8221, type: 2}
   levelText: {fileID: 375686399}
+  xp: {fileID: 11400000, guid: cae49448d54fd6b4fb3adb2406fffbf0, type: 2}
   progressBar: {fileID: 432897176}
   barText: {fileID: 1900060000}
   barLevel: {fileID: 1941505124}

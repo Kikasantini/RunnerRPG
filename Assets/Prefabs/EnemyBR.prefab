@@ -93,7 +93,7 @@ Animator:
   m_GameObject: {fileID: 2010518951662983142}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: cfce9def1dc7590418abeee06e29c690, type: 2}
+  m_Controller: {fileID: 9100000, guid: 153417a06ca91ae4ab1ec5d7c77652ad, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -157,3 +157,5 @@ MonoBehaviour:
   anim: {fileID: 524721682260658866}
   buffed: 0
   activeBuffParticle: {fileID: 0}
+  profilePic: {fileID: 0}
+  isMagic: 0

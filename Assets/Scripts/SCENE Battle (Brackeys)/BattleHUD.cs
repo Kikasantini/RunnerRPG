@@ -59,7 +59,7 @@ public class BattleHUD : MonoBehaviour
     public void SetBossHUD(UnitBoss unit)
     {
         nameText.text = unit.unitName;
-        levelText.text = "Lvl " + unit.unitLevel;
+        levelText.text = "Lvl " + (unit.unitLevel + 1);
     }
 
 
