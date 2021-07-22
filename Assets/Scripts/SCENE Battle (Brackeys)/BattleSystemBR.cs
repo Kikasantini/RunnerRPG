@@ -9,6 +9,7 @@ public class BattleSystemBR : MonoBehaviour
 {
     private GameObject playerGO;
     private GameObject enemyGO;
+    public LevelManager lvlmanager;
 
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
@@ -321,7 +322,7 @@ public class BattleSystemBR : MonoBehaviour
         panelOverGoBackButton.SetActive(false);
         hideButtonsPanel.SetActive(false);
 
-        // Chamar You Won Panel
+        // Chamar You Won Panel:
         Invoke("ActivateWonPanel", 2f);
 
         if (state == BattleStateBR.WON)
@@ -329,9 +330,6 @@ public class BattleSystemBR : MonoBehaviour
             enemyUnit.Die();
             dialogueText.text = "You won the battle";
             youWonText.text = "YOU WON!";
-            //youWonPanel.SetActive(true);
-
-            // Give prize:
             GivePrize();
 
             battleID++;
@@ -352,8 +350,6 @@ public class BattleSystemBR : MonoBehaviour
             xpPrizeText.enabled = false;
             coinImage.SetActive(false);
             ripImage.SetActive(true);
-
-            //youWonPanel.SetActive(true);
         }
     }
 
@@ -537,7 +533,9 @@ public class BattleSystemBR : MonoBehaviour
         }
 
         coins.Value += coinPrize;
-        xp.Value += expPrize;
+        //lvlmanager.AddExpPoints(expPrize);
+        lvlmanager.AddExpPoints(5);
+        //xp.Value += expPrize; // NÃO TA CONFERINDO NADAAAAA
 
         coinPrizeText.text = "+" + coinPrize;
         xpPrizeText.text = "+" + expPrize + " EXP";

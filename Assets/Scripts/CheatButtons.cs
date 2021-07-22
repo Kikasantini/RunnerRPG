@@ -47,10 +47,6 @@ public class CheatButtons : MonoBehaviour
         level.Value += 1;
     }
 
-
-    // ******************************************************************* //
-
-
     public void ResetGame()
     {
         ResetCoins();
@@ -66,7 +62,6 @@ public class CheatButtons : MonoBehaviour
     {
         coins.Value = 0;
     }
-
 
     public void ResetFrags()
     {
@@ -121,7 +116,4 @@ public class CheatButtons : MonoBehaviour
             }
         }
     }
-
-
-
 }

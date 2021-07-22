@@ -26,8 +26,8 @@ MonoBehaviour:
   multPDef: 0
   totalPDef: 0
   totalMDef: 0
-  totalAttack: 0
+  totalAttack: 7
   totalHP: 0
-  level: 0
-  sprite: {fileID: 21300000, guid: 191cd9b6b4ef01240b08357bbdf9867f, type: 3}
+  level: 5
+  sprite: {fileID: 21300000, guid: 4e6c0b972466e9b41beff7a740a0f837, type: 3}
   cost: {fileID: 11400000, guid: bf38856c4c7129a4eb2703f105c66143, type: 2}

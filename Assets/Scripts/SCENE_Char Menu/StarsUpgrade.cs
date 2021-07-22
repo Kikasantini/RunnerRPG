@@ -13,7 +13,6 @@ public class StarsUpgrade : MonoBehaviour
     public Image[] stars;
     public Color disabledStar;
     public Text costText;
-    //public Button upgradeButton;
     public GameObject upgradeButtonGO;
 
     // Level mínimo para upar Stars: (começa no 0)
@@ -26,14 +25,8 @@ public class StarsUpgrade : MonoBehaviour
     private int coins2 = 100;
     private int coins3 = 1000;
 
-    public void Start()
-    {
-
-    }
-
     public void OnClick()
     {
-        //upgradeButton.interactable = false;
         upgradeButtonGO.SetActive(false);
         int heroIndex = 0;
 
@@ -91,7 +84,6 @@ public class StarsUpgrade : MonoBehaviour
         }
 
         costText.text = "An upgrade is available.";
-        //upgradeButton.interactable = true;
         upgradeButtonGO.SetActive(true);
 
     }
@@ -110,24 +102,6 @@ public class StarsUpgrade : MonoBehaviour
     {
         character.stars++;
         coins.Value -= cost;
-        //UpdateStarsUI();
         upgradePanel.SetActive(false);
     }
-
-    /*
-    public void UpdateStarsUI()
-    {
-        for (int i = 0; i < stars.Length; i++)
-        {
-            if (i < character.stars)
-            {
-                stars[i].color = Color.white;
-            }
-            else
-            {
-                stars[i].color = disabledStar;
-            }
-        }
-    }
-    */
 }

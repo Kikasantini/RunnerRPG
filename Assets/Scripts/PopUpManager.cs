@@ -14,7 +14,6 @@ public class PopUpManager : MonoBehaviour
     public IntVariable coins;
     public GameObject prizePanel;
     public Text text;
-    //public Transform spawnPos;
     private float tempo;
     public Image prizeSprite;
 
@@ -42,7 +41,6 @@ public class PopUpManager : MonoBehaviour
         enabled = true;
         button.SetActive(true);
         int index = UnityEngine.Random.Range(0, 10);
-        //Debug.Log("index é " + index);
         chosenPopUp = Instantiate(popUps[index]);
         chosenPopUp.transform.position = spawnPoint.position;
 
@@ -59,7 +57,6 @@ public class PopUpManager : MonoBehaviour
             case 0: // Coins
                 amount = UnityEngine.Random.Range(5, 20);
                 coins.Value += amount;
-                Debug.Log("Ganhou " + amount + " coin(s)");
                 text.text = amount + " coin(s)";
                 prizeSprite.sprite = coins.Sprite;
                 break;
@@ -67,7 +64,6 @@ public class PopUpManager : MonoBehaviour
             case 1: // Armor fragments
                 amount = UnityEngine.Random.Range(1, 11);
                 fragments.Value += amount;
-                Debug.Log("Ganhou " + amount + " upgrade fragment(s)");
                 text.text = amount + " fragment(s)";
                 prizeSprite.sprite = fragments.Sprite;
                 break;
@@ -106,7 +102,6 @@ public class PopUpManager : MonoBehaviour
 
         int type = UnityEngine.Random.Range(0, 5);
         tokens[type].Value += amount;
-        //Debug.Log("Ganhou " + amount + " tokens do tipo " + tokens[type].name);
         text.text = amount + " " + tokens[type].nickname + " Token(s)";
         prizeSprite.sprite = tokens[type].Sprite;
     }

@@ -29,5 +29,5 @@ MonoBehaviour:
   totalAttack: 0
   totalHP: 0
   level: 0
-  sprite: {fileID: 21300000, guid: 7bf000685e7bc8e4eb4ef73ccbdc86d8, type: 3}
+  sprite: {fileID: 21300000, guid: 7b5faac9e3f46b64a8086ad3d8e43d89, type: 3}
   cost: {fileID: 11400000, guid: bf38856c4c7129a4eb2703f105c66143, type: 2}

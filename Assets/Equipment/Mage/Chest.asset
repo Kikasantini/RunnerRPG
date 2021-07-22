@@ -24,10 +24,10 @@ MonoBehaviour:
   multAttack: 0
   multMDef: 0.25
   multPDef: 0.05
-  totalPDef: 0
-  totalMDef: 0
+  totalPDef: 9
+  totalMDef: 35
   totalAttack: 0
-  totalHP: 0
-  level: 0
-  sprite: {fileID: 21300000, guid: da1c153d669931f44ad74d30ca350d69, type: 3}
+  totalHP: 53
+  level: 9
+  sprite: {fileID: 21300000, guid: 9fdffaf228b6f824698faff272202720, type: 3}
   cost: {fileID: 11400000, guid: 8c3f9a49e6aee6548825e8e97be68395, type: 2}
