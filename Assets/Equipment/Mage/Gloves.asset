@@ -22,7 +22,7 @@ MonoBehaviour:
   incHP: 1
   multHP: 0.25
   multAttack: 0
-  multMDef: 0.25
+  multMDef: 0.2
   multPDef: 0.1
   totalPDef: 0
   totalMDef: 0

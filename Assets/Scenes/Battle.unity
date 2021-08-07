@@ -6738,6 +6738,7 @@ MonoBehaviour:
   bossLevel: {fileID: 1686790313}
   battleNumber: {fileID: 2078716256}
   startPanel: {fileID: 333489469}
+  acceptButton: {fileID: 1747948445}
   hitParticle: {fileID: 100004, guid: 1edf7c9886a7c894eb962b23bd8e34ec, type: 3}
   bossBuffedParticle: {fileID: 6899683503749318108, guid: a2039d86377b05f469f63bf31bc35b73, type: 3}
   pointsText:
@@ -8540,7 +8541,7 @@ GameObject:
   - component: {fileID: 1873447701}
   - component: {fileID: 1873447700}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Image 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

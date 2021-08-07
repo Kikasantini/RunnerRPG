@@ -643,7 +643,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &69033741
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4164,6 +4164,7 @@ MonoBehaviour:
   boss:
   - {fileID: 11400000, guid: 2ed3cb3bc3054ec47aa3d046468d1324, type: 2}
   - {fileID: 11400000, guid: 7960fb90624418c48b43bf0641305dd2, type: 2}
+  lvlmanager: {fileID: 0}
 --- !u!1 &588787181
 GameObject:
   m_ObjectHideFlags: 0
@@ -8476,19 +8477,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1058225623}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: AddExpPoints
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 5
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1058225623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9849,8 +9838,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
+        - m_Target: {fileID: 1286298650}
+          m_TargetAssemblyTypeName: LevelUI, Assembly-CSharp
           m_MethodName: UpdateLevelUI
           m_Mode: 1
           m_Arguments:
@@ -17333,7 +17322,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2006664966
 RectTransform:
   m_ObjectHideFlags: 0

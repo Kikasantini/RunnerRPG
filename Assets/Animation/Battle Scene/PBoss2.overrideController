@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PBoss2
+  m_Controller: {fileID: 9100000, guid: 153417a06ca91ae4ab1ec5d7c77652ad, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: affc20478fd7ab645b779e5ea8eb36e6, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 974f1d1f723ca2b4e99d468acee35078, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 4ecdcfec849cf6f4fa5a171f01be0552, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1eecf2ac2bbb67b4c82906eb1729c5ef, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: c025d14ca0c34844ab644158e750aed7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7e68214012984924983c6e298daa69ad, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 2ae8373f96e93c64faa89c8c02e6d5e7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ce489bb610a98194c8b5b9412c66a1d8, type: 2}

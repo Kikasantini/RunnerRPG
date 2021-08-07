@@ -42,6 +42,8 @@ public class GameControl10 : MonoBehaviour
     public Text description;
     private int skillIndex;
     private bool canShowSkillInfo = false;
+    public Image charPicture;
+    public Sprite[] charSprite;
 
     public Button spinButton;
     public Button goBackButton;
@@ -289,7 +291,13 @@ public class GameControl10 : MonoBehaviour
         else
             type.text = "Nature: Physical";
 
-        //description.text = skill[skillIndex - 1].description;
+        // Mostrar o char aqui:
+        if ((skillIndex - 1) == 0 || (skillIndex - 1) == 3 || (skillIndex - 1) == 6) // Mage
+            charPicture.sprite = charSprite[0];
+        else if ((skillIndex - 1) == 1 || (skillIndex - 1) == 4 || (skillIndex - 1) == 7) // Warrior
+            charPicture.sprite = charSprite[1];
+        else if ((skillIndex - 1) == 2 || (skillIndex - 1) == 5 || (skillIndex - 1) == 8) // Priest
+            charPicture.sprite = charSprite[2];
 
         if (skill[skillIndex - 1].damage > 0)
         {

@@ -12,6 +12,8 @@ public class CheatButtons : MonoBehaviour
     public CharacterSO[] characters;
     public BossSO[] boss;
 
+    public LevelManager lvlmanager;
+
     public void CoinsCheat()
     {
         coins.Value += 50;

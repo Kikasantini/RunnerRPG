@@ -46,11 +46,11 @@ public class EquipmentSO : ScriptableObject
 
     public void Upgrade()
     {
-        level++;
         totalHP += incHP + (int)(level * multHP);
         totalAttack += incAttack + (int)(level * multAttack);
         totalMDef += incMDef + (int)(level * multMDef);
         totalPDef += incPDef + (int)(level * multPDef);
+        level++;
     }
 
     public void costUpdate()

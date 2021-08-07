@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f88e7d88e84c294c8eec44b9ea280ac, type: 3}
   m_Name: BossB
   m_EditorClassIdentifier: 
-  name: "Boss F\xEDsico"
-  level: 0
+  name: Zehith
+  level: 2
   bossSprite: {fileID: 0}
-  profilePic: {fileID: 21300000, guid: 58650e86e8d454e4e91c0b91820726a4, type: 3}
+  profilePic: {fileID: 21300000, guid: 4a6cfc7c33002f242baf8ae3691b90b3, type: 3}
   hp: 15
   baseDamage: 10
   magDef: 2
@@ -23,5 +23,5 @@ MonoBehaviour:
   isMagic: 0
   incrementoPhyDef: 0.2
   incrementoMagDef: 0
-  bossAnimator: {fileID: 22100000, guid: cfce9def1dc7590418abeee06e29c690, type: 2}
-  next: 0
+  bossAnimator: {fileID: 22100000, guid: e79a6ac07889cc74abe9d4ce63a325ee, type: 2}
+  next: 1

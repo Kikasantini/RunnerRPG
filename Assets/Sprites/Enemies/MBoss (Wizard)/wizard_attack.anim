@@ -22,6 +22,15 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.083333336
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -30,7 +39,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.4166667
+        time: 0.5
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -53,9 +62,9 @@ AnimationClip:
       value: {fileID: 21300000, guid: 3e8a90df6eb36e94184177717fdf1144, type: 3}
     - time: 0.16666667
       value: {fileID: 21300000, guid: 2e0a0eb0a535b2046b18b2802f5dd0c5, type: 3}
-    - time: 0.25
-      value: {fileID: 21300000, guid: 922377637ea063846bc2e827912ec4c2, type: 3}
     - time: 0.33333334
+      value: {fileID: 21300000, guid: 922377637ea063846bc2e827912ec4c2, type: 3}
+    - time: 0.41666666
       value: {fileID: 21300000, guid: 9743eeae637d1194786c6022a4e2cd35, type: 3}
     attribute: m_Sprite
     path: 
@@ -93,7 +102,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.4166667
+    m_StopTime: 0.5
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -114,6 +123,15 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.083333336
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -122,7 +140,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.4166667
+        time: 0.5
         value: 0
         inSlope: Infinity
         outSlope: Infinity

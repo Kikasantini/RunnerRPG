@@ -63,6 +63,7 @@ public class BattleSystemBR : MonoBehaviour
     public Text bossLevel;
     public Text battleNumber;
     public GameObject startPanel;
+    public Button acceptButton;
 
     // Particles:
     public GameObject hitParticle;
@@ -93,6 +94,11 @@ public class BattleSystemBR : MonoBehaviour
 
     void Start()
     {
+        if (coins.Value < 10)
+            acceptButton.interactable = false;
+        else
+            acceptButton.interactable = true;
+
         panelOverGoBackButton.SetActive(true);
         for (int i = 0; i < pointsText.Length; i++)
             pointsText[i].DOFade(0, 0);
@@ -164,11 +170,12 @@ public class BattleSystemBR : MonoBehaviour
     void PlayerTurn()
     {
         playerUnit.StartTurn();
+        playerUnit.StartTurn();
         hideButtonsPanel.SetActive(false);
         bossBuffed = false;
 
         float abc = UnityEngine.Random.Range(0f, 1f); // Chance do boss se buffar
-        if (abc >= 0.5)
+        if (abc >= 0) // default deve ser 0.9
             bossBuffed = true;
 
         if (bossBuffed == true) // Ativa a partícula do boss buffado
@@ -189,16 +196,12 @@ public class BattleSystemBR : MonoBehaviour
     IEnumerator CastSkill (SkillSO skill, int index) // public void
     {
         int dmg = enemyUnit.CalculateDamage(skill.damage, skill.isMagic);
-        
-        Debug.Log("Entrou em Cast Skill. Dano base da skill é " + skill.damage);
 
         if (skill.damage > 0)
         {
-            Debug.Log("_______________________________ Entrou em skill.damage > 0");
             CreateParticle(skill.particle, enemyParticlesSpot.transform);
             StartCoroutine(FlyingHPoints(dmg, index));
             isDead = enemyUnit.TakeDamage(dmg);
-            Debug.Log("Inimigo toma dano de = " + dmg);
             enemyHUD.SetEnemyBar(enemyUnit.currentHP, enemyUnit.maxHP);
         }
 
@@ -275,9 +278,6 @@ public class BattleSystemBR : MonoBehaviour
         playerUnit.Attack(); // animação de ataque do player
         yield return new WaitForSeconds(1f); // espera de 1 segundo
 
-        // SE SKILL FOR SHIELD, CRIAR A PARTÍCULA DO SHIELD AQUI
-        // BOSS ANIMAÇÃO DE DANO
-
         // Partícula de hit no boss:
         CreateParticle(hitParticle, enemyParticlesSpot.transform);
         yield return new WaitForSeconds(0.5f);
@@ -319,6 +319,7 @@ public class BattleSystemBR : MonoBehaviour
 
     void EndBattle()
     {
+
         panelOverGoBackButton.SetActive(false);
         hideButtonsPanel.SetActive(false);
 
@@ -350,6 +351,10 @@ public class BattleSystemBR : MonoBehaviour
             xpPrizeText.enabled = false;
             coinImage.SetActive(false);
             ripImage.SetActive(true);
+            if (coins.Value < 10)
+                acceptButton.interactable = false;
+            else
+                acceptButton.interactable = true;
         }
     }
 
@@ -412,18 +417,26 @@ public class BattleSystemBR : MonoBehaviour
 
     IEnumerator FlyingHPoints(int points, int index) // Animação de perder HP
     {
-        Vector3 originalScale = new Vector3(0, 0, 0);
-        Vector3 newScale = new Vector3(0, 0, 0);
+        Vector2 originalScale = new Vector2();
+        Vector2 newScale = new Vector2();
         originalScale = pointsText[index].transform.localScale;
         newScale = pointsText[index].transform.localScale;
 
         float jump = 0.01f;
 
-        Vector2 pointsPosInit = new Vector2(0, 0);
+        Vector2 pointsPosInit = new Vector2();
         pointsPosInit = pointsText[index].transform.position;
         pointsText[index].text = "-" + points;
 
         pointsText[index].DOFade(1, 0.5f); // fade in
+
+        /*
+        Debug.Log("------------- Antes da animação:");
+        Debug.Log("originalScale = " + originalScale.x + " " + originalScale.y);
+        Debug.Log("newScale = " + newScale.x + " " + newScale.y);
+        Debug.Log("pointsText[index] = " + pointsText[index].transform.localScale.x + " " + pointsText[index].transform.localScale.y);
+        */
+
 
         for (int i = 0; i < 50; i++)
         {
@@ -432,7 +445,7 @@ public class BattleSystemBR : MonoBehaviour
 
             newScale.x += 0.01f;
             newScale.y += 0.01f;
-            newScale.z += 0.01f;
+            //newScale.z += 0.01f;
             pointsText[index].transform.localScale = newScale;
 
             yield return new WaitForSeconds(0.01f);
@@ -447,7 +460,7 @@ public class BattleSystemBR : MonoBehaviour
 
             newScale.x += 0.01f;
             newScale.y += 0.01f;
-            newScale.z += 0.01f;
+            //newScale.z += 0.01f;
             pointsText[index].transform.localScale = newScale;
 
             yield return new WaitForSeconds(0.01f);
@@ -455,11 +468,21 @@ public class BattleSystemBR : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        pointsPosInit.y -= jump * 100;
+
+        pointsPosInit.y -= (jump * 100);
         pointsText[index].transform.position = pointsPosInit; // texto volta à posição original
+        //pointsPosInit.y = originalScale.y;
+
         pointsText[index].transform.localScale = originalScale; // texto volta ao tamanho original
+
+        /*
+        Debug.Log("------------- Depois da animação:");
+        Debug.Log("originalScale = " + originalScale.x + " " + originalScale.y);
+        Debug.Log("newScale = " + newScale.x + " " + newScale.y);
+        Debug.Log("pointsText[index] = " + pointsText[index].transform.localScale.x + " " + pointsText[index].transform.localScale.y);
+        */
     }
- 
+
     IEnumerator BossDescription()
     {
         bossDescription.enabled = true;
@@ -492,6 +515,7 @@ public class BattleSystemBR : MonoBehaviour
     {
         if (coins.Value < 10)
         {
+            //Debug.Log("Not enough coins");
             return;
         }
 
@@ -533,17 +557,19 @@ public class BattleSystemBR : MonoBehaviour
         }
 
         coins.Value += coinPrize;
-        //lvlmanager.AddExpPoints(expPrize);
-        lvlmanager.AddExpPoints(5);
-        //xp.Value += expPrize; // NÃO TA CONFERINDO NADAAAAA
+        lvlmanager.AddExpPoints(expPrize);
 
         coinPrizeText.text = "+" + coinPrize;
         xpPrizeText.text = "+" + expPrize + " EXP";
+
+        if (coins.Value < 10)
+            acceptButton.interactable = false;
+        else
+            acceptButton.interactable = true;
     }
 
     public void ActivateWonPanel()
     {
         youWonPanel.SetActive(true);
     }
-            
 }

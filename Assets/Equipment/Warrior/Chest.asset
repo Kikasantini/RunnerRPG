@@ -16,7 +16,7 @@ MonoBehaviour:
   fragCost: 15
   incTokenCost: 2
   incFragCost: 5
-  incPDef: 3
+  incPDef: 2
   incMDef: 0
   incAttack: 0
   incHP: 10

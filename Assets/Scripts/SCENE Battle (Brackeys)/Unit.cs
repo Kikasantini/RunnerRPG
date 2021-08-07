@@ -35,6 +35,12 @@ public class Unit : MonoBehaviour
       
     }
 
+    // ARRUMAR ESSA FUNÇÃO
+    // FAZER:
+    // QUANTO MAIOR A DEFESA, MENOS IMPORTA O AUMENTO DA DEFESA
+    //
+    // BUG ATUAL:
+    // DEFESA > 100 HEALA A UNIT AO INVÉS DE DAR DANO
     public int CalculateDamage (int dmg, bool isMagic)
     {
         float x;
