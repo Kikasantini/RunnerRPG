@@ -5,13 +5,11 @@ using UnityEngine.UI;
 
 public class SetArmorUI : MonoBehaviour
 {
-    public CharacterSO[] characters;
-    public CharacterSO character = null;
+    public CharacterSO character;
 
     public Text dialogue;
 
     // Elementos do Painel Principal
-    public Text charName;
     public Text chestLevel;
     public Text glovesLevel;
     public Text pantsLevel;
@@ -21,14 +19,14 @@ public class SetArmorUI : MonoBehaviour
     public Image[] equipSprites;
 
     // Elementos do Inventário
-    public Text totalTokens;
-    public Text totalFrags;
-    public Text totalFrags2;
-    public Text chestTokens;
-    public Text glovesTokens;
-    public Text pantsTokens;
-    public Text shoesTokens;
-    public Text weaponTokens;
+    //public Text totalTokens;
+    //public Text totalFrags;
+    //public Text totalFrags2;
+    //public Text chestTokens;
+    //public Text glovesTokens;
+    //public Text pantsTokens;
+    //public Text shoesTokens;
+    //public Text weaponTokens;
 
     public IntVariable[] tokens;
     public IntVariable frags;
@@ -53,19 +51,6 @@ public class SetArmorUI : MonoBehaviour
     void Start()
     {
         dialogue.enabled = false;
-        int heroIndex = 0;
-
-        foreach (CharacterSO c in characters)
-        {
-            if (c.selected)
-            {
-                character = c;
-                break;
-            }
-            heroIndex++;
-        }
-        character = characters[heroIndex];
-
         SetUI();
     }
 
@@ -82,7 +67,6 @@ public class SetArmorUI : MonoBehaviour
 
     public void SetArmorLevel()
     {
-        charName.text = "Character: " + character.characterName;
         chestLevel.text = "Level " + (character.equip[0].level + 1);
         glovesLevel.text = "Level " + (character.equip[1].level + 1);
         pantsLevel.text = "Level " + (character.equip[2].level + 1);
@@ -113,14 +97,14 @@ public class SetArmorUI : MonoBehaviour
 
     public void SetInventory()
     {
-        totalTokens.text = (tokens[0].Value + tokens[1].Value + tokens[2].Value + tokens[3].Value + tokens[4].Value).ToString();
-        totalFrags.text = frags.Value.ToString();
-        totalFrags2.text = frags.Value.ToString();
-        chestTokens.text = tokens[0].Value.ToString();
-        glovesTokens.text = tokens[1].Value.ToString();
-        pantsTokens.text = tokens[2].Value.ToString();
-        shoesTokens.text = tokens[3].Value.ToString();
-        weaponTokens.text = tokens[4].Value.ToString();
+        //totalTokens.text = (tokens[0].Value + tokens[1].Value + tokens[2].Value + tokens[3].Value + tokens[4].Value).ToString();
+        //totalFrags.text = frags.Value.ToString();
+        //totalFrags2.text = frags.Value.ToString();
+        //chestTokens.text = tokens[0].Value.ToString();
+        //glovesTokens.text = tokens[1].Value.ToString();
+        //pantsTokens.text = tokens[2].Value.ToString();
+        //shoesTokens.text = tokens[3].Value.ToString();
+        //weaponTokens.text = tokens[4].Value.ToString();
     }
 
     public void SetUpgradePanel(int index)
@@ -141,22 +125,22 @@ public class SetArmorUI : MonoBehaviour
         int ohno = 0;
         if(character.equip[index].CheckHPInc() > 0)
         {
-            stat[ohno].text = "Health " + "<color=#0bb900><b>" + "+ " + character.equip[index].CheckHPInc() + "</b></color>";
+            stat[ohno].text = "Health " + "<color=#055500><b>" + "+ " + character.equip[index].CheckHPInc() + "</b></color>";
             ohno++;
         }
         if (character.equip[index].CheckAttackInc() > 0)
         {
-            stat[ohno].text = "Attack " + "<color=#0bb900><b>" + "+ " + character.equip[index].CheckAttackInc() + "</b></color>";
+            stat[ohno].text = "Attack " + "<color=#055500><b>" + "+ " + character.equip[index].CheckAttackInc() + "</b></color>";
             ohno++;
         }
         if (character.equip[index].CheckMDefInc() > 0)
         {
-            stat[ohno].text = "M. Defense " + "<color=#0bb900><b>" + "+ " + character.equip[index].CheckMDefInc() + "</b></color>";
+            stat[ohno].text = "M. Defense " + "<color=#055500><b>" + "+ " + character.equip[index].CheckMDefInc() + "</b></color>";
             ohno++;
         }
         if (character.equip[index].CheckPDefInc() > 0)
         {
-            stat[ohno].text = "P. Defense " + "<color=#0bb900><b>" + "+ " + character.equip[index].CheckPDefInc() + "</b></color>";
+            stat[ohno].text = "P. Defense " + "<color=#055500><b>" + "+ " + character.equip[index].CheckPDefInc() + "</b></color>";
             ohno++;
         }
 

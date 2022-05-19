@@ -20,10 +20,10 @@ public class BattleSystemBR : MonoBehaviour
     public GameObject hideButtonsPanel;
 
     // Personagens e bosses:
-    public CharacterSO[] character;
+    public CharacterSO character;
     public BossSO[] boss;
 
-    private CharacterSO selectedCharacter = null;
+    //private CharacterSO selectedCharacter = null;
     private BossSO selectedBoss = null;
 
     private int bossIndex;
@@ -59,11 +59,13 @@ public class BattleSystemBR : MonoBehaviour
 
     // Painel de início de batalha:
     public Text playerName;
+    public Text playerLevel;
     public Text bossName;
     public Text bossLevel;
     public Text battleNumber;
     public GameObject startPanel;
     public Button acceptButton;
+    public IntVariable level;
 
     // Particles:
     public GameObject hitParticle;
@@ -117,18 +119,8 @@ public class BattleSystemBR : MonoBehaviour
 
         int heroIndex = 0;
 
-        foreach (CharacterSO c in character)
-        {
-            if (c.selected)
-            {
-                selectedCharacter = c;
-                break;
-            }
-            heroIndex++;
-        }
-
         playerUnit.SetAnimator(heroesAnimators[heroIndex]);
-        playerUnit.SetCharacter(selectedCharacter);
+        playerUnit.SetCharacter(character);
 
         enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<UnitBoss>();
@@ -156,9 +148,10 @@ public class BattleSystemBR : MonoBehaviour
         // Start panel:
         StartCoroutine(BossDescription());
         playerName.text = playerUnit.unitName;
+        playerLevel.text = "Level " + (level.Value + 1);
         bossName.text = enemyUnit.unitName;
-        bossLevel.text = "Lvl " + (enemyUnit.unitLevel + 1);
-        battleNumber.text = "BATTLE # " + (battleID + 1);
+        bossLevel.text = "Level " + (enemyUnit.unitLevel + 1);
+        battleNumber.text = "Battle # " + (battleID + 1);
         playerPic.sprite = playerUnit.profilePic;
         bossPic.sprite = enemyUnit.profilePic;
 
@@ -175,11 +168,11 @@ public class BattleSystemBR : MonoBehaviour
         bossBuffed = false;
 
         float abc = UnityEngine.Random.Range(0f, 1f); // Chance do boss se buffar
-        if (abc >= 0) // default deve ser 0.9
+        if (abc >= 0.6) // default deve ser 0.9
             bossBuffed = true;
 
-        if (bossBuffed == true) // Ativa a partícula do boss buffado
-            enemyUnit.activeBuffParticle = CreateParticle(bossBuffedParticle, enemyParticlesSpot.transform, destroySelf: false);
+        //if (bossBuffed == true) // Ativa a partícula do boss buffado
+        //    enemyUnit.activeBuffParticle = CreateParticle(bossBuffedParticle, enemyParticlesSpot.transform, destroySelf: false);
 
         dialogueText.text = "Choose your next move..";
         selectedSkills = 0;
@@ -253,13 +246,13 @@ public class BattleSystemBR : MonoBehaviour
 
     public void OnClickSkillButton(int index)
     {
-        if(selectedSkills < playerUnit.unitLevel && buttonSelected[index].enabled == false && selectedCharacter.skill[index].quantity > 0) // conferir se tem skill > 0
+        if(selectedSkills < playerUnit.unitLevel && buttonSelected[index].enabled == false && character.skill[index].quantity > 0) // conferir se tem skill > 0
         {
             skillButtons[index] = !skillButtons[index];
             buttonSelected[index].enabled = !buttonSelected[index].enabled;
             selectedSkills++;
 
-            selectedCharacter.skill[index].quantity--;
+            character.skill[index].quantity--;
             playerHUD.SetHeroHUD(playerUnit);
         }
         else if(buttonSelected[index].enabled == true)
@@ -267,8 +260,8 @@ public class BattleSystemBR : MonoBehaviour
             selectedSkills--;
             skillButtons[index] = !skillButtons[index];
             buttonSelected[index].enabled = !buttonSelected[index].enabled;
-            
-            selectedCharacter.skill[index].quantity++;
+
+            character.skill[index].quantity++;
             playerHUD.SetHeroHUD(playerUnit);
         }
     }
@@ -290,17 +283,17 @@ public class BattleSystemBR : MonoBehaviour
 
         if (skillButtons[0]) // skill 1 selecionada
         {
-            StartCoroutine(CastSkill(selectedCharacter.skill[0], 1));
+            StartCoroutine(CastSkill(character.skill[0], 1));
             a++;
         }
         if (skillButtons[1]) // skill 2 selecionada
         {
-            StartCoroutine(CastSkill(selectedCharacter.skill[1], 2));
+            StartCoroutine(CastSkill(character.skill[1], 2));
             a++;
         }
         if (skillButtons[2]) // skill 3 selecionada
         {
-            StartCoroutine(CastSkill(selectedCharacter.skill[2], 3));
+            StartCoroutine(CastSkill(character.skill[2], 3));
             a++;
         }
 
@@ -560,7 +553,7 @@ public class BattleSystemBR : MonoBehaviour
         lvlmanager.AddExpPoints(expPrize);
 
         coinPrizeText.text = "+" + coinPrize;
-        xpPrizeText.text = "+" + expPrize + " EXP";
+        xpPrizeText.text = "+" + expPrize + " exp";
 
         if (coins.Value < 10)
             acceptButton.interactable = false;

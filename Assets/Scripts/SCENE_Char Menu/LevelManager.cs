@@ -25,5 +25,6 @@ public class LevelManager : MonoBehaviour
             playerLevel.Value++;
             levelMaxExp = 10 + (playerLevel.Value + 1) * playerLevel.Value;
         }
+        
     }
 }

@@ -8,11 +8,12 @@ public class SkillPanel : MonoBehaviour
     public Text description;
     public SkillSO[] skill;
     public GameObject panel;
+    public Image skillImage;
 
     public void ShowSkillInfo(int index)
     {
         
-        name.text = "Name: " + skill[index].skillName;
+        name.text = skill[index].skillName;
         
         if (skill[index].isMagic)
             type.text = "Nature: Magical";
@@ -27,7 +28,7 @@ public class SkillPanel : MonoBehaviour
         {
             description.text = skill[index].descriptionPt1;
         }
-        
+        skillImage.sprite = skill[index].image;
         panel.SetActive(true);
     }
 

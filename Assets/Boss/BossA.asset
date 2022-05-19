@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BossA
   m_EditorClassIdentifier: 
   name: Uras d'Orb
-  level: 2
+  level: 0
   bossSprite: {fileID: 0}
   profilePic: {fileID: 21300000, guid: 760d97b11a3a70e40b143a4b2824559b, type: 3}
   hp: 10

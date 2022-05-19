@@ -64,7 +64,7 @@ public class PopUpManager : MonoBehaviour
             case 1: // Armor fragments
                 amount = UnityEngine.Random.Range(1, 11);
                 fragments.Value += amount;
-                text.text = amount + " fragment(s)";
+                text.text = amount + " gem(s)";
                 prizeSprite.sprite = fragments.Sprite;
                 break;
 

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class StarsUpgrade : MonoBehaviour
 {
-    public CharacterSO[] chars;
+    //public CharacterSO chars;
     public CharacterSO character;
     public IntVariable level;
     public IntVariable coins;
@@ -11,7 +11,7 @@ public class StarsUpgrade : MonoBehaviour
     // Painel de Upgrade de stars
     public GameObject upgradePanel;
     public Image[] stars;
-    public Color disabledStar;
+    //public Color disabledStar;
     public Text costText;
     public GameObject upgradeButtonGO;
 
@@ -25,11 +25,13 @@ public class StarsUpgrade : MonoBehaviour
     private int coins2 = 100;
     private int coins3 = 1000;
 
-    public void OnClick()
+    public void openPanel()
     {
         upgradeButtonGO.SetActive(false);
-        int heroIndex = 0;
+        //int heroIndex = 0;
 
+        /*
+        
         foreach (CharacterSO c in chars)
         {
             if (c.selected)
@@ -39,6 +41,9 @@ public class StarsUpgrade : MonoBehaviour
             }
             heroIndex++;
         }
+        */
+        Color disabledColor = new Color(0, 0, 0);
+        disabledColor.a = 0.3f;
 
         for (int i = 0; i < stars.Length; i++)
         {
@@ -48,7 +53,7 @@ public class StarsUpgrade : MonoBehaviour
             }
             else
             {
-                stars[i].color = disabledStar;
+                stars[i].color = disabledColor;
             }
         }
 

@@ -13,27 +13,46 @@ public class LevelUI : MonoBehaviour
     // Progress bar (Panel Info & Settings):
     public Image progressBar;
     public Text barText;
-    public Text barLevel;
+    //public Text barLevel;
     float percentage;
 
 
     void Start()
     {
         UpdateLevelUI();
-        levelMaxExp = 10 + (playerLevel.Value + 1) * playerLevel.Value;
-        SetProgressBar(xp.Value, levelMaxExp);
+        //levelMaxExp = 10 + (playerLevel.Value + 1) * playerLevel.Value;
+        SetProgressBar();
     }
 
     public void UpdateLevelUI()
     {
         levelText.text = "Level " + (playerLevel.Value + 1);
-        barLevel.text = "Level " + (playerLevel.Value + 1);
+        //barLevel.text = "Level " + (playerLevel.Value + 1);
+        SetProgressBar();
     }
 
-    public void SetProgressBar(int exp, int max)
+    public void SetProgressBar()
     {
-        percentage = (float)exp / max;
+        int curExp = xp.Value;
+        int max = 10 + (playerLevel.Value + 1) * playerLevel.Value;
+        percentage = (float)curExp / max;
         progressBar.fillAmount = percentage;
-        barText.text = (System.Math.Round((float)exp, 1)).ToString() + " / " + max.ToString();
+        barText.text = (System.Math.Round((float)curExp, 1)).ToString() + " / " + max.ToString();
+    }
+
+    public void AddExpPoints(int exp)
+    {
+        levelMaxExp = 10 + (playerLevel.Value + 1) * playerLevel.Value;
+        if ((xp.Value + exp) < levelMaxExp)
+        {
+            xp.Value += exp;
+        }
+        else
+        {
+            xp.Value = (xp.Value + exp) - levelMaxExp;
+            playerLevel.Value++;
+            levelMaxExp = 10 + (playerLevel.Value + 1) * playerLevel.Value;
+        }
+        UpdateLevelUI();
     }
 }

@@ -29,6 +29,8 @@ public class BattleHUD : MonoBehaviour
 
     private float percentage;
 
+    public IntVariable mageLevel;
+
 
     public void SetHeroHUD(UnitPlayer unit)
     {
@@ -54,6 +56,7 @@ public class BattleHUD : MonoBehaviour
         }
 
         nameText.text = unit.unitName;
+        levelText.text = "Level " + (mageLevel.Value + 1);
     }
 
     public void SetBossHUD(UnitBoss unit)

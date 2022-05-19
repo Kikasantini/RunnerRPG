@@ -9,6 +9,9 @@ public class ShowCorrectPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        characters[0].selected = true;
+        panels[0].SetActive(true);
+        /*
         // Se nenhum está selecionado, seleciona a Mage
         if (!characters[0].selected && !characters[1].selected && !characters[2].selected)
             characters[0].selected = true;
@@ -17,8 +20,8 @@ public class ShowCorrectPanel : MonoBehaviour
         if (characters[0].selected)
         {
             panels[0].SetActive(true);
-            panels[1].SetActive(false);
-            panels[2].SetActive(false);
+            //panels[1].SetActive(false);
+            //panels[2].SetActive(false);
         }
         else if (characters[1].selected)
         {
@@ -32,7 +35,7 @@ public class ShowCorrectPanel : MonoBehaviour
             panels[1].SetActive(false);
             panels[0].SetActive(false);
         }
-
+        */
     }
 
     // Update is called once per frame

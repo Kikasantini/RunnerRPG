@@ -9,10 +9,11 @@ public class CheatButtons : MonoBehaviour
     public IntVariable[] tokens;
     public IntVariable level;
     public IntVariable xp;
-    public CharacterSO[] characters;
+    public CharacterSO character;
     public BossSO[] boss;
 
-    public LevelManager lvlmanager;
+    public BoolVariable brokenMachine;
+    //public LevelManager lvlmanager;
 
     public void CoinsCheat()
     {
@@ -21,26 +22,24 @@ public class CheatButtons : MonoBehaviour
 
     public void FragCheat()
     {
-        fragments.Value += 1000;
+        fragments.Value += 100;
     }
 
     public void TokenCheat()
     {
-        tokens[0].Value += 100;
-        tokens[1].Value += 100;
-        tokens[2].Value += 100;
-        tokens[3].Value += 100;
-        tokens[4].Value += 100;
+        tokens[0].Value += 50;
+        tokens[1].Value += 50;
+        tokens[2].Value += 50;
+        tokens[3].Value += 50;
+        tokens[4].Value += 50;
     }
 
     public void SkillCheat()
     {
-        for (int i = 0; i < 3; i++)
+
+        for (int j = 0; j < 3; j++)
         {
-            for (int j = 0; j < 3; j++)
-            {
-                characters[i].skill[j].quantity += 10;
-            }
+            character.skill[j].quantity += 10;
         }
     }
 
@@ -58,6 +57,7 @@ public class CheatButtons : MonoBehaviour
         ResetLevelAndStars();
         ResetAllGear();
         ResetBossLevel();
+        brokenMachine.Value = false;
     }
 
     public void ResetCoins()
@@ -81,12 +81,9 @@ public class CheatButtons : MonoBehaviour
 
     public void ResetSkills()
     {
-        for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
         {
-            for (int j = 0; j < 3; j++)
-            {
-                characters[i].skill[j].quantity = 0;
-            }
+            character.skill[j].quantity = 0;
         }
     }
 
@@ -99,23 +96,18 @@ public class CheatButtons : MonoBehaviour
     {
         level.Value = 0;
         xp.Value = 0;
-        characters[0].stars = 0;
-        characters[1].stars = 0;
-        characters[2].stars = 0;
+        character.stars = 0;
     }
 
     public void ResetAllGear()
     {
-        for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 5; j++)
         {
-            for (int j = 0; j < 5; j++)
-            {
-                characters[i].equip[j].level = 0;
-                characters[i].equip[j].totalHP = 0;
-                characters[i].equip[j].totalAttack = 0;
-                characters[i].equip[j].totalMDef = 0;
-                characters[i].equip[j].totalPDef = 0;
-            }
+            character.equip[j].level = 0;
+            character.equip[j].totalHP = 0;
+            character.equip[j].totalAttack = 0;
+            character.equip[j].totalMDef = 0;
+            character.equip[j].totalPDef = 0;
         }
     }
 }

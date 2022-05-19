@@ -16,7 +16,7 @@ MonoBehaviour:
   descriptionPt1: Deals
   descriptionPt2: base damage to the opponent.
   image: {fileID: 21300000, guid: b03eb7ad2bec616489b25355be049e7e, type: 3}
-  quantity: 10
+  quantity: 6
   effects: []
   dmgTarget: 1
   damage: 10
