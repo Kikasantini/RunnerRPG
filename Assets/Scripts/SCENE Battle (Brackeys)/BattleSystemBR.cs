@@ -52,7 +52,8 @@ public class BattleSystemBR : MonoBehaviour
 
     public AnimatorOverrideController[] heroesAnimators;
     
-    private int battleID = 0;
+    //private int battleID = 0;
+    public IntVariable battleID;
 
     private float bossBuff = 0.5f; // % de aumento do ataque do boss
     private bool bossBuffed;
@@ -151,7 +152,7 @@ public class BattleSystemBR : MonoBehaviour
         playerLevel.text = "Level " + (level.Value + 1);
         bossName.text = enemyUnit.unitName;
         bossLevel.text = "Level " + (enemyUnit.unitLevel + 1);
-        battleNumber.text = "Battle # " + (battleID + 1);
+        battleNumber.text = "Battle # " + (battleID.Value + 1);
         playerPic.sprite = playerUnit.profilePic;
         bossPic.sprite = enemyUnit.profilePic;
 
@@ -326,7 +327,7 @@ public class BattleSystemBR : MonoBehaviour
             youWonText.text = "YOU WON!";
             GivePrize();
 
-            battleID++;
+            battleID.Value++;
             boss[bossIndex].level++;
             boss[bossIndex].next = false;
 
@@ -528,25 +529,25 @@ public class BattleSystemBR : MonoBehaviour
         ripImage.SetActive(false);
         coinImage.SetActive(true);
 
-        if (battleID < 5)
+        if (battleID.Value < 5)
         {
             coinPrize = 5;
             expPrize = 1;
         }
-        else if(battleID < 10)
+        else if(battleID.Value < 10)
         {
             coinPrize = 10;
             expPrize = 2;
         }
-        else if(battleID < 20)
+        else if(battleID.Value < 20)
         {
             coinPrize = 50;
             expPrize = 2;
         }
         else
         {
-            coinPrize = (30 + battleID / 10);
-            expPrize = (1 + battleID / 10);
+            coinPrize = (30 + battleID.Value / 10);
+            expPrize = (1 + battleID.Value / 10);
         }
 
         coins.Value += coinPrize;

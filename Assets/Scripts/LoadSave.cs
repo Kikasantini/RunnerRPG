@@ -23,6 +23,9 @@ public class LoadSave : MonoBehaviour
     public EquipmentSO shoes;
     public EquipmentSO weapon;
     public BoolVariable brokenMachine;
+    public IntVariable battleID;
+    public BossSO bossA;
+    public BossSO bossB;
 
     private string currentPath;
 
@@ -134,6 +137,18 @@ public class LoadSave : MonoBehaviour
             else
                 brokenMachine.Value = false;
 
+            line = reader.ReadLine();
+            lineElements = line.Split();
+            battleID.Value = Int32.Parse(lineElements[0]);
+
+            line = reader.ReadLine();
+            lineElements = line.Split();
+            bossA.level = Int32.Parse(lineElements[0]);
+
+            line = reader.ReadLine();
+            lineElements = line.Split();
+            bossB.level = Int32.Parse(lineElements[0]);
+
             //Debug.Log("leu tudo");            
         }
         catch (Exception)
@@ -170,6 +185,9 @@ public class LoadSave : MonoBehaviour
             writer.WriteLine(shoes.level + " level shoes");
             writer.WriteLine(weapon.level + " level weapon");
             writer.WriteLine(brokenMachine.Value.ToString() + " brokenMachine status");
+            writer.WriteLine(battleID.Value.ToString() + " battle ID");
+            writer.WriteLine(bossA.level + " boss A level");
+            writer.WriteLine(bossB.level + " boss B level");
 
             //Debug.Log("escreveu tudo");
         }
@@ -205,6 +223,9 @@ public class LoadSave : MonoBehaviour
             writer.WriteLine("0 level shoes");
             writer.WriteLine("0 level weapon");
             writer.WriteLine("False brokenMachine status");
+            writer.WriteLine("0 battle ID");
+            writer.WriteLine("0 boss A level");
+            writer.WriteLine("0 boss B level");
 
             //Debug.Log("escreveu tudo");
         }

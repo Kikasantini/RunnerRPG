@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Kika
   charImage: {fileID: -6657997426889672124, guid: cc448a85eb2f8f74585cee79387eae13, type: 3}
-  profilePic: {fileID: 21300000, guid: 4c83b9f204bb3db4d93f8eedc7eba322, type: 3}
+  profilePic: {fileID: 21300000, guid: a250b7b5ac3541048a68d0f3cfa85b83, type: 3}
   selected: 1
-  stars: 1
+  stars: 0
   health: 20
   attack: 5
   magDefense: 10
   phyDefense: 8
-  totalHealth: 80
+  totalHealth: 20
   totalAttack: 5
   totalMDef: 10
-  totalPDef: 80
+  totalPDef: 8
   skill:
   - {fileID: 11400000, guid: e55dba10ef2246a4886cb334790196a5, type: 2}
   - {fileID: 11400000, guid: 79f3e159babb74f4a982e5eae4abc20e, type: 2}

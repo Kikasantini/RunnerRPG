@@ -1534,7 +1534,7 @@ RectTransform:
   - {fileID: 1442985276}
   - {fileID: 816757239}
   m_Father: {fileID: 305245721}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1612,7 +1612,7 @@ RectTransform:
   - {fileID: 1902184107}
   - {fileID: 2114768553}
   m_Father: {fileID: 305245721}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1835,10 +1835,10 @@ RectTransform:
   - {fileID: 1354204787}
   - {fileID: 546212345}
   - {fileID: 1744398971}
-  - {fileID: 1851566658}
   - {fileID: 296711506}
   - {fileID: 290028220}
   - {fileID: 808108096}
+  - {fileID: 1851566658}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4147,7 +4147,9 @@ MonoBehaviour:
   shoes: {fileID: 11400000, guid: 26d95a4a5ddddda4588e77c440ff7650, type: 2}
   weapon: {fileID: 11400000, guid: e686aee9f64de9c48b8d21ffa026ae00, type: 2}
   brokenMachine: {fileID: 11400000, guid: 50283b1328f636d46a0715057cdb129d, type: 2}
-  testeText: {fileID: 872674479}
+  battleID: {fileID: 11400000, guid: a3449dbcf9652cb4bb3382a927b3c812, type: 2}
+  bossA: {fileID: 11400000, guid: 2ed3cb3bc3054ec47aa3d046468d1324, type: 2}
+  bossB: {fileID: 11400000, guid: 7960fb90624418c48b43bf0641305dd2, type: 2}
 --- !u!224 &758492175
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4328,7 +4330,7 @@ RectTransform:
   - {fileID: 1062373652}
   - {fileID: 1427426861}
   m_Father: {fileID: 305245721}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7343,7 +7345,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 285e092b1a4c2a74b98176951f21aea6, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -9878,6 +9880,7 @@ MonoBehaviour:
   - {fileID: 22100000, guid: d6dfa5a7e620b5c43a0f5621246def36, type: 2}
   - {fileID: 22100000, guid: 0948920f14ad39f44bded50b24181072, type: 2}
   - {fileID: 22100000, guid: a3c2eb27be4c4d74e831f6db09ca49b3, type: 2}
+  battleID: {fileID: 11400000, guid: a3449dbcf9652cb4bb3382a927b3c812, type: 2}
   playerName: {fileID: 1770577607}
   playerLevel: {fileID: 1753408917}
   bossName: {fileID: 714677942}
@@ -12273,7 +12276,7 @@ RectTransform:
   - {fileID: 710327641}
   - {fileID: 1742018556}
   m_Father: {fileID: 305245721}
-  m_RootOrder: 8
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

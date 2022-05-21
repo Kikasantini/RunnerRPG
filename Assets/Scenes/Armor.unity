@@ -7713,7 +7713,9 @@ MonoBehaviour:
   shoes: {fileID: 11400000, guid: 26d95a4a5ddddda4588e77c440ff7650, type: 2}
   weapon: {fileID: 11400000, guid: e686aee9f64de9c48b8d21ffa026ae00, type: 2}
   brokenMachine: {fileID: 11400000, guid: 50283b1328f636d46a0715057cdb129d, type: 2}
-  testeText: {fileID: 1769182873}
+  battleID: {fileID: 11400000, guid: a3449dbcf9652cb4bb3382a927b3c812, type: 2}
+  bossA: {fileID: 11400000, guid: 2ed3cb3bc3054ec47aa3d046468d1324, type: 2}
+  bossB: {fileID: 11400000, guid: 7960fb90624418c48b43bf0641305dd2, type: 2}
 --- !u!4 &1536381628
 Transform:
   m_ObjectHideFlags: 0

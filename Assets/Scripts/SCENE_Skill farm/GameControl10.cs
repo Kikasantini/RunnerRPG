@@ -10,9 +10,6 @@ public class GameControl10 : MonoBehaviour
     public static event Action HandlePulled = delegate { };
 
     [SerializeField]
-    private Text prizeText;
-
-    [SerializeField]
     private Row10[] rows;
 
     private bool resultsChecked = false;
@@ -22,37 +19,24 @@ public class GameControl10 : MonoBehaviour
     private int[] quantidades = new int[10]; // quanto de cada item deu no spin
 
     public IntVariable coins;
-    public SkillSO[] skill; // Lista das 9 skills
-    public Image skillSprite; // Imagem da skill que ganhou
+    public SkillSO[] skill; // Lista das 3 skills
 
     public Text coinAnim; // Dinheiro gastando e ganhando (animação)
     
-    public GameObject yourPRIZEText;
-    public GameObject giftLid;
-    public GameObject skillPrize;
-    public GameObject coinPrize;
-    public GameObject skillInfoPanel;
+    
+    public Text coinAnimText;
+    public Text plusText;
+    public Text lessText;
 
     private Vector2 posicaoInicial = new Vector2(0, 0);
     private Vector2 posicaoFinal = new Vector2(0, 0);
 
-    // Skill info panel
-    public Text text;
-    public Text type;
-    public Text description;
-    private int skillIndex;
-    private bool canShowSkillInfo = false;
-    //public Image charPicture;
-    //public Sprite[] charSprite;
-
     public Button spinButton;
-    //public Button goBackButton;
-    public GameObject pannelOverMenu; // Wont allow to change scene if spinning
+    public GameObject pannelOverMenu; // Won't allow to change scene if spinning
 
     public IntVariable gems;
     public IntVariable[] equipTokens;
 
-    //private bool brokenMachine = false;
     public BoolVariable brokenMachine;
     private readonly int fixingCost = 5;
     public GameObject brokenMachinePanel;
@@ -66,41 +50,67 @@ public class GameControl10 : MonoBehaviour
     public Text m2prize;
     public Image m2sprite;
 
-    private int spinPrice = 10;
+    private readonly int spinPrice = 10;
+
+    // Replacing working and broken machine
+    public GameObject row1GO;
+    public GameObject row2GO;
+    public GameObject row3GO;
+    public GameObject workingMachineGO;
+    public GameObject brokenMachineGO;
+
+    // Jackpot Panel
+    public GameObject jackpotPanel;
+    public Text qtSkill;
+    public Text qtCoin;
+    public Text qtGem;
+    public Image randSkillSprite;
+
+    private Vector2 posText = new Vector2(0, 0);
+    private Vector2 posTextInit = new Vector2(0, 0);
+    private Vector2 scaleText = new Vector2(0, 0);
+    private Vector2 scaleTextInit = new Vector2(1, 1);
+
 
     private void Start()
     {
+        //StartCoroutine(CoinUpDown());
+            
+
+        ShowCorrectMachine(brokenMachine.Value);
+        jackpotPanel.SetActive(false);
+
         rows[0].rowStopped = true;
         rows[1].rowStopped = true;
         rows[2].rowStopped = true;
 
-        // Machine 2 :
-        m2prize.text = "";
-        m2sprite.enabled = false;
-        //m2sprite.sprite = coins.Sprite;
-        m2status.text = "";
+        MachineShowPrizeeInfo("Welcome", false, coins.Sprite, "");
 
-
-        priceFixing.text = fixingCost.ToString();
+        priceFixing.text = "$ " + fixingCost.ToString();
 
         if (brokenMachine.Value)
+        {
             brokenMachinePanel.SetActive(true);
+            m2status.text = "";
+        }
+            
 
-        skillSprite.enabled = false;
-        posicaoInicial = skillPrize.transform.position;
+        //skillSprite.enabled = false;
+        //posicaoInicial = skillPrize.transform.position;
     }
 
     void Update()
     {
+            // If any row is still moving :
             if (!rows[0].rowStopped || !rows[1].rowStopped || !rows[2].rowStopped)
             {
-                prizeText.enabled = false;
                 resultsChecked = false;
             }
+
+            // If all rows are stopped & results aren't checked yet & you can give the prize
             if (rows[0].rowStopped && rows[1].rowStopped && rows[2].rowStopped && !resultsChecked && podePremiar == true)
             {
                 spinButton.interactable = true;
-                //goBackButton.interactable = true;
                 pannelOverMenu.SetActive(false);
                 CheckResults();
             }
@@ -108,36 +118,21 @@ public class GameControl10 : MonoBehaviour
 
     public void ClickSpinButton()
     {
+        // If all rows are stopped :
         if (rows[0].rowStopped && rows[1].rowStopped && rows[2].rowStopped)
         {
+            // If you have enough coins :
             if (coins.Value >= spinPrice)
             {
-                // Machine 2 :
-                m2prize.text = "";
-                m2sprite.enabled = false;
-                //m2sprite.sprite = coins.Sprite;
-                m2status.text = "";
-
-                canShowSkillInfo = false;
-                prizeText.enabled = false;
-
-                skillSprite.enabled = false;
-                coinPrize.SetActive(false);
+                MachineShowPrizeeInfo("", false, coins.Sprite, "");
 
                 podePremiar = true;
                 spinButton.interactable = false;
-                //goBackButton.interactable = false;
                 pannelOverMenu.SetActive(true);
                 HandlePulled();
                 CoinAnimation(-spinPrice);
                 coins.Value -= spinPrice;
-
-                yourPRIZEText.SetActive(true);
-
-                // Prêmio revelado volta ao tamanho e posição iniciais
-                skillPrize.transform.DOScale(1, 0);
-                skillPrize.transform.position = posicaoInicial;
-                coinPrize.transform.position = posicaoInicial;
+                jackpotPanel.SetActive(false);
             }
             else
             {
@@ -148,133 +143,67 @@ public class GameControl10 : MonoBehaviour
 
     private void RewardPlayer (int numberOfRewards, int rewardIndex)
     {
-        StartCoroutine(OpenGift());
-
-
         if (numberOfRewards == 3)
             numberOfRewards = 10;
 
-        skillIndex = rewardIndex;
+        int quantity = numberOfRewards;
+
 
         switch (rewardIndex)
         {
-            case 0: // 10 ou 50 coins                
-                coins.Value += (numberOfRewards * 10);
-                StartCoroutine(CoinPrize(numberOfRewards * 10));
+            case 0: // Coins
+                quantity = numberOfRewards * 10;
+                coins.Value += quantity;
+                CoinAnimation(quantity);
+                MachineShowPrizeeInfo("Coins, coins and more coins", true, coins.Sprite, quantity + " coins");
                 break;
-            case 1: // Skill 1 (Mage)
-                skill[0].quantity += numberOfRewards;
 
-                // Machine 2 :
-                m2prize.text = numberOfRewards + " " + skill[0].skillName;
-                m2sprite.enabled = true;
-                m2sprite.sprite = skill[0].image;
-                m2status.text = "Congratulations, you got a skill match";
-
-                //ShowPrize(skill[0].skillName, numberOfRewards, skill[0].image);
+            case 1: // Skill 1 : Blaze
+                skill[0].quantity += quantity;
+                MachineShowPrizeeInfo("Congratulations, you got a skill match", true, skill[0].image, quantity + " " + skill[0].skillName);
                 break;
-            case 2: // Skill 1 (Warrior)
-                    //skill[1].quantity += numberOfRewards;
-                    //ShowPrize(skill[1].skillName, numberOfRewards, skill[1].image);
-                    //break;
 
-                // Gems
-                gems.Value += (numberOfRewards * 5);
-                //ShowPrize("Gems", numberOfRewards * 5, gems.Sprite);
-
-                // Machine 2 :
-                m2prize.text = (numberOfRewards * 5) + " Gems";
-                m2sprite.enabled = true;
-                m2sprite.sprite = gems.Sprite;
-                m2status.text = "Congratulations, you got Gems match";
-
-
+            case 2: // Gems
+                quantity = numberOfRewards * 5;
+                gems.Value += quantity;
+                MachineShowPrizeeInfo("Congratulations, you got Gems", true, gems.Sprite, quantity + " Gems");
                 break;
-            case 3: // Skill 1 (Priest)
-                // skill[2].quantity += numberOfRewards;
-                // ShowPrize(skill[2].skillName, numberOfRewards, skill[2].image);
-                // break;
 
-                // Token chest
+            case 3: // Token chest
                 System.Random rand = new System.Random();
                 int tokenIndex = rand.Next(0, 5);
-                numberOfRewards = numberOfRewards + rand.Next(0, 4) + rand.Next(0, 4);
-                Debug.Log("Primeiro rand = " + tokenIndex + " Number of rewards = " + numberOfRewards); 
-
-                //ShowPrize(equipTokens[tokenIndex].nickname + " Tokens", numberOfRewards, equipTokens[tokenIndex].Sprite);
-                equipTokens[tokenIndex].Value += numberOfRewards;
-
-                // Machine 2 :
-                m2prize.text = numberOfRewards + " " + equipTokens[tokenIndex].nickname + " tokens";
-                m2sprite.enabled = true;
-                m2sprite.sprite = equipTokens[tokenIndex].Sprite;
-                m2status.text = "Congratulations, you got a random Token bundle";
-
-
+                quantity = numberOfRewards + rand.Next(0, 4) + rand.Next(0, 4);
+                equipTokens[tokenIndex].Value += quantity;
+                MachineShowPrizeeInfo("Cool, you got a random Token bundle", true, equipTokens[tokenIndex].Sprite, quantity + " " + equipTokens[tokenIndex].nickname + " tokens");
                 break;
-            case 4: // Skill 2 (Mage)
-                skill[3].quantity += numberOfRewards;
-                //ShowPrize(skill[3].skillName, numberOfRewards, skill[3].image);
 
-                // Machine 2 :
-                m2prize.text = numberOfRewards + " " + skill[3].skillName;
-                m2sprite.enabled = true;
-                m2sprite.sprite = skill[3].image;
-                m2status.text = "Congratulations, you got a skill match";
-
+            case 4: // Skill 2 : Absorb Energy
+                skill[1].quantity += quantity;
+                MachineShowPrizeeInfo("Congratulations, you got a skill match", true, skill[1].image, quantity + " " + skill[1].skillName);
                 break;
-            case 5: // Skill 2 (Warrior)
-                    //skill[4].quantity += numberOfRewards;
-                    //ShowPrize(skill[4].skillName, numberOfRewards, skill[4].image);
 
-                // Pink potion
-
-                // Machine 2 :
-                m2prize.text = "X pink pot";
-                m2sprite.enabled = true;
-                m2sprite.sprite = potB.Sprite;
-                m2status.text = "Congratulations, you got potions";
-
+            case 5: // Pink potion
+                MachineShowPrizeeInfo("Congratulations, you got potions", true, potB.Sprite, "X pink pot");
                 break;
-            case 6: // Skill 2 (Priest)
-                //skill[5].quantity += numberOfRewards;
-                //ShowPrize(skill[5].skillName, numberOfRewards, skill[5].image);
-                
-                // Green potion
-                // Machine 2 :
-                m2prize.text = "X green pot";
-                m2sprite.enabled = true;
-                m2sprite.sprite = potA.Sprite;
-                m2status.text = "Congratulations, you got potions";
 
+            case 6: // Green potion
+                MachineShowPrizeeInfo("Congratulations, you got potions", true, potA.Sprite, "X green pot");
                 break;
-            case 7: // Skill 3 (Mage)
-                skill[6].quantity += numberOfRewards;
-                //ShowPrize(skill[6].skillName, numberOfRewards, skill[6].image);
 
-                // Machine 2 :
-                m2prize.text = numberOfRewards + " " + skill[6].skillName;
-                m2sprite.enabled = true;
-                m2sprite.sprite = skill[6].image;
-                m2status.text = "Congratulations, you got a skill match";
+            case 7: // Skill 3 : Stone Skin
+                skill[2].quantity += quantity;
+                MachineShowPrizeeInfo("Congratulations, you got a skill match", true, skill[2].image, quantity + " " + skill[2].skillName);
+                break;
 
+            case 8: // JACKPOT
                 break;
-            case 8: // Skill 3 (Warrior)
-                //skill[7].quantity += numberOfRewards;
-                //ShowPrize(skill[7].skillName, numberOfRewards, skill[7].image);
-
-                // JACKPOT
+            
+            case 9:
                 break;
-            /*
-            case 9: // Skill 3 (Priest)
-                skill[8].quantity += numberOfRewards;
-                ShowPrize(skill[8].skillName, numberOfRewards, skill[8].image);
-                break;
-            */
         }
     }
 
-
+    /*
     private void ShowPrize(String name, int number, Sprite sprite)
     {
         skillSprite.enabled = true;
@@ -288,7 +217,9 @@ public class GameControl10 : MonoBehaviour
         prizeText.enabled = true;
         prizeText.DOFade(1, 2);  
     }
+    */
 
+    /*
     IEnumerator AnimatePrize(GameObject skillPrize)
     {
         posicaoFinal = skillPrize.transform.position;
@@ -301,13 +232,15 @@ public class GameControl10 : MonoBehaviour
         canShowSkillInfo = true;
         yield return new WaitForSeconds(1f);
     }
+    */
 
+    /*
     IEnumerator CoinPrize(int quantity)
     {
-        coinPrize.SetActive(true);
-        yourPRIZEText.SetActive(false);
+        //coinPrize.SetActive(true);
+        //yourPRIZEText.SetActive(false);
         CoinAnimation(quantity);
-
+        
         posicaoFinal = coinPrize.transform.position;
 
         for (int i = 0; i < 20; i++)
@@ -321,64 +254,39 @@ public class GameControl10 : MonoBehaviour
         prizeText.text = quantity + " coins";
         prizeText.enabled = true;
         prizeText.DOFade(1, 2);
+        
     }
+    */
 
     private void CheckResults()
     {
-        // Put zero in all quantities
+        // Putting 0 in all quantities
         for (int i = 0; i < 10; i++)
             quantidades[i] = 0;
 
+        // aumenta a quantidade do item que parou (nas 3 rows)
         for (int i = 0; i < 3; i++)
-        { // aumenta a quantidade do item que parou (nas 3 rows)
             quantidades[(int)rows[i].stoppedSlot]++;
-            //Debug.Log("quantidades " + (int)rows[i].stoppedSlot + " = " + quantidades[(int)rows[i].stoppedSlot]);
-        }
 
-
-
-
-        // Teste máquina quebrada:
-        if (quantidades[9] == 1 && !brokenMachine.Value) // quantidades[9] == 3
+        // Teste máquina quebrada: (quantidades[9] == 3)
+        if ((quantidades[9] == 2 || quantidades[9] == 3) && !brokenMachine.Value)
         {
-            // Machine 2 :
-            m2prize.text = "";
-            m2sprite.enabled = false;
-            //m2sprite.sprite = ;
-            m2status.text = "You broke the machine";
-            
-            
+            MachineShowPrizeeInfo("You broke the machine", false, coins.Sprite, "");     
             BreakMachine();
         }
-        else if(quantidades[9] == 2)
+        else if (quantidades[8] == 2 || quantidades[8] == 3) // quantidades[8] == 3
         {
-            Debug.Log("Teste BAD MATCH, you dont get anything");
-            m2status.text = "Teste BAD MATCH = you get nothing";
-        }
-        else if (quantidades[8] != 0) // quantidades[8] == 3
-        {
-            // Machine 2 :
-            m2prize.text = "";
-            m2sprite.enabled = false;
-            //m2sprite.sprite = ;
-            m2status.text = "JACKPOT";
-            // Give many prizes randomly
-            // Activate panel to show prizes
+            ItIsJackpot();
         }
         else
         {
             if(!resultsChecked && !brokenMachine.Value)
                 CheckResultsPrize();
         }
-
-
         resultsChecked = true;
-
-
-
-
     }
 
+    /*
     IEnumerator OpenGift()
     {
         Vector2 posGift = new Vector2();
@@ -399,6 +307,7 @@ public class GameControl10 : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
     }
+    */
 
     void CoinAnimation(int value)
     {
@@ -430,6 +339,7 @@ public class GameControl10 : MonoBehaviour
         coinAnim.transform.DOMoveY(posInicial.y, 0.1f, false); // (float to, float duration, bool snapping)
                                                                    // coinAnim.transform.position = posInicial;
     }
+
     /*
     public void ShowSkillInfo()
     {
@@ -466,7 +376,8 @@ public class GameControl10 : MonoBehaviour
     private void BreakMachine()
     {
         brokenMachine.Value = true;
-        brokenMachinePanel.SetActive(true);
+        jackpotPanel.SetActive(false);
+        ShowCorrectMachine(brokenMachine.Value);
     }
 
     public void FixMachine()
@@ -476,27 +387,17 @@ public class GameControl10 : MonoBehaviour
             coins.Value -= fixingCost;
             CoinAnimation(-fixingCost);
             brokenMachine.Value = false;
-            brokenMachinePanel.SetActive(false);
+            ShowCorrectMachine(brokenMachine.Value);
         }
         else
         {
-            //Debug.Log("No money to fix");
             m2status.text = "No money to fix";
         }
     }
 
 
     private void CheckResultsPrize()
-    {
-        //Debug.Log("primeira verificação");
-        /*
-        if (quantidades[9] == 3)
-        {
-            Debug.Log("3 bombas. Machine is broken");
-            return;
-        }
-        */
-
+    { 
         for (int j = 0; j < 10; j++)
         {
             if ((quantidades[j] == 3 || quantidades[j] == 2) && achouPremio == false)
@@ -508,9 +409,6 @@ public class GameControl10 : MonoBehaviour
 
         if (achouPremio == false)
         {
-            //StartCoroutine(OpenGift());
-            
-
             int coinsToGive;
             System.Random random = new System.Random();
             if(random.Next(0, 10) <= 7)
@@ -531,11 +429,137 @@ public class GameControl10 : MonoBehaviour
             m2status.text = "No match";
 
             coins.Value += coinsToGive;
-            StartCoroutine(CoinPrize(coinsToGive));
+            CoinAnimation(coinsToGive);
             achouPremio = false;
         }
         else
             achouPremio = false;
     }
 
+    private void ShowCorrectMachine(bool value) // true = broken; false = working
+    {
+        row1GO.SetActive(!value);
+        row2GO.SetActive(!value);
+        row3GO.SetActive(!value);
+        workingMachineGO.SetActive(!value);
+
+        brokenMachineGO.SetActive(value);
+        brokenMachinePanel.SetActive(value);
+    }
+
+    private void ItIsJackpot()
+    {
+
+        // Give prizes
+        System.Random rand = new System.Random();
+        
+        int randCoins = rand.Next(150, 250);
+        coins.Value += randCoins;
+        CoinAnimation(randCoins);
+        int randGems = rand.Next(150, 200);
+        gems.Value += randGems;
+        int randIndex = rand.Next(0, 3);
+        skill[randIndex].quantity += 10;
+
+        Debug.Log("Jackpot - coins: " + randCoins);
+        Debug.Log("Jackpot - gems: " + randGems);
+        Debug.Log("Jackpot - skill: 10 " + skill[randIndex].skillName);
+
+        // Setting up the panel
+        qtSkill.text = "10";
+        qtCoin.text = randCoins.ToString();
+        qtGem.text = randGems.ToString();
+        randSkillSprite.sprite = skill[randIndex].image;
+
+
+
+    // Machine 2 :
+    m2prize.text = "";
+        m2sprite.enabled = false;
+        //m2sprite.sprite = ;
+        m2status.text = "JACKPOT";
+        jackpotPanel.SetActive(true);
+        // Give many prizes randomly
+        // Activate panel to show prizes
+    }
+
+    private void MachineShowPrizeeInfo(string status, bool visible, Sprite img, string text)
+    {
+        m2status.text = status;
+
+        m2sprite.enabled = visible;
+        m2sprite.sprite = img;
+
+        m2prize.text = text;
+    }
+
+    IEnumerator CoinUpDown()
+    {
+        Color novaCor;
+        int alpha = 255;
+
+        posTextInit.x = coinAnimText.transform.position.x;
+        posTextInit.y = coinAnimText.transform.position.y;
+        posText = posTextInit;
+
+        scaleText = scaleTextInit;
+
+        for (int i = 0; i < 50; i++)
+        {
+            posText.y -= .02f;
+            coinAnimText.transform.position = posText;
+
+            scaleText.x -= 0.01f;
+            scaleText.y -= 0.01f;
+            coinAnimText.transform.localScale = scaleText;
+
+            // Alpha não ta funfando :
+            alpha -= 1;
+            novaCor = new Color(0, 0, 0, alpha);
+            coinAnimText.color = novaCor;
+
+            yield return new WaitForSeconds(.01f);
+        }
+
+        /*
+        yield return new WaitForSeconds(5f);
+
+        while (newColor.a > 0)
+        {
+            newColor.a -= 2;
+            Debug.Log(newColor.a);
+            coinAnimText.color = newColor;
+            yield return new WaitForSeconds(.01f);
+        }
+
+
+            // plusText
+            // lessText
+            yield return new WaitForSeconds(0.5f);
+
+        */
+    }
+
+
+
+        /*
+        posGift.x = giftLid.transform.position.x;
+        posGift.y = giftLid.transform.position.y;
+
+        for (int i = 0; i < 10; i++) // abre o presente
+        {
+            posGift.x -= 0.05f;
+            giftLid.transform.position = posGift;
+            yield return new WaitForSeconds(0.05f);
+        }
+        yield return new WaitForSeconds(1f);
+        for (int i = 0; i < 10; i++) // fecha o presente
+        {
+            posGift.x += 0.05f;
+            giftLid.transform.position = posGift;
+            yield return new WaitForSeconds(0.05f);
+        }
+        */
+     
+        
 }
