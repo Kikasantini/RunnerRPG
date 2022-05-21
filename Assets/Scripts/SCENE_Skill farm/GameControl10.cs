@@ -422,11 +422,7 @@ public class GameControl10 : MonoBehaviour
                 Debug.Log("random.Next > 7 ..... coins to give = " + coinsToGive);
             }
 
-            // Machine 2 :
-            m2prize.text = coinsToGive + " coins";
-            m2sprite.enabled = true;
-            m2sprite.sprite = coins.Sprite;
-            m2status.text = "No match";
+            MachineShowPrizeeInfo("No match", true, coins.Sprite, coinsToGive + " coins");
 
             coins.Value += coinsToGive;
             CoinAnimation(coinsToGive);
@@ -456,28 +452,25 @@ public class GameControl10 : MonoBehaviour
         int randCoins = rand.Next(150, 250);
         coins.Value += randCoins;
         CoinAnimation(randCoins);
+
         int randGems = rand.Next(150, 200);
         gems.Value += randGems;
+
         int randIndex = rand.Next(0, 3);
-        skill[randIndex].quantity += 10;
+        skill[randIndex].quantity += 15;
 
         Debug.Log("Jackpot - coins: " + randCoins);
         Debug.Log("Jackpot - gems: " + randGems);
-        Debug.Log("Jackpot - skill: 10 " + skill[randIndex].skillName);
+        Debug.Log("Jackpot - skill: 15 " + skill[randIndex].skillName);
 
         // Setting up the panel
-        qtSkill.text = "10";
+        qtSkill.text = "15";
         qtCoin.text = randCoins.ToString();
         qtGem.text = randGems.ToString();
         randSkillSprite.sprite = skill[randIndex].image;
 
 
-
-    // Machine 2 :
-    m2prize.text = "";
-        m2sprite.enabled = false;
-        //m2sprite.sprite = ;
-        m2status.text = "JACKPOT";
+        MachineShowPrizeeInfo("JACKPOT", false, coins.Sprite, "");
         jackpotPanel.SetActive(true);
         // Give many prizes randomly
         // Activate panel to show prizes
