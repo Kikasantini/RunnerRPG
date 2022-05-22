@@ -16,32 +16,19 @@ public class StarsUpgrade : MonoBehaviour
     public GameObject upgradeButtonGO;
 
     // Level mínimo para upar Stars: (começa no 0)
-    private int star1 = 4;
-    private int star2 = 9;
-    private int star3 = 14;
+    private int star1 = 1;
+    private int star2 = 4;
+    private int star3 = 9;
 
     // Custo dos upgrades em coin:
-    private int coins1 = 10;
+    private int coins1 = 50;
     private int coins2 = 100;
-    private int coins3 = 1000;
+    private int coins3 = 200;
 
     public void openPanel()
     {
         upgradeButtonGO.SetActive(false);
-        //int heroIndex = 0;
-
-        /*
-        
-        foreach (CharacterSO c in chars)
-        {
-            if (c.selected)
-            {
-                character = c;
-                break;
-            }
-            heroIndex++;
-        }
-        */
+      
         Color disabledColor = new Color(0, 0, 0);
         disabledColor.a = 0.3f;
 
@@ -56,7 +43,6 @@ public class StarsUpgrade : MonoBehaviour
                 stars[i].color = disabledColor;
             }
         }
-
 
         if (character.stars == 0)
         {

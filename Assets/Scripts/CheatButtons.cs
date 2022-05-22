@@ -13,11 +13,10 @@ public class CheatButtons : MonoBehaviour
     public BossSO[] boss;
 
     public BoolVariable brokenMachine;
-    //public LevelManager lvlmanager;
 
     public void CoinsCheat()
     {
-        coins.Value += 50;
+        coins.Value += 100;
     }
 
     public void FragCheat()
@@ -36,11 +35,9 @@ public class CheatButtons : MonoBehaviour
 
     public void SkillCheat()
     {
-
-        for (int j = 0; j < 3; j++)
-        {
-            character.skill[j].quantity += 10;
-        }
+        character.skill[0].quantity += 10;
+        character.skill[1].quantity += 10;
+        character.skill[2].quantity += 10;
     }
 
     public void LevelCheat()
@@ -81,10 +78,9 @@ public class CheatButtons : MonoBehaviour
 
     public void ResetSkills()
     {
-        for (int j = 0; j < 3; j++)
-        {
-            character.skill[j].quantity = 0;
-        }
+        character.skill[0].quantity = 0;
+        character.skill[1].quantity = 0;
+        character.skill[2].quantity = 0;
     }
 
     public void ResetBossLevel()

@@ -36,7 +36,6 @@ public class InventoryUpdater : MonoBehaviour
 
     public void UpdateInventory()
     {
-        Debug.Log("chamou o update inv");
         coinAmount.text = coin.Value.ToString();
         gemAmount.text = gem.Value.ToString();
         tChestAmount.text = tChest.Value.ToString();

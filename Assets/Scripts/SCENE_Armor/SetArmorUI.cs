@@ -18,16 +18,6 @@ public class SetArmorUI : MonoBehaviour
 
     public Image[] equipSprites;
 
-    // Elementos do Inventário
-    //public Text totalTokens;
-    //public Text totalFrags;
-    //public Text totalFrags2;
-    //public Text chestTokens;
-    //public Text glovesTokens;
-    //public Text pantsTokens;
-    //public Text shoesTokens;
-    //public Text weaponTokens;
-
     public IntVariable[] tokens;
     public IntVariable frags;
 
@@ -60,7 +50,7 @@ public class SetArmorUI : MonoBehaviour
         if (character == null)
             return;
 
-        SetInventory();
+        //SetInventory();
         SetArmorLevel();
         SetArmorSprites();
     }
@@ -91,20 +81,6 @@ public class SetArmorUI : MonoBehaviour
                 setinha[i].SetActive(false);
             }
         }
-
-
-    }
-
-    public void SetInventory()
-    {
-        //totalTokens.text = (tokens[0].Value + tokens[1].Value + tokens[2].Value + tokens[3].Value + tokens[4].Value).ToString();
-        //totalFrags.text = frags.Value.ToString();
-        //totalFrags2.text = frags.Value.ToString();
-        //chestTokens.text = tokens[0].Value.ToString();
-        //glovesTokens.text = tokens[1].Value.ToString();
-        //pantsTokens.text = tokens[2].Value.ToString();
-        //shoesTokens.text = tokens[3].Value.ToString();
-        //weaponTokens.text = tokens[4].Value.ToString();
     }
 
     public void SetUpgradePanel(int index)

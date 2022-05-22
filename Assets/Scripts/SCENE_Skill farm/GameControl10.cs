@@ -19,7 +19,7 @@ public class GameControl10 : MonoBehaviour
     private int[] quantidades = new int[10]; // quanto de cada item deu no spin
 
     public IntVariable coins;
-    public SkillSO[] skill; // Lista das 3 skills
+    public SkillSO[] skill; // List of 3 mage skills
 
     public Text coinAnim; // Dinheiro gastando e ganhando (animação)
     
@@ -38,7 +38,7 @@ public class GameControl10 : MonoBehaviour
     public IntVariable[] equipTokens;
 
     public BoolVariable brokenMachine;
-    private readonly int fixingCost = 5;
+    private readonly int fixingCost = 60;
     public GameObject brokenMachinePanel;
     public Text priceFixing;
 
@@ -50,12 +50,10 @@ public class GameControl10 : MonoBehaviour
     public Text m2prize;
     public Image m2sprite;
 
-    private readonly int spinPrice = 10;
+    private readonly int spinPrice = 8;
+    public Text spinPriceText;
 
     // Replacing working and broken machine
-    public GameObject row1GO;
-    public GameObject row2GO;
-    public GameObject row3GO;
     public GameObject workingMachineGO;
     public GameObject brokenMachineGO;
 
@@ -76,7 +74,6 @@ public class GameControl10 : MonoBehaviour
     {
         //StartCoroutine(CoinUpDown());
             
-
         ShowCorrectMachine(brokenMachine.Value);
         jackpotPanel.SetActive(false);
 
@@ -86,6 +83,7 @@ public class GameControl10 : MonoBehaviour
 
         MachineShowPrizeeInfo("Welcome", false, coins.Sprite, "");
 
+        spinPriceText.text = "$ " + spinPrice;
         priceFixing.text = "$ " + fixingCost.ToString();
 
         if (brokenMachine.Value)
@@ -93,10 +91,6 @@ public class GameControl10 : MonoBehaviour
             brokenMachinePanel.SetActive(true);
             m2status.text = "";
         }
-            
-
-        //skillSprite.enabled = false;
-        //posicaoInicial = skillPrize.transform.position;
     }
 
     void Update()
@@ -143,43 +137,45 @@ public class GameControl10 : MonoBehaviour
 
     private void RewardPlayer (int numberOfRewards, int rewardIndex)
     {
-        if (numberOfRewards == 3)
-            numberOfRewards = 10;
+        string message;
+        System.Random rand = new System.Random();
 
-        int quantity = numberOfRewards;
+        int quantity;
 
 
         switch (rewardIndex)
         {
             case 0: // Coins
-                quantity = numberOfRewards * 10;
+                quantity = numberOfRewards == 2 ? rand.Next(40, 60) : rand.Next(100, 120);
                 coins.Value += quantity;
                 CoinAnimation(quantity);
-                MachineShowPrizeeInfo("Coins, coins and more coins", true, coins.Sprite, quantity + " coins");
+                message = "Coins, coins and more coins";
+                MachineShowPrizeeInfo(message, true, coins.Sprite, quantity + " coins");
                 break;
 
             case 1: // Skill 1 : Blaze
+                quantity = numberOfRewards == 2 ? rand.Next(5, 13) : rand.Next(20, 41);
                 skill[0].quantity += quantity;
-                MachineShowPrizeeInfo("Congratulations, you got a skill match", true, skill[0].image, quantity + " " + skill[0].skillName);
+                MachineShowPrizeeInfo("Nicely done, you got a skill match", true, skill[0].image, quantity + " " + skill[0].skillName);
                 break;
 
             case 2: // Gems
-                quantity = numberOfRewards * 5;
+                quantity = numberOfRewards == 2 ? rand.Next(15, 26) : rand.Next(40, 61);
                 gems.Value += quantity;
                 MachineShowPrizeeInfo("Congratulations, you got Gems", true, gems.Sprite, quantity + " Gems");
                 break;
 
             case 3: // Token chest
-                System.Random rand = new System.Random();
                 int tokenIndex = rand.Next(0, 5);
-                quantity = numberOfRewards + rand.Next(0, 4) + rand.Next(0, 4);
+                quantity = numberOfRewards == 2 ? rand.Next(5, 16) : rand.Next(30, 41);
                 equipTokens[tokenIndex].Value += quantity;
                 MachineShowPrizeeInfo("Cool, you got a random Token bundle", true, equipTokens[tokenIndex].Sprite, quantity + " " + equipTokens[tokenIndex].nickname + " tokens");
                 break;
 
             case 4: // Skill 2 : Absorb Energy
+                quantity = numberOfRewards == 2 ? rand.Next(5, 13) : rand.Next(20, 41);
                 skill[1].quantity += quantity;
-                MachineShowPrizeeInfo("Congratulations, you got a skill match", true, skill[1].image, quantity + " " + skill[1].skillName);
+                MachineShowPrizeeInfo("Nicely done, you got a skill match", true, skill[1].image, quantity + " " + skill[1].skillName);
                 break;
 
             case 5: // Pink potion
@@ -191,8 +187,9 @@ public class GameControl10 : MonoBehaviour
                 break;
 
             case 7: // Skill 3 : Stone Skin
+                quantity = numberOfRewards == 2 ? rand.Next(5, 13) : rand.Next(20, 41);
                 skill[2].quantity += quantity;
-                MachineShowPrizeeInfo("Congratulations, you got a skill match", true, skill[2].image, quantity + " " + skill[2].skillName);
+                MachineShowPrizeeInfo("Nicely done, a skill match", true, skill[2].image, quantity + " " + skill[2].skillName);
                 break;
 
             case 8: // JACKPOT
@@ -269,12 +266,12 @@ public class GameControl10 : MonoBehaviour
             quantidades[(int)rows[i].stoppedSlot]++;
 
         // Teste máquina quebrada: (quantidades[9] == 3)
-        if ((quantidades[9] == 2 || quantidades[9] == 3) && !brokenMachine.Value)
+        if ((quantidades[9] == 3) && !brokenMachine.Value)
         {
             MachineShowPrizeeInfo("You broke the machine", false, coins.Sprite, "");     
             BreakMachine();
         }
-        else if (quantidades[8] == 2 || quantidades[8] == 3) // quantidades[8] == 3
+        else if (quantidades[8] == 3) // quantidades[8] == 3
         {
             ItIsJackpot();
         }
@@ -414,12 +411,10 @@ public class GameControl10 : MonoBehaviour
             if(random.Next(0, 10) <= 7)
             {
                 coinsToGive = random.Next(5, 11); // from 5 to 10
-                Debug.Log("random.Next <= 7 ..... coins to give = " + coinsToGive);
             }
             else
             {
                 coinsToGive = random.Next(11, 21); // from 11 to 20
-                Debug.Log("random.Next > 7 ..... coins to give = " + coinsToGive);
             }
 
             MachineShowPrizeeInfo("No match", true, coins.Sprite, coinsToGive + " coins");
@@ -434,9 +429,9 @@ public class GameControl10 : MonoBehaviour
 
     private void ShowCorrectMachine(bool value) // true = broken; false = working
     {
-        row1GO.SetActive(!value);
-        row2GO.SetActive(!value);
-        row3GO.SetActive(!value);
+        //row1GO.SetActive(!value);
+        //row2GO.SetActive(!value);
+        //row3GO.SetActive(!value);
         workingMachineGO.SetActive(!value);
 
         brokenMachineGO.SetActive(value);
