@@ -65,3 +65,9 @@ Assets/Plugins/FMOD/Cache/Editor/FMODStudioCache.asset
 *.popb
 *.popb.*
 Recordings/
+# Unity project local/generated files
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Rr]ecordings/
+*.tmp
+*.bak
