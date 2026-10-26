@@ -37,7 +37,7 @@ public class LoadSave : MonoBehaviour
 
         //Output the Game data path to the console
         Debug.Log("dataPath : " + currentPath);
-        currentPath += "\\save.file";
+        currentPath = Path.Combine(currentPath, "save.file");
 
         if (!File.Exists(currentPath))
         {
@@ -307,7 +307,7 @@ public class LoadSave : MonoBehaviour
 
         if (!File.Exists(currentPath))
         {
-            //testeText.text = "FILE j· existia : " + currentPath;
+            //testeText.text = "FILE j√° existia : " + currentPath;
             Debug.Log("criou arquivo");
             FileStream fs = File.Create(currentPath);
             fs.Close();
