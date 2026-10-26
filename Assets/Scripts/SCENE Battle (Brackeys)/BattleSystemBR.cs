@@ -42,7 +42,7 @@ public class BattleSystemBR : MonoBehaviour
 
     public BattleStateBR state;
 
-    // Botıes das skills:
+    // Bot√µes das skills:
     public Button button1;
     public Button button2;
     public Button button3;
@@ -58,7 +58,7 @@ public class BattleSystemBR : MonoBehaviour
     private float bossBuff = 0.5f; // % de aumento do ataque do boss
     private bool bossBuffed;
 
-    // Painel de inÌcio de batalha:
+    // Painel de in√≠cio de batalha:
     public Text playerName;
     public Text playerLevel;
     public Text bossName;
@@ -164,7 +164,6 @@ public class BattleSystemBR : MonoBehaviour
     void PlayerTurn()
     {
         playerUnit.StartTurn();
-        playerUnit.StartTurn();
         hideButtonsPanel.SetActive(false);
         bossBuffed = false;
 
@@ -172,7 +171,7 @@ public class BattleSystemBR : MonoBehaviour
         if (abc >= 0.6) // default deve ser 0.9
             bossBuffed = true;
 
-        //if (bossBuffed == true) // Ativa a partÌcula do boss buffado
+        //if (bossBuffed == true) // Ativa a part√≠cula do boss buffado
         //    enemyUnit.activeBuffParticle = CreateParticle(bossBuffedParticle, enemyParticlesSpot.transform, destroySelf: false);
 
         dialogueText.text = "Choose your next move..";
@@ -269,14 +268,14 @@ public class BattleSystemBR : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
-        playerUnit.Attack(); // animaÁ„o de ataque do player
+        playerUnit.Attack(); // anima√ß√£o de ataque do player
         yield return new WaitForSeconds(1f); // espera de 1 segundo
 
-        // PartÌcula de hit no boss:
+        // Part√≠cula de hit no boss:
         CreateParticle(hitParticle, enemyParticlesSpot.transform);
         yield return new WaitForSeconds(0.5f);
 
-        isDead = enemyUnit.TakeDamage(playerUnit.damage); // Dar o dano do hit b·sico no boss
+        isDead = enemyUnit.TakeDamage(playerUnit.damage); // Dar o dano do hit b√°sico no boss
         StartCoroutine(FlyingHPoints(playerUnit.damage, 0)); // Mostrar o dano na tela
         enemyHUD.SetEnemyBar(enemyUnit.currentHP, enemyUnit.maxHP);  // Atualizar a barra de HP do boss
 
@@ -363,12 +362,12 @@ public class BattleSystemBR : MonoBehaviour
 
 
 
-        // BOSS ANIMA«√O DE ATAQUE
+        // BOSS ANIMA√á√ÉO DE ATAQUE
         enemyUnit.Attack();
 
-        // PLAYER ANIMA«√O DE DANO
+        // PLAYER ANIMA√á√ÉO DE DANO
 
-        // PartÌcula de hit no player:
+        // Part√≠cula de hit no player:
         CreateParticle(hitParticle, playerUnit.transform);
 
         if (enemyUnit.activeBuffParticle != null) {
@@ -409,7 +408,7 @@ public class BattleSystemBR : MonoBehaviour
         }
     }
 
-    IEnumerator FlyingHPoints(int points, int index) // AnimaÁ„o de perder HP
+    IEnumerator FlyingHPoints(int points, int index) // Anima√ß√£o de perder HP
     {
         Vector2 originalScale = new Vector2();
         Vector2 newScale = new Vector2();
@@ -425,7 +424,7 @@ public class BattleSystemBR : MonoBehaviour
         pointsText[index].DOFade(1, 0.5f); // fade in
 
         /*
-        Debug.Log("------------- Antes da animaÁ„o:");
+        Debug.Log("------------- Antes da anima√ß√£o:");
         Debug.Log("originalScale = " + originalScale.x + " " + originalScale.y);
         Debug.Log("newScale = " + newScale.x + " " + newScale.y);
         Debug.Log("pointsText[index] = " + pointsText[index].transform.localScale.x + " " + pointsText[index].transform.localScale.y);
@@ -464,13 +463,13 @@ public class BattleSystemBR : MonoBehaviour
 
 
         pointsPosInit.y -= (jump * 100);
-        pointsText[index].transform.position = pointsPosInit; // texto volta ‡ posiÁ„o original
+        pointsText[index].transform.position = pointsPosInit; // texto volta √† posi√ß√£o original
         //pointsPosInit.y = originalScale.y;
 
         pointsText[index].transform.localScale = originalScale; // texto volta ao tamanho original
 
         /*
-        Debug.Log("------------- Depois da animaÁ„o:");
+        Debug.Log("------------- Depois da anima√ß√£o:");
         Debug.Log("originalScale = " + originalScale.x + " " + originalScale.y);
         Debug.Log("newScale = " + newScale.x + " " + newScale.y);
         Debug.Log("pointsText[index] = " + pointsText[index].transform.localScale.x + " " + pointsText[index].transform.localScale.y);

@@ -1,9 +1,9 @@
 {
   "dependencies": {
     "com.unity.2d.sprite": {
-      "version": "file:C:/Program Files/Unity/Hub/Editor/2020.3.1f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.2d.sprite",
+      "version": "1.0.0",
       "depth": 0,
-      "source": "local",
+      "source": "builtin",
       "dependencies": {}
     },
     "com.unity.collab-proxy": {
@@ -44,12 +44,6 @@
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
-    },
-    "com.unity.package-manager-ui": {
-      "version": "file:C:/Program Files/Unity/Hub/Editor/2019.3.0f6/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.package-manager-ui",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {}
     },
     "com.unity.test-framework": {
       "version": "1.1.22",
